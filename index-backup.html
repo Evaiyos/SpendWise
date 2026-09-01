@@ -1,0 +1,1929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="manifest" href="manifest.json">
+
+    <title>SpendWise | Smart Expense Tracker</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background: #f6f7fb;
+            color: #1f2937;
+        }
+        /* ================= PROFILE SETUP ================= */
+
+
+
+        /* ================= HEADER ================= */
+
+        header {
+            background: white;
+            border-bottom: 1px solid #e8eaf0;
+            padding: 16px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-icon {
+            font-size: 28px;
+        }
+
+        .brand h1 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .brand p {
+            margin: 3px 0 0;
+            color: #7b8190;
+            font-size: 12px;
+        }
+
+        nav {
+            display: flex;
+            gap: 8px;
+        }
+
+        .tab-btn {
+            border: none;
+            background: transparent;
+            padding: 10px 15px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #606776;
+        }
+
+        .tab-btn.active,
+        .tab-btn:hover {
+            background: #1f2937;
+            color: white;
+        }
+
+        main {
+            max-width: 1180px;
+            margin: auto;
+            padding: 30px 20px 50px;
+        }
+
+        .tab {
+            display: none;
+        }
+
+        .tab.active {
+            display: block;
+        }
+
+        /* ================= WELCOME ================= */
+
+        .welcome {
+            margin-bottom: 24px;
+        }
+
+        .welcome h2 {
+            margin: 0 0 8px;
+            font-size: 28px;
+        }
+
+        .welcome p {
+            margin: 0;
+            color: #6b7280;
+        }
+
+        /* ================= ALERT ================= */
+
+        .alert {
+            padding: 16px 18px;
+            border-radius: 12px;
+            margin-bottom: 22px;
+            background: white;
+            border: 1px solid #e5e7eb;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* ================= DASHBOARD CARDS ================= */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 14px;
+            margin-bottom: 25px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #e9ebf0;
+            border-radius: 14px;
+            padding: 18px;
+        }
+
+        .card-label {
+            color: #7b8190;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+        }
+
+        .card-value {
+            font-size: 23px;
+            font-weight: bold;
+            margin-top: 9px;
+        }
+
+        /* ================= DAILY EXPENSE ================= */
+
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 25px 0 14px;
+        }
+
+        .section-title h3 {
+            margin: 0;
+        }
+
+        .primary-btn {
+            border: none;
+            background: #1f2937;
+            color: white;
+            padding: 11px 16px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .daily-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .day-card {
+            background: white;
+            border: 1px solid #e7e9ee;
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .day-header {
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .day-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .day-date {
+            font-weight: bold;
+        }
+
+        .day-total {
+            font-weight: bold;
+        }
+
+        .day-summary {
+            color: #7b8190;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+
+        .arrow {
+            color: #7b8190;
+            margin-left: 6px;
+        }
+
+        .day-details {
+            display: none;
+            padding: 0 16px 18px;
+            border-top: 1px solid #f0f1f4;
+        }
+
+        .day-card.open .day-details {
+            display: block;
+        }
+
+        .expenses {
+            margin: 15px 0;
+        }
+
+        .expense-row {
+            display: grid;
+            grid-template-columns: 1fr 130px 40px;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #dfe2e8;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #6b7280;
+        }
+
+        .icon-btn {
+            border: 1px solid #e1e4ea;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .day-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .secondary-btn {
+            border: 1px solid #dfe2e8;
+            background: white;
+            padding: 10px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .danger-btn {
+            border: 1px solid #f0d5d5;
+            background: white;
+            color: #b53b3b;
+            padding: 10px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        /* ================= SETTINGS ================= */
+
+        .settings-card,
+        .insight-card {
+            max-width: 720px;
+            background: white;
+            padding: 25px;
+            border: 1px solid #e7e9ee;
+            border-radius: 16px;
+        }
+
+        .settings-card h2,
+        .insight-card h2 {
+            margin-top: 0;
+        }
+
+        .settings-card p {
+            color: #6b7280;
+        }
+
+        /* ================= INSIGHTS ================= */
+
+        .insight-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            margin-top: 18px;
+        }
+
+        .insight {
+            padding: 18px;
+            border: 1px solid #eceef2;
+            border-radius: 12px;
+        }
+
+        .insight small {
+            color: #7b8190;
+        }
+
+        .insight strong {
+            display: block;
+            margin-top: 7px;
+            font-size: 20px;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 950px) {
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            nav {
+                width: 100%;
+                overflow-x: auto;
+            }
+
+            .cards,
+            .insight-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .expense-row {
+                grid-template-columns: 1fr 100px 40px;
+            }
+
+            main {
+                padding: 22px 14px;
+            }
+        }
+        /* ================= PROFILE SETUP ================= */
+
+.profile-setup {
+    position: fixed;
+    inset: 0;
+    background: #f6f7fb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 9999;
+}
+
+.profile-card {
+    width: 100%;
+    max-width: 440px;
+    background: #ffffff;
+    padding: 42px 36px;
+    border-radius: 22px;
+    border: 1px solid #e7e9ee;
+    box-shadow: 0 20px 60px rgba(31, 41, 55, 0.08);
+}
+
+.setup-logo {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin-bottom: 28px;
+}
+
+.profile-card h2 {
+    margin: 0 0 10px;
+    font-size: 26px;
+}
+
+.profile-card > p {
+    color: #6b7280;
+    line-height: 1.6;
+    margin-bottom: 28px;
+}
+
+.setup-field {
+    margin-bottom: 18px;
+}
+
+.setup-field label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.setup-field input {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1px solid #dfe3ea;
+    border-radius: 10px;
+    font-size: 15px;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.setup-field input:focus {
+    border-color: #1f2937;
+}
+
+.setup-btn {
+    width: 100%;
+    margin-top: 8px;
+    padding: 14px;
+    font-size: 15px;
+}
+/* ================= PROFILE SETUP SCREEN ================= */
+
+.profile-setup {
+    position: fixed;
+    inset: 0;
+    background: #f6f7fb;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 9999;
+}
+
+.profile-card {
+    width: 100%;
+    max-width: 440px;
+    background: white;
+    padding: 36px;
+    border-radius: 18px;
+    box-shadow: 0 12px 40px rgba(31, 41, 55, 0.12);
+}
+
+.setup-logo {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 28px;
+    color: #1f2937;
+}
+
+.profile-card h2 {
+    margin: 0 0 10px;
+    color: #1f2937;
+}
+
+.profile-card p {
+    color: #6b7280;
+    line-height: 1.6;
+    margin-bottom: 28px;
+}
+
+.setup-field {
+    margin-bottom: 18px;
+}
+
+.setup-field label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 7px;
+    color: #374151;
+}
+
+.setup-field input {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    font-size: 15px;
+    outline: none;
+}
+
+.setup-field input:focus {
+    border-color: #1f2937;
+}
+
+.setup-btn {
+    width: 100%;
+    margin-top: 8px;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: #1f2937;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.setup-btn:hover {
+    opacity: 0.92;
+}   
+</style>
+</head>
+
+<body>
+    <div id="profileSetup" class="profile-setup">
+    <div class="profile-card">
+
+        <div class="setup-logo">SpendWise</div>
+
+        <h2>Welcome to SpendWise 👋</h2>
+
+        <p>
+            Let's set up your profile and make your money tracking
+            experience a little more personal.
+        </p>
+
+        <div class="setup-field">
+            <label for="userName">Your Name</label>
+            <input
+                type="text"
+                id="userName"
+                placeholder="Enter your name"
+            >
+        </div>
+
+        <div class="setup-field">
+            <label for="jobRole">Job Role</label>
+            <input
+                type="text"
+                id="jobRole"
+            >
+        </div>
+
+        <div class="setup-field">
+            <label for="monthlySalary">Monthly Salary (₹)</label>
+            <input
+                type="number"
+                id="monthlySalary"
+                placeholder="Enter your monthly salary"
+                min="0"
+            >
+        </div>
+
+        <button class="setup-btn" onclick="saveProfile()">
+            Let's Get Started →
+        </button>
+
+    </div>
+</div>
+
+    <!-- ================= HEADER ================= -->
+<div id="app" style="display: none;">
+    <header>
+
+        <div class="brand">
+            <div class="brand-icon">💰</div>
+
+            <div>
+                <h1>SpendWise</h1>
+                <p>Your personal spending companion</p>
+            </div>
+        </div>
+
+        <nav>
+            <button class="tab-btn active"
+                onclick="openTab('home', this)">
+                My Expense
+            </button>
+
+            <button class="tab-btn"
+                onclick="openTab('budget', this)">
+                Set Budget
+            </button>
+
+            <button class="tab-btn"
+                onclick="openTab('insights', this)">
+                Insights
+            </button>
+            <button class="tab-btn" onclick="openTab('profile', this)">
+                    Profile
+            </button>
+        </nav>
+
+    </header>
+
+
+<!-- ================= PROFILE SETUP SCREEN ================= -->
+
+<!-- ========================================================= -->
+    
+    <main>
+
+        <!-- ================= HOME ================= -->
+
+        <section id="home" class="tab active">
+
+            <div class="welcome">
+                <h2>My Expenses</h2>
+                <p>Track your daily spending and understand your money better.</p>
+            </div>
+
+            <div id="notification" class="alert">
+                👋 Welcome! Set your monthly budget and start adding expenses.
+            </div>
+
+
+            <!-- DASHBOARD -->
+
+            <div class="cards">
+
+                <div class="card">
+                    <div class="card-label">Monthly Budget</div>
+                    <div class="card-value" id="budgetValue">₹0</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-label">Total Spent</div>
+                    <div class="card-value" id="spentValue">₹0</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-label">Remaining Balance</div>
+                    <div class="card-value" id="remainingValue">₹0</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-label">Total Income</div>
+                    <div class="card-value" id="incomeValue">₹0</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-label">Potential Savings</div>
+                    <div class="card-value" id="savingsValue">₹0</div>
+                </div>
+
+            </div>
+
+
+            <div class="section-title">
+
+                <h3>Daily Expense Tracker</h3>
+
+                <button class="primary-btn" onclick="addDay()">
+                    + Add Day
+                </button>
+
+            </div>
+
+
+            <div id="dailyList" class="daily-list"></div>
+
+        </section>
+
+
+        <!-- ================= BUDGET ================= -->
+
+        <section id="budget" class="tab">
+
+            <div class="settings-card">
+
+                <h2>💰 Set Monthly Budget</h2>
+
+                <p>
+                    Enter the maximum amount you plan to use during this month.
+                </p>
+
+                <input
+                    type="number"
+                    id="budgetInput"
+                    placeholder="Example: 30000"
+                    min="0"
+                >
+
+                <br><br>
+
+                <button class="primary-btn" onclick="saveBudget()">
+                    Save Budget
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= INSIGHTS ================= -->
+
+        <section id="insights" class="tab">
+
+            <div class="insight-card">
+
+                <h2>📊 Smart Spending Insights</h2>
+
+                <p>
+                    Your tracker learns from your recorded spending pattern.
+                </p>
+
+                <div id="insightContent" class="insight-grid"></div>
+
+            </div>
+
+        </section>
+
+        <!-- ================= PROFILE ================= -->
+<section id="profile" class="tab">
+
+    <div class="profile-header">
+        <div>
+            <h2>👤 My Profile</h2>
+            <p>Manage your personal details and track your financial journey.</p>
+        </div>
+
+        <button class="edit-profile-btn" onclick="toggleProfileEdit()">
+    ✏️ Edit Profile
+</button>
+
+<button class="logout-btn" onclick="logout()">
+    🚪 Logout
+</button>
+    </div>
+
+
+    <!-- PROFILE DETAILS -->
+    <div class="profile-card">
+
+        <div class="profile-avatar">👤</div>
+
+        <div class="profile-details">
+            <h2 id="profileName">Not set</h2>
+            <p id="profileRole">Job role not set</p>
+        </div>
+
+        <div class="profile-income">
+            <small>Monthly Salary</small>
+            <strong id="profileSalary">₹0</strong>
+        </div>
+
+    </div>
+
+
+    <!-- PROFILE EDIT FORM -->
+    <div class="profile-edit-card" id="profileEditCard" style="display: none;">
+
+        <h2>✏️ Edit Profile</h2>
+
+        <input
+            type="text"
+            id="editProfileName"
+            placeholder="Your Name"
+        >
+
+        <input
+            type="text"
+            id="editProfileRole"
+            placeholder="Job / Role"
+        >
+
+        <input
+            type="number"
+            id="editProfileSalary"
+            placeholder="Monthly Salary"
+            min="0"
+        >
+
+        <button class="primary-btn" onclick="saveProfileChanges()">
+            💾 Save Changes
+        </button>
+
+    </div>
+
+
+    <!-- MONTHLY SUMMARY -->
+    <div class="profile-card profile-summary-card">
+
+        <h2>📊 This Month's Summary</h2>
+
+        <div class="profile-summary">
+
+            <div class="profile-item">
+                <small>Monthly Budget</small>
+                <strong id="profileBudget">₹0</strong>
+            </div>
+
+            <div class="profile-item">
+                <small>Total Expense</small>
+                <strong id="profileExpense">₹0</strong>
+            </div>
+
+            <div class="profile-item">
+                <small>Extra Income</small>
+                <strong id="profileIncome">₹0</strong>
+            </div>
+
+            <div class="profile-item">
+                <small>Remaining Balance</small>
+                <strong id="profileBalance">₹0</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+    </main>
+</div>
+
+    <script>
+
+        /* =========================================
+           DATA
+        ========================================= */
+
+        let budget =
+            Number(localStorage.getItem("spendwiseBudget")) || 0;
+
+        let days =
+            JSON.parse(localStorage.getItem("spendwiseDays")) || [];
+
+
+        /* =========================================
+           TABS
+        ========================================= */
+
+        function openTab(tabId, button) {
+
+            document.querySelectorAll(".tab").forEach(tab => {
+                tab.classList.remove("active");
+            });
+
+            document.querySelectorAll(".tab-btn").forEach(btn => {
+                btn.classList.remove("active");
+            });
+
+            document.getElementById(tabId).classList.add("active");
+
+            button.classList.add("active");
+
+            updateApp();
+        }
+
+
+        /* =========================================
+           ADD DAY
+        ========================================= */
+
+        function addDay() {
+
+            const today = getLocalDate();
+
+            days.unshift({
+                id: Date.now(),
+                date: today,
+                income: 0,
+                expenses: []
+            });
+
+            saveData();
+
+            renderDays(days[0].id);
+        }
+
+
+        /* =========================================
+           RENDER DAYS
+        ========================================= */
+
+        function renderDays(openDayId = null) {
+
+            const list =
+                document.getElementById("dailyList");
+
+            if (days.length === 0) {
+
+                list.innerHTML = `
+                    <div class="day-card">
+                        <div class="day-header">
+                            <span>
+                                No days added yet.
+                                Click “Add Day” to start tracking.
+                            </span>
+                        </div>
+                    </div>
+                `;
+
+                updateApp();
+                return;
+            }
+
+            list.innerHTML = "";
+
+
+            days.forEach(day => {
+
+                const total = getDayTotal(day);
+
+                const expenseRows =
+                    day.expenses.map(expense => `
+
+                        <div class="expense-row">
+
+                            <input
+                                type="text"
+                                value="${escapeHTML(expense.name)}"
+                                placeholder="Expense name"
+                                onchange="updateExpenseName(
+                                    ${day.id},
+                                    ${expense.id},
+                                    this.value
+                                )"
+                            >
+
+                            <input
+                                type="number"
+                                value="${expense.amount || ''}"
+                                placeholder="Amount"
+                                min="0"
+                                onchange="updateExpenseAmount(
+                                    ${day.id},
+                                    ${expense.id},
+                                    this.value
+                                )"
+                            >
+
+                            <button
+                                class="icon-btn"
+                                onclick="removeExpense(
+                                    ${day.id},
+                                    ${expense.id}
+                                )"
+                            >
+                                🗑
+                            </button>
+
+                        </div>
+
+                    `).join("");
+
+
+                list.innerHTML += `
+
+                    <div class="day-card
+                        ${openDayId === day.id ? "open" : ""}">
+
+                        <div
+                            class="day-header"
+                            onclick="toggleDay(this.parentElement)"
+                        >
+
+                            <div class="day-left">
+
+                                <div>
+
+                                    <div class="day-date">
+                                        ${formatDate(day.date)}
+                                    </div>
+
+                                    <div class="day-summary">
+                                        ${day.expenses.length}
+                                        expense item(s)
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div>
+
+                               <span class="day-total" id="dayTotal-${day.id}">
+    ₹${formatMoney(total)}
+</span>
+                                <span class="arrow">⌄</span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="day-details">
+
+                            <div class="expenses">
+
+                                ${
+                                    expenseRows ||
+                                    "<p>No expenses added yet.</p>"
+                                }
+
+                            </div>
+
+
+                            <div class="day-actions">
+
+                                <button
+                                    class="secondary-btn"
+                                    onclick="addExpense(${day.id})"
+                                >
+                                    + Add Expense
+                                </button>
+
+
+                                <button
+                                    class="danger-btn"
+                                    onclick="deleteDay(${day.id})"
+                                >
+                                    Delete Day
+                                </button>
+
+                            </div>
+
+
+                            <br>
+
+                            <label>
+                                <strong>Income for this day</strong>
+                            </label>
+
+
+                            <br><br>
+
+                            <input
+                                type="number"
+                                value="${day.income || ''}"
+                                placeholder="Enter income (optional)"
+                                min="0"
+                                onchange="updateIncome(
+                                    ${day.id},
+                                    this.value
+                                )"
+                            >
+
+                        </div>
+
+                    </div>
+
+                `;
+            });
+
+
+            updateApp();
+        }
+
+
+        /* =========================================
+           DAY ACTIONS
+        ========================================= */
+
+        function toggleDay(card) {
+            card.classList.toggle("open");
+        }
+
+
+        function deleteDay(dayId) {
+
+            if (!confirm(
+                "Delete this day and all its expenses?"
+            )) {
+                return;
+            }
+
+            days =
+                days.filter(day => day.id !== dayId);
+
+            saveData();
+
+            renderDays();
+        }
+
+
+        /* =========================================
+           EXPENSE ACTIONS
+        ========================================= */
+
+        function addExpense(dayId) {
+
+            const day =
+                days.find(day => day.id === dayId);
+
+            if (!day) return;
+
+            day.expenses.push({
+                id: Date.now() + Math.random(),
+                name: "",
+                amount: 0
+            });
+
+            saveData();
+
+            /* Keep the same day open */
+            renderDays(dayId);
+        }
+
+
+        function removeExpense(dayId, expenseId) {
+
+            const day =
+                days.find(day => day.id === dayId);
+
+            if (!day) return;
+
+            day.expenses =
+                day.expenses.filter(
+                    expense => expense.id !== expenseId
+                );
+
+            saveData();
+
+            renderDays(dayId);
+        }
+
+
+        function updateExpenseName(
+            dayId,
+            expenseId,
+            value
+        ) {
+
+            const day =
+                days.find(day => day.id === dayId);
+
+            if (!day) return;
+
+            const expense =
+                day.expenses.find(
+                    expense => expense.id === expenseId
+                );
+
+            if (!expense) return;
+
+            expense.name = value;
+
+            saveData();
+
+            /*
+                Don't render again here.
+                This prevents the field from closing.
+            */
+
+            updateApp();
+        }
+
+
+        function updateExpenseAmount(
+            dayId,
+            expenseId,
+            value
+        ) {
+
+            const day =
+                days.find(day => day.id === dayId);
+
+            if (!day) return;
+
+            const expense =
+                day.expenses.find(
+                    expense => expense.id === expenseId
+                );
+
+            if (!expense) return;
+
+            expense.amount =
+                Number(value) || 0;
+
+            saveData();
+
+            /*
+                Only update calculations.
+                Do NOT re-render the day.
+            */
+
+            updateDayTotal(dayId);
+            updateApp();
+        }
+function updateDayTotal(dayId) {
+
+    const day = days.find(day => day.id === dayId);
+
+    if (!day) return;
+
+    const dayTotalElement =
+        document.getElementById(`dayTotal-${dayId}`);
+
+    if (dayTotalElement) {
+        dayTotalElement.textContent =
+            "₹" + formatMoney(getDayTotal(day));
+    }
+}
+
+        /* =========================================
+           INCOME
+        ========================================= */
+
+        function updateIncome(dayId, value) {
+
+            const day =
+                days.find(day => day.id === dayId);
+
+            if (!day) return;
+
+            day.income =
+                Number(value) || 0;
+
+            saveData();
+
+            /*
+                Don't re-render.
+                Keep the current day open.
+            */
+
+            updateApp();
+        }
+
+
+        /* =========================================
+           BUDGET
+        ========================================= */
+
+        function saveBudget() {
+
+            const value =
+                Number(
+                    document.getElementById(
+                        "budgetInput"
+                    ).value
+                );
+
+            if (value <= 0) {
+
+                alert(
+                    "Please enter a valid monthly budget."
+                );
+
+                return;
+            }
+
+            budget = value;
+
+            saveData();
+
+            alert(
+                "🎉 Monthly budget successfully added!"
+            );
+
+            updateApp();
+        }
+
+
+        /* =========================================
+           CALCULATIONS
+        ========================================= */
+        function isCurrentMonth(dateString) {
+    const today = new Date();
+    const date = new Date(dateString + "T00:00:00");
+
+    return (
+        date.getFullYear() === today.getFullYear() &&
+        date.getMonth() === today.getMonth()
+    );
+}
+
+        function getDayTotal(day) {
+
+            return day.expenses.reduce(
+                (total, expense) =>
+                    total +
+                    Number(expense.amount || 0),
+                0
+            );
+        }
+
+
+        function getTotalSpent() {
+    return days
+        .filter(day => isCurrentMonth(day.date))
+        .reduce(
+            (total, day) =>
+                total + getDayTotal(day),
+            0
+        );
+}
+
+
+        function getTotalIncome() {
+    return days
+        .filter(day => isCurrentMonth(day.date))
+        .reduce(
+            (total, day) =>
+                total + Number(day.income || 0),
+            0
+        );
+}
+
+        function getAverageDailySpend() {
+
+            const daysWithExpenses =
+                days.filter(
+                    day => getDayTotal(day) > 0
+                );
+
+            if (
+                daysWithExpenses.length === 0
+            ) {
+                return 0;
+            }
+
+            const total =
+                daysWithExpenses.reduce(
+                    (sum, day) =>
+                        sum + getDayTotal(day),
+                    0
+                );
+
+            return total /
+                daysWithExpenses.length;
+        }
+
+
+        function getRemainingDays() {
+
+            const today = new Date();
+
+            const lastDay =
+                new Date(
+                    today.getFullYear(),
+                    today.getMonth() + 1,
+                    0
+                ).getDate();
+
+            return Math.max(
+                0,
+                lastDay - today.getDate()
+            );
+        }
+function toggleProfileEdit() {
+    const editCard = document.getElementById("profileEditCard");
+
+    const savedProfile =
+    JSON.parse(localStorage.getItem("spendwiseProfile"));
+
+if (savedProfile) {
+    document.getElementById("editProfileName").value =
+        savedProfile.name || "";
+
+    document.getElementById("editProfileRole").value =
+        savedProfile.jobRole || "";
+
+    document.getElementById("editProfileSalary").value =
+        savedProfile.monthlySalary || "";
+}
+
+    editCard.style.display =
+        editCard.style.display === "none" ? "block" : "none";
+}
+
+function saveProfileChanges() {
+const name =
+    document.getElementById("editProfileName").value.trim();
+
+const jobRole =
+    document.getElementById("editProfileRole").value.trim();
+
+const salary =
+    Number(document.getElementById("editProfileSalary").value);
+
+if (!name || !jobRole || salary < 0) {
+    alert("Please fill in all profile details.");
+    return;
+}
+
+const profile = {
+    name: name,
+    jobRole: jobRole,
+    monthlySalary: salary
+};
+
+localStorage.setItem(
+    "spendwiseProfile",
+    JSON.stringify(profile)
+);
+
+    document.getElementById("profileName").innerText = name;
+    document.getElementById("profileRole").innerText = jobRole;
+    document.getElementById("profileSalary").innerText =
+        "₹" + formatMoney(salary);
+
+    document.getElementById("profileEditCard").style.display = "none";
+
+    alert("Profile updated successfully!");
+}
+function logout() {
+    const confirmLogout = confirm("Are you sure you want to logout?");
+
+    if (!confirmLogout) {
+        return;
+    }
+
+    localStorage.removeItem("spendwiseProfile");
+
+    document.getElementById("app").style.display = "none";
+    document.getElementById("profileSetup").style.display = "flex";
+
+    document.getElementById("userName").value = "";
+    document.getElementById("jobRole").value = "";
+    document.getElementById("monthlySalary").value = "";
+}
+
+        /* =========================================
+           UPDATE APPLICATION
+        ========================================= */
+
+        function updateApp() {
+
+            const totalSpent =
+                getTotalSpent();
+
+            const totalIncome =
+                getTotalIncome();
+
+
+            /*
+                MAIN MONEY LOGIC 🔥
+
+                Remaining Balance =
+                Budget + Income - Expense
+            */
+
+            const remaining =
+                budget +
+                totalIncome -
+                totalSpent;
+
+
+            const averageDaily =
+                getAverageDailySpend();
+
+            const daysRemaining =
+                getRemainingDays();
+
+            const expectedFutureSpend =
+                averageDaily *
+                daysRemaining;
+
+
+            const potentialSavings =
+    Math.max(
+        0,
+        remaining -
+        expectedFutureSpend
+    );
+
+// PROFILE SUMMARY
+document.getElementById("profileBudget").innerText =
+    "₹" + formatMoney(budget);
+
+document.getElementById("profileExpense").innerText =
+    "₹" + formatMoney(totalSpent);
+
+document.getElementById("profileIncome").innerText =
+    "₹" + formatMoney(totalIncome);
+
+document.getElementById("profileBalance").innerText =
+    "₹" + formatMoney(remaining);
+
+
+            document.getElementById(
+                "budgetValue"
+            ).innerText =
+                "₹" + formatMoney(budget);
+
+
+            document.getElementById(
+                "spentValue"
+            ).innerText =
+                "₹" + formatMoney(totalSpent);
+
+
+            document.getElementById(
+                "remainingValue"
+            ).innerText =
+                "₹" + formatMoney(remaining);
+
+
+            document.getElementById(
+                "incomeValue"
+            ).innerText =
+                "₹" + formatMoney(totalIncome);
+
+
+            document.getElementById(
+                "savingsValue"
+            ).innerText =
+                "₹" +
+                formatMoney(potentialSavings);
+
+
+            updateNotification(
+                remaining,
+                averageDaily,
+                daysRemaining,
+                expectedFutureSpend,
+                potentialSavings
+            );
+
+
+            updateInsights(
+                averageDaily,
+                daysRemaining,
+                expectedFutureSpend,
+                potentialSavings,
+                totalIncome,
+                totalSpent
+            );
+            // ================= PROFILE DISPLAY =================
+
+const savedProfile = JSON.parse(
+    localStorage.getItem("spendwiseProfile")
+);
+
+if (savedProfile) {
+
+    document.getElementById("profileName").innerText =
+        savedProfile.name || "Not set";
+
+    document.getElementById("profileRole").innerText =
+        savedProfile.jobRole || "Job role not set";
+
+    document.getElementById("profileSalary").innerText =
+        "₹" + formatMoney(savedProfile.monthlySalary || 0);
+}
+        }
+
+
+        /* =========================================
+           SMART NOTIFICATION
+        ========================================= */
+
+        function updateNotification(
+            remaining,
+            averageDaily,
+            daysRemaining,
+            expectedFutureSpend,
+            potentialSavings
+        ) {
+
+            const notification =
+                document.getElementById(
+                    "notification"
+                );
+
+
+            if (budget === 0) {
+
+                notification.innerText =
+                    "👋 Start by setting your monthly budget.";
+
+                return;
+            }
+
+
+            if (remaining < 0) {
+
+                notification.innerText =
+                    `🚨 You are ₹${formatMoney(
+                        Math.abs(remaining)
+                    )} below your available balance. Try to reduce spending for the remaining days.`;
+
+                return;
+            }
+
+
+            if (averageDaily === 0) {
+
+                notification.innerText =
+                    "📊 Add a few days of expenses and I'll estimate your usual daily spending.";
+
+                return;
+            }
+
+
+            if (
+                expectedFutureSpend >
+                remaining
+            ) {
+
+                const shortage =
+                    expectedFutureSpend -
+                    remaining;
+
+
+                notification.innerText =
+                    `⚠️ Based on your usual spending of around ₹${formatMoney(
+                        averageDaily
+                    )} per day, you may need approximately ₹${formatMoney(
+                        expectedFutureSpend
+                    )} for the remaining ${daysRemaining} day(s). Try to save around ₹${formatMoney(
+                        shortage
+                    )}.`;
+
+            } else {
+
+                notification.innerText =
+                    `🎯 Based on your usual spending of around ₹${formatMoney(
+                        averageDaily
+                    )} per day, you may spend approximately ₹${formatMoney(
+                        expectedFutureSpend
+                    )} over the next ${daysRemaining} day(s). Around ₹${formatMoney(
+                        potentialSavings
+                    )} could become savings! 💰`;
+            }
+        }
+
+
+        /* =========================================
+           INSIGHTS
+        ========================================= */
+
+        function updateInsights(
+            averageDaily,
+            daysRemaining,
+            expectedFutureSpend,
+            potentialSavings,
+            totalIncome,
+            totalSpent
+        ) {
+
+            const content =
+                document.getElementById(
+                    "insightContent"
+                );
+
+
+            if (days.length === 0) {
+
+                content.innerHTML =
+                    "<p>Add some daily expenses to unlock your insights.</p>";
+
+                return;
+            }
+
+
+            const highestExpense =
+                getHighestExpense();
+
+
+            content.innerHTML = `
+
+                <div class="insight">
+                    <small>Usual Daily Spending</small>
+                    <strong>
+                        ₹${formatMoney(averageDaily)}
+                    </strong>
+                </div>
+
+
+                <div class="insight">
+                    <small>Days Remaining This Month</small>
+                    <strong>
+                        ${daysRemaining}
+                    </strong>
+                </div>
+
+
+                <div class="insight">
+                    <small>Expected Remaining Expense</small>
+                    <strong>
+                        ₹${formatMoney(
+                            expectedFutureSpend
+                        )}
+                    </strong>
+                </div>
+
+
+                <div class="insight">
+                    <small>Potential Savings</small>
+                    <strong>
+                        ₹${formatMoney(
+                            potentialSavings
+                        )}
+                    </strong>
+                </div>
+
+
+                <div class="insight">
+                    <small>Highest Expense Type</small>
+                    <strong>
+                        ${highestExpense.name ||
+                        "No data yet"}
+                    </strong>
+                </div>
+
+
+                <div class="insight">
+                    <small>Income vs Expense</small>
+                    <strong>
+                        ₹${formatMoney(
+                            totalIncome
+                        )}
+                        /
+                        ₹${formatMoney(
+                            totalSpent
+                        )}
+                    </strong>
+                </div>
+
+            `;
+        }
+
+
+        function getHighestExpense() {
+
+            const totals = {};
+
+
+            days.forEach(day => {
+
+                day.expenses.forEach(
+                    expense => {
+
+                        const name =
+                            expense.name ||
+                            "Unnamed Expense";
+
+
+                        totals[name] =
+                            (totals[name] || 0) +
+                            Number(
+                                expense.amount || 0
+                            );
+                    }
+                );
+
+            });
+
+
+            let highest = {
+                name: "",
+                amount: 0
+            };
+
+
+            Object.keys(totals).forEach(
+                name => {
+
+                    if (
+                        totals[name] >
+                        highest.amount
+                    ) {
+
+                        highest = {
+                            name: name,
+                            amount: totals[name]
+                        };
+                    }
+                }
+            );
+
+
+            return highest;
+        }
+
+
+        /* =========================================
+           SAVE DATA
+        ========================================= */
+
+        function saveData() {
+
+            localStorage.setItem(
+                "spendwiseBudget",
+                budget
+            );
+
+            localStorage.setItem(
+                "spendwiseDays",
+                JSON.stringify(days)
+            );
+        }
+
+
+        /* =========================================
+           HELPERS
+        ========================================= */
+
+        function formatMoney(amount) {
+
+            return Number(
+                amount || 0
+            ).toLocaleString(
+                "en-IN",
+                {
+                    maximumFractionDigits: 0
+                }
+            );
+        }
+
+
+        function formatDate(dateString) {
+
+            if (!dateString) {
+                return "Unknown Date";
+            }
+
+            return new Date(
+                dateString + "T00:00:00"
+            ).toLocaleDateString(
+                "en-IN",
+                {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric"
+                }
+            );
+        }
+
+
+        function getLocalDate() {
+
+            const today =
+                new Date();
+
+            const year =
+                today.getFullYear();
+
+            const month =
+                String(
+                    today.getMonth() + 1
+                ).padStart(2, "0");
+
+            const day =
+                String(
+                    today.getDate()
+                ).padStart(2, "0");
+
+            return `${year}-${month}-${day}`;
+        }
+
+
+        function escapeHTML(text) {
+
+            const div =
+                document.createElement("div");
+
+            div.textContent =
+                text || "";
+
+            return div.innerHTML;
+        }
+
+
+        /* =========================================
+           INITIAL LOAD
+        ========================================= */
+
+        document.getElementById(
+            "budgetInput"
+        ).value =
+            budget || "";
+
+
+        renderDays();
+/* =========================================
+   SERVICE WORKER REGISTRATION
+========================================= */
+
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+
+        const savedProfile = localStorage.getItem("spendwiseProfile");
+
+        if (savedProfile) {
+            document.getElementById("profileSetup").style.display = "none";
+            document.getElementById("app").style.display = "block";
+            updateApp();
+        }
+
+        navigator.serviceWorker.register("./service-worker.js")
+            .then(() => {
+                console.log("SpendWise is ready for offline use!");
+            })
+            .catch(error => {
+                console.log("Service Worker registration failed:", error);
+            });
+    });
+}
+  function saveProfile() {
+    const name = document.getElementById("userName").value.trim();
+    const jobRole = document.getElementById("jobRole").value.trim();
+    const monthlySalary = document.getElementById("monthlySalary").value.trim();
+
+    if (!name || !jobRole || !monthlySalary) {
+        alert("Please fill in all the details 😊");
+        return;
+    }
+
+    const profile = {
+        name: name,
+        jobRole: jobRole,
+        monthlySalary: Number(monthlySalary)
+    };
+
+    localStorage.setItem("spendwiseProfile", JSON.stringify(profile));
+
+    document.getElementById("profileSetup").style.display = "none";
+    document.getElementById("app").style.display = "block";
+
+    updateApp();
+}
+   </script>
+</body>
+</html>
