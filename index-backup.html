@@ -1891,6 +1891,7 @@ if ("serviceWorker" in navigator) {
             document.getElementById("app").style.display = "block";
             updateApp();
         }
+const savedprofile = localstorage.getitem("spendwiseprofile");
 
         navigator.serviceWorker.register("./service-worker.js")
             .then(() => {

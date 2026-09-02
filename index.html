@@ -923,7 +923,7 @@
            DATA
         ========================================= */
 
-    let activeUser = localStorage.getItem("spendwiseActiveUser");
+ let activeUser = localStorage.getItem("spendwiseActiveUser");
 
 let users =
     JSON.parse(localStorage.getItem("spendwiseUsers")) || {};
@@ -931,6 +931,31 @@ let users =
 let budget = 0;
 let days = [];
 
+function restoreActiveUserData() {
+
+    const activeUsername =
+        localStorage.getItem("spendwiseActiveUser");
+
+    const savedUsers =
+        JSON.parse(localStorage.getItem("spendwiseUsers")) || {};
+
+    if (!activeUsername || !savedUsers[activeUsername]) {
+        return false;
+    }
+
+    activeUser = activeUsername;
+    users = savedUsers;
+
+    budget =
+        Number(savedUsers[activeUsername].budget) || 0;
+
+    days =
+        Array.isArray(savedUsers[activeUsername].days)
+            ? savedUsers[activeUsername].days
+            : [];
+
+    return true;
+}
         /* =========================================
            TABS
         ========================================= */
@@ -2134,13 +2159,18 @@ if (savedProfile) {
 if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {
 
-        const savedProfile = localStorage.getItem("spendwiseProfile");
+     const restored = restoreActiveUserData();
 
-        if (savedProfile) {
-            document.getElementById("profileSetup").style.display = "none";
-            document.getElementById("app").style.display = "block";
-            updateApp();
-        }
+if (restored) {
+    document.getElementById("profileSetup").style.display = "none";
+    document.getElementById("app").style.display = "block";
+
+    document.getElementById("budgetInput").value =
+        budget || "";
+
+    renderDays();
+    updateApp();
+}
 
         navigator.serviceWorker.register("./service-worker.js")
             .then(() => {
