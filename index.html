@@ -959,6 +959,13 @@ function restoreActiveUserData() {
         /* =========================================
            TABS
         ========================================= */
+        
+        
+        const tabOrder = ["home", "budget", "insights", "profile"];
+
+let touchStartX = 0;
+let touchEndX = 0;
+
 
         function openTab(tabId, button) {
 
@@ -977,7 +984,82 @@ function restoreActiveUserData() {
             updateApp();
         }
 
+document.addEventListener("touchstart", function (event) {
 
+    touchStartX = event.changedTouches[0].screenX;
+
+}, { passive: true });
+
+
+document.addEventListener("touchend", function (event) {
+
+    touchEndX = event.changedTouches[0].screenX;
+
+    handleSwipe();
+
+}, { passive: true });
+
+
+function handleSwipe() {
+
+    const swipeDistance = touchEndX - touchStartX;
+
+    const minimumSwipeDistance = 70;
+
+
+    // Swipe distance kurav aanenkil ignore
+    if (Math.abs(swipeDistance) < minimumSwipeDistance) {
+        return;
+    }
+
+
+    // Current active tab kandupidikkuka
+    const currentTab = document.querySelector(".tab.active");
+
+    if (!currentTab) return;
+
+
+    const currentIndex =
+        tabOrder.indexOf(currentTab.id);
+
+
+    // Right → Left swipe
+    // Next tab
+    if (swipeDistance < 0) {
+
+        if (currentIndex < tabOrder.length - 1) {
+
+            const nextTab =
+                tabOrder[currentIndex + 1];
+
+            const nextButton =
+                document.querySelector(
+                    `[onclick*="openTab('${nextTab}'"]`
+                );
+
+            openTab(nextTab, nextButton);
+        }
+    }
+
+
+    // Left → Right swipe
+    // Previous tab
+    if (swipeDistance > 0) {
+
+        if (currentIndex > 0) {
+
+            const previousTab =
+                tabOrder[currentIndex - 1];
+
+            const previousButton =
+                document.querySelector(
+                    `[onclick*="openTab('${previousTab}'"]`
+                );
+
+            openTab(previousTab, previousButton);
+        }
+    }
+}
         /* =========================================
            ADD DAY
         ========================================= */
