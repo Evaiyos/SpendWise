@@ -87,13 +87,44 @@
         }
 
         .tab {
-            display: none;
-        }
+    display: none;
+}
 
-        .tab.active {
-            display: block;
-        }
+.tab.active {
+    display: block;
+}
 
+.tab.slide-in-right {
+    animation: slideInRight 0.35s ease forwards;
+}
+
+.tab.slide-in-left {
+    animation: slideInLeft 0.35s ease forwards;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(45px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-45px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
         /* ================= WELCOME ================= */
 
         .welcome {
