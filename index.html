@@ -2539,105 +2539,182 @@
 
             function updateApp() {
 
-                const totalSpent =
-                    getTotalSpent();
+    const totalSpent =
+        getTotalSpent();
 
-                const totalIncome =
-                    getTotalIncome();
-
-
-                /*
-                    MAIN MONEY LOGIC 🔥
-
-                    Remaining Balance =
-                    Budget + Income - Expense
-                */
-
-                const remaining =
-                    budget +
-                    totalIncome -
-                    totalSpent;
+    const totalIncome =
+        getTotalIncome();
 
 
-                const averageDaily =
-    getAverageDailySpend();
+    /*
+        MAIN MONEY LOGIC
+    */
 
-const daysRemaining =
-    getRemainingDays();
+    const remaining =
+        budget +
+        totalIncome -
+        totalSpent;
 
-const expectedRemainingExpense =
-    getExpectedRemainingExpense();
 
-const potentialSavings =
-    Math.max(
-        0,
-        remaining -
-        expectedRemainingExpense
+    /*
+        SPENDING ANALYSIS
+    */
+
+    const averageDaily =
+        getAverageDailySpend();
+
+    const daysRemaining =
+        getRemainingDays();
+
+    const expectedRemainingExpense =
+        getExpectedRemainingExpense();
+
+    const potentialSavings =
+        Math.max(
+            0,
+            remaining -
+            expectedRemainingExpense
+        );
+
+
+    /*
+        PROFILE SUMMARY
+    */
+
+    document.getElementById(
+        "profileBudget"
+    ).innerText =
+        "₹" +
+        formatMoney(budget);
+
+    document.getElementById(
+        "profileExpense"
+    ).innerText =
+        "₹" +
+        formatMoney(totalSpent);
+
+    document.getElementById(
+        "profileIncome"
+    ).innerText =
+        "₹" +
+        formatMoney(totalIncome);
+
+    document.getElementById(
+        "profileBalance"
+    ).innerText =
+        "₹" +
+        formatMoney(remaining);
+
+
+    /*
+        MAIN DASHBOARD
+    */
+
+    document.getElementById(
+        "budgetValue"
+    ).innerText =
+        "₹" +
+        formatMoney(budget);
+
+
+    document.getElementById(
+        "spentValue"
+    ).innerText =
+        "₹" +
+        formatMoney(totalSpent);
+
+
+    document.getElementById(
+        "remainingValue"
+    ).innerText =
+        "₹" +
+        formatMoney(remaining);
+
+
+    document.getElementById(
+        "incomeValue"
+    ).innerText =
+        "₹" +
+        formatMoney(totalIncome);
+
+
+    document.getElementById(
+        "savingsValue"
+    ).innerText =
+        "₹" +
+        formatMoney(
+            potentialSavings
+        );
+
+
+    /*
+        SMART NOTIFICATION
+    */
+
+    updateNotification(
+        remaining,
+        averageDaily,
+        daysRemaining,
+        expectedRemainingExpense,
+        potentialSavings
     );
-        
-
-    // PROFILE SUMMARY
-    document.getElementById("profileBudget").innerText =
-        "₹" + formatMoney(budget);
-
-    document.getElementById("profileExpense").innerText =
-        "₹" + formatMoney(totalSpent);
-
-    document.getElementById("profileIncome").innerText =
-        "₹" + formatMoney(totalIncome);
-
-    document.getElementById("profileBalance").innerText =
-        "₹" + formatMoney(remaining);
 
 
-                document.getElementById(
-                    "budgetValue"
-                ).innerText =
-                    "₹" + formatMoney(budget);
+    /*
+        INSIGHTS
+    */
+
+    updateInsights(
+        averageDaily,
+        daysRemaining,
+        expectedRemainingExpense,
+        potentialSavings,
+        totalIncome,
+        totalSpent,
+        remaining
+    );
 
 
-                document.getElementById(
-                    "spentValue"
-                ).innerText =
-                    "₹" + formatMoney(totalSpent);
+    /*
+        PROFILE DISPLAY
+    */
+
+    const savedProfile =
+        JSON.parse(
+            localStorage.getItem(
+                "spendwiseProfile"
+            )
+        );
 
 
-                document.getElementById(
-                    "remainingValue"
-                ).innerText =
-                    "₹" + formatMoney(remaining);
+    if (savedProfile) {
+
+        document.getElementById(
+            "profileName"
+        ).innerText =
+            savedProfile.name ||
+            "Not set";
 
 
-                document.getElementById(
-                    "incomeValue"
-                ).innerText =
-                    "₹" + formatMoney(totalIncome);
+        document.getElementById(
+            "profileRole"
+        ).innerText =
+            savedProfile.jobRole ||
+            "Job role not set";
 
 
-                document.getElementById(
-                    "savingsValue"
-                ).innerText =
-                    "₹" +
-                    formatMoney(potentialSavings);
+        document.getElementById(
+            "profileSalary"
+        ).innerText =
+            "₹" +
+            formatMoney(
+                savedProfile.monthlySalary ||
+                0
+            );
 
+    }
 
-                updateNotification(
-    remaining,
-    averageDaily,
-    daysRemaining,
-    expectedRemainingExpense,
-    potentialSavings
-);
-
-
-                updateInsights(
-    averageDaily,
-    daysRemaining,
-    expectedRemainingExpense,
-    potentialSavings,
-    totalIncome,
-    totalSpent
-);
+}
                 // ================= PROFILE DISPLAY =================
 
     const savedProfile = JSON.parse(
@@ -2655,7 +2732,7 @@ const potentialSavings =
         document.getElementById("profileSalary").innerText =
             "₹" + formatMoney(savedProfile.monthlySalary || 0);
     }
-            }
+            
 
 
             /* =========================================
@@ -2742,335 +2819,449 @@ const potentialSavings =
             ========================================= */
 
             function updateInsights(
-    remaining,
-    averageDaily, 
+    averageDaily,
     daysRemaining,
     expectedRemainingExpense,
     potentialSavings,
     totalIncome,
     totalSpent
-)
- {
-const unusualExpenses = getUnusualExpenses();
-
-let unusualInsight = "";
-
-if (unusualExpenses.length > 0) {
-
-    const latestUnusual =
-        unusualExpenses[
-            unusualExpenses.length - 1
-        ];
-
-    unusualInsight = `
-        <div class="insight warning">
-            ⚠️ <strong>Unusual Spending Detected!</strong>
-            You spent ₹${formatMoney(latestUnusual.amount)}
-            on ${latestUnusual.date},
-            which is significantly higher than your
-            normal daily average.
-        </div>
-    `;
-
-}
-                const content =
-                    document.getElementById(
-                        "insightContent"
-                    );
-
-
-                if (days.length === 0) {
-
-                    content.innerHTML =
-                        "<p>Add some daily expenses to unlock your insights.</p>";
-
-                    return;
-                }
-
-
-                const highestExpense =
-                    getHighestExpense();
-
-
-               content.innerHTML = `
-
-    <div class="insight-section">
-
-        <div class="insight-heading">
-            <h3>💳 Current Financial Position</h3>
-            <p>
-                Here's where you stand right now.
-            </p>
-        </div>
-
-        <div class="insight-grid">
-
-            <div class="insight">
-                <small>Total Income</small>
-                <strong>
-                    ₹${formatMoney(totalIncome)}
-                </strong>
-                <span>
-                    Money recorded this month
-                </span>
-            </div>
-
-
-            <div class="insight">
-                <small>Total Spent</small>
-                <strong>
-                    ₹${formatMoney(totalSpent)}
-                </strong>
-                <span>
-                    Your spending so far
-                </span>
-            </div>
-
-
-            <div class="insight">
-                <small>Remaining Balance</small>
-                <strong>
-                    ₹${formatMoney(
-                        budget +
-                        totalIncome -
-                        totalSpent
-                    )}
-                </strong>
-                <span>
-                    Available to spend or save
-                </span>
-            </div>
-
-        </div>
-
-    </div>
-
-
-
-    <div class="insight-section">
-
-        <div class="insight-heading">
-            <h3>📊 Spending Behaviour</h3>
-            <p>
-                Based on your recorded expenses.
-            </p>
-        </div>
-
-        <div class="insight-grid">
-
-            <div class="insight">
-                <small>Usual Daily Spending</small>
-                <strong>
-                    ₹${formatMoney(averageDaily)}
-                </strong>
-                <span>
-                    Your average spending per day
-                </span>
-            </div>
-
-
-            <div class="insight">
-                <small>Highest Expense Type</small>
-                <strong>
-                    ${highestExpense.name ||
-                    "No data yet"}
-                </strong>
-                <span>
-                    ₹${formatMoney(
-                        highestExpense.amount
-                    )} spent in this category
-                </span>
-            </div>
-
-        </div>
-
-    </div>
-
-
-
-    <div class="insight-section">
-
-        <div class="insight-heading">
-            <h3>🔮 Month-End Prediction</h3>
-            <p>
-                Estimated using your current spending pattern.
-            </p>
-        </div>
-
-        <div class="insight-grid">
-
-            <div class="insight">
-                <small>Days Remaining</small>
-                <strong>
-                    ${daysRemaining}
-                </strong>
-                <span>
-                    Days left in this month
-                </span>
-            </div>
-
-
-            <div class="insight">
-                <small>Expected Remaining Expense</small>
-                <strong>
-                    ₹${formatMoney(
-                        expectedRemainingExpense
-                    )}
-                </strong>
-                <span>
-                    Based on your average daily spending
-                </span>
-            </div>
-
-
-            <div class="insight">
-                <small>Projected Month-End Spending</small>
-                <strong>
-                    ₹${formatMoney(
-                        totalSpent +
-                        expectedRemainingExpense
-                    )}
-                </strong>
-                <span>
-                    Estimated total spending this month
-                </span>
-            </div>
-
-        </div>
-
-    </div>
-
-
-
-    <div class="insight-section">
-
-        <div class="insight-heading">
-            <h3>💰 Savings Opportunity</h3>
-            <p>
-                Your possible savings based on current spending.
-            </p>
-        </div>
-
-        <div class="insight-grid">
-
-           <div class="insight highlight ${
-    potentialSavings >= 0
-        ? "positive"
-        : "negative"
-}">
-    <small>Potential Savings</small>
-
-    <strong>
-        ₹${formatMoney(
-            potentialSavings
-        )}
-    </strong>
-
-    <span>
-        ${
-            potentialSavings >= 0
-                ? "Money you may be able to save"
-                : "You may exceed your available budget"
-        }
-    </span>
-</div>
-
-        </div>
-
-    </div>
-
-
-
-    <div class="insight-section">
-
-        <div class="insight-heading">
-            <h3>🧠 Smart Spending Alerts</h3>
-            <p>
-                SpendWise detected these patterns.
-            </p>
-        </div>
-
-        <div class="insight-grid">
-
-    ${getSmartSpendingAlert(
-        remaining,
-        expectedRemainingExpense,
-        daysRemaining,
-        potentialSavings
-    )}
-
-    ${unusualInsight}
-
-</div>
-
-    </div>
-
-`;
-            }
-function getSmartSpendingAlert(
-    remaining,
-    expectedRemainingExpense,
-    daysRemaining,
-    potentialSavings
 ) {
 
-    // No budget data yet
-    if (remaining <= 0 && expectedRemainingExpense <= 0) {
-        return `
+    const content =
+        document.getElementById(
+            "insightContent"
+        );
+
+    if (!content) return;
+
+
+    // =========================================
+    // NO EXPENSE DATA
+    // =========================================
+
+    if (days.length === 0) {
+
+        content.innerHTML = `
+            <div class="insight-section">
+                <div class="insight-heading">
+                    <h3>📊 Smart Spending Insights</h3>
+
+                    <p>
+                        Add your daily expenses to
+                        understand your spending pattern.
+                    </p>
+                </div>
+
+                <div class="insight-grid">
+
+                    <div class="insight">
+                        <small>No spending data yet</small>
+
+                        <strong>
+                            Start tracking your expenses
+                        </strong>
+                    </div>
+
+                </div>
+            </div>
+        `;
+
+        return;
+    }
+
+
+    // =========================================
+    // EXPENSE ANALYSIS
+    // =========================================
+
+    const highestExpense =
+        getHighestExpense();
+
+    const unusualExpenses =
+        getUnusualExpenses();
+
+    const safeDaysRemaining =
+        Math.max(
+            0,
+            Math.ceil(
+                Number(daysRemaining) || 0
+            )
+        );
+
+    const projectedMonthSpend =
+        Number(totalSpent || 0) +
+        Number(expectedRemainingExpense || 0);
+
+
+    // =========================================
+    // UNUSUAL SPENDING ALERT
+    // =========================================
+
+    let unusualInsight = "";
+
+    if (unusualExpenses.length > 0) {
+
+        const latestUnusual =
+            unusualExpenses[
+                unusualExpenses.length - 1
+            ];
+
+        unusualInsight = `
+
             <div class="insight warning">
-                💡 Add more expense and budget data
-                to generate smart alerts.
+
+                <small>
+                    ⚠️ Unusual Spending Detected
+                </small>
+
+                <strong>
+                    ₹${formatMoney(
+                        latestUnusual.amount
+                    )}
+                </strong>
+
+                <span>
+                    Higher than your usual
+                    daily spending pattern.
+                </span>
+
             </div>
+
         `;
+
     }
 
 
-    // High risk
-    if (expectedRemainingExpense > remaining) {
+    // =========================================
+    // INSIGHTS UI
+    // =========================================
 
-        const shortage =
-            expectedRemainingExpense - remaining;
+    content.innerHTML = `
 
-        return `
-            <div class="insight warning">
-                🚨 <strong>Budget Risk Detected!</strong><br>
 
-                Your expected spending for the remaining
-                ${daysRemaining} days is
-                ₹${formatMoney(expectedRemainingExpense)}.
+        <!-- ============================= -->
+        <!-- FINANCIAL POSITION -->
+        <!-- ============================= -->
 
-                This is ₹${formatMoney(shortage)}
-                more than your available balance.
+        <div class="insight-section">
+
+            <div class="insight-heading">
+
+                <h3>
+                    💳 Current Financial Position
+                </h3>
+
+                <p>
+                    Here's where you stand right now.
+                </p>
+
             </div>
-        `;
-    }
 
 
-    // Positive situation
-    if (potentialSavings > 0) {
+            <div class="insight-grid">
 
-        return `
-            <div class="insight positive">
-                🟢 <strong>You are on track!</strong><br>
 
-                Based on your current spending pattern,
-                you may save around
-                ₹${formatMoney(potentialSavings)}
-                this month.
+                <div class="insight">
+
+                    <small>
+                        Total Income
+                    </small>
+
+                    <strong>
+                        ₹${formatMoney(
+                            totalIncome
+                        )}
+                    </strong>
+
+                    <span>
+                        Money recorded this month
+                    </span>
+
+                </div>
+
+
+                <div class="insight">
+
+                    <small>
+                        Total Spent
+                    </small>
+
+                    <strong>
+                        ₹${formatMoney(
+                            totalSpent
+                        )}
+                    </strong>
+
+                    <span>
+                        Your spending so far
+                    </span>
+
+                </div>
+
+
             </div>
-        `;
-    }
 
-
-    // Neutral situation
-    return `
-        <div class="insight">
-            ⚠️ <strong>Watch your spending.</strong><br>
-
-            Your current spending pattern is close
-            to your available monthly balance.
         </div>
+
+
+
+        <!-- ============================= -->
+        <!-- SPENDING BEHAVIOUR -->
+        <!-- ============================= -->
+
+        <div class="insight-section">
+
+            <div class="insight-heading">
+
+                <h3>
+                    📊 Spending Behaviour
+                </h3>
+
+                <p>
+                    Based on your recorded expenses.
+                </p>
+
+            </div>
+
+
+            <div class="insight-grid">
+
+
+                <div class="insight">
+
+                    <small>
+                        Usual Daily Spending
+                    </small>
+
+                    <strong>
+                        ₹${formatMoney(
+                            averageDaily
+                        )}
+                    </strong>
+
+                    <span>
+                        Your average spending per day
+                    </span>
+
+                </div>
+
+
+                <div class="insight">
+
+                    <small>
+                        Highest Expense Type
+                    </small>
+
+                    <strong>
+                        ${escapeHTML(
+                            highestExpense.name ||
+                            "No data yet"
+                        )}
+                    </strong>
+
+                    <span>
+                        ₹${formatMoney(
+                            highestExpense.amount
+                        )}
+                        spent in this category
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ============================= -->
+        <!-- MONTH END PREDICTION -->
+        <!-- ============================= -->
+
+        <div class="insight-section">
+
+            <div class="insight-heading">
+
+                <h3>
+                    🔮 Month-End Prediction
+                </h3>
+
+                <p>
+                    Estimated using your current
+                    spending pattern.
+                </p>
+
+            </div>
+
+
+            <div class="insight-grid">
+
+
+                <div class="insight">
+
+                    <small>
+                        Days Remaining
+                    </small>
+
+                    <strong>
+                        ${safeDaysRemaining}
+                    </strong>
+
+                    <span>
+                        Days left this month
+                    </span>
+
+                </div>
+
+
+                <div class="insight">
+
+                    <small>
+                        Expected Remaining Expense
+                    </small>
+
+                    <strong>
+                        ₹${formatMoney(
+                            expectedRemainingExpense
+                        )}
+                    </strong>
+
+                    <span>
+                        Based on your average
+                        daily spending
+                    </span>
+
+                </div>
+
+
+                <div class="insight">
+
+                    <small>
+                        Projected Month-End Spending
+                    </small>
+
+                    <strong>
+                        ₹${formatMoney(
+                            projectedMonthSpend
+                        )}
+                    </strong>
+
+                    <span>
+                        Estimated total spending
+                        this month
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ============================= -->
+        <!-- SAVINGS -->
+        <!-- ============================= -->
+
+        <div class="insight-section">
+
+            <div class="insight-heading">
+
+                <h3>
+                    💰 Savings Opportunity
+                </h3>
+
+                <p>
+                    Your possible savings based
+                    on current spending.
+                </p>
+
+            </div>
+
+
+            <div class="insight-grid">
+
+
+                <div class="insight highlight">
+
+                    <small>
+                        Potential Savings
+                    </small>
+
+                    <strong>
+                        ₹${formatMoney(
+                            Math.max(
+                                0,
+                                potentialSavings
+                            )
+                        )}
+                    </strong>
+
+                    <span>
+                        Money you may be able
+                        to save
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ============================= -->
+        <!-- SMART ALERT -->
+        <!-- ============================= -->
+
+        <div class="insight-section">
+
+            <div class="insight-heading">
+
+                <h3>
+                    🧠 Smart Spending Alerts
+                </h3>
+
+                <p>
+                    SpendWise detected these patterns.
+                </p>
+
+            </div>
+
+
+            <div class="insight-grid">
+
+                ${unusualInsight || `
+
+                    <div class="insight">
+
+                        <small>
+                            🟢 Spending Pattern
+                        </small>
+
+                        <strong>
+                            No unusual spending detected
+                        </strong>
+
+                        <span>
+                            Your recorded spending is
+                            following a normal pattern.
+                        </span>
+
+                    </div>
+
+                `}
+
+            </div>
+
+        </div>
+
+
     `;
+
 }
 
             function getHighestExpense() {
