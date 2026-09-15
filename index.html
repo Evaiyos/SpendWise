@@ -2153,148 +2153,332 @@
             /* =========================================
             CALCULATIONS
             ========================================= */
-            function isCurrentMonth(dateString) {
-        const today = new Date();
-        const date = new Date(dateString + "T00:00:00");
+            /* =========================================
+   SPENDWISE FINANCIAL ENGINE V2
+   ========================================= */
 
-        return (
-            date.getFullYear() === today.getFullYear() &&
-            date.getMonth() === today.getMonth()
-        );
+function isCurrentMonth(dateString) {
+
+    if (!dateString) return false;
+
+    const today = new Date();
+    const date = new Date(dateString + "T00:00:00");
+
+    return (
+        date.getFullYear() === today.getFullYear() &&
+        date.getMonth() === today.getMonth()
+    );
+}
+
+
+/* =========================================
+   CURRENT MONTH DATA
+   ========================================= */
+
+function getCurrentMonthDays() {
+
+    return days.filter(day =>
+        isCurrentMonth(day.date)
+    );
+}
+
+
+/* =========================================
+   DAY TOTAL
+   ========================================= */
+
+function getDayTotal(day) {
+
+    if (!day || !Array.isArray(day.expenses)) {
+        return 0;
     }
 
-            function getDayTotal(day) {
+    return day.expenses.reduce(
+        (total, expense) => {
 
-                return day.expenses.reduce(
-                    (total, expense) =>
-                        total +
-                        Number(expense.amount || 0),
-                    0
-                );
+            const amount =
+                Number(expense.amount) || 0;
+
+            return total + amount;
+
+        },
+        0
+    );
+}
+
+
+/* =========================================
+   TOTAL SPENT
+   Actual money that went out
+   ========================================= */
+
+function getTotalSpent() {
+
+    return getCurrentMonthDays().reduce(
+        (total, day) => {
+
+            return total + getDayTotal(day);
+
+        },
+        0
+    );
+}
+
+
+/* =========================================
+   TOTAL INCOME
+   Actual income recorded
+   ========================================= */
+
+function getTotalIncome() {
+
+    return getCurrentMonthDays().reduce(
+        (total, day) => {
+
+            return total +
+                (Number(day.income) || 0);
+
+        },
+        0
+    );
+}
+
+
+/* =========================================
+   AVAILABLE BALANCE
+   Income - Actual Spending
+   ========================================= */
+
+function getAvailableBalance() {
+
+    const income =
+        getTotalIncome();
+
+    const spent =
+        getTotalSpent();
+
+    return income - spent;
+}
+
+
+/* =========================================
+   BUDGET REMAINING
+   Budget - Actual Spending
+   ========================================= */
+
+function getBudgetRemaining() {
+
+    return (
+        Number(budget || 0) -
+        getTotalSpent()
+    );
+}
+
+
+/* =========================================
+   EXPENSE ANALYSIS HELPER
+   ========================================= */
+
+function getExpenseAnalysis(expense) {
+
+    if (!expense) {
+        return {
+            category: "Other",
+            spendingType: "unknown",
+            predictionEligible: false
+        };
+    }
+
+    return analyseExpense(expense);
+}
+
+
+/* =========================================
+   REGULAR SPENDING
+   ========================================= */
+
+function isRegularExpense(expense) {
+
+    const analysis =
+        getExpenseAnalysis(expense);
+
+    return (
+        analysis.predictionEligible === true &&
+        Number(expense.amount || 0) > 0
+    );
+}
+
+
+/* =========================================
+   REGULAR SPEND TOTAL
+   ========================================= */
+
+function getRegularSpendTotal() {
+
+    return getCurrentMonthDays().reduce(
+        (total, day) => {
+
+            if (!Array.isArray(day.expenses)) {
+                return total;
             }
 
+            const dayRegularSpend =
+                day.expenses.reduce(
+                    (sum, expense) => {
 
-            function getTotalSpent() {
-        return days
-            .filter(day => isCurrentMonth(day.date))
-            .reduce(
-                (total, day) =>
-                    total + getDayTotal(day),
-                0
+                        if (
+                            !isRegularExpense(expense)
+                        ) {
+                            return sum;
+                        }
+
+                        return sum +
+                            (Number(expense.amount) || 0);
+
+                    },
+                    0
+                );
+
+            return total + dayRegularSpend;
+
+        },
+        0
+    );
+}
+
+
+/* =========================================
+   ONE-TIME SPENDING
+   ========================================= */
+
+function getOneTimeSpendTotal() {
+
+    return getCurrentMonthDays().reduce(
+        (total, day) => {
+
+            if (!Array.isArray(day.expenses)) {
+                return total;
+            }
+
+            const dayOneTimeSpend =
+                day.expenses.reduce(
+                    (sum, expense) => {
+
+                        const analysis =
+                            getExpenseAnalysis(expense);
+
+                        if (
+                            analysis.spendingType === "one-time"
+                        ) {
+                            return sum +
+                                (Number(expense.amount) || 0);
+                        }
+
+                        return sum;
+
+                    },
+                    0
+                );
+
+            return total + dayOneTimeSpend;
+
+        },
+        0
+    );
+}
+
+
+/* =========================================
+   USUAL DAILY SPENDING
+   Only regular spending behaviour
+   ========================================= */
+
+function getAverageDailySpend() {
+
+    const currentMonthDays =
+        getCurrentMonthDays();
+
+    const daysWithRegularSpend =
+        currentMonthDays.filter(day => {
+
+            if (!Array.isArray(day.expenses)) {
+                return false;
+            }
+
+            return day.expenses.some(expense =>
+                isRegularExpense(expense)
             );
+        });
+
+
+    if (daysWithRegularSpend.length === 0) {
+        return 0;
     }
 
 
-            function getTotalIncome() {
-        return days
-            .filter(day => isCurrentMonth(day.date))
-            .reduce(
-                (total, day) =>
-                    total + Number(day.income || 0),
-                0
-            );
-    }
+    const totalRegularSpend =
+        daysWithRegularSpend.reduce(
+            (total, day) => {
 
-        function getAverageDailySpend() {
-
-        const currentMonthDays =
-            days.filter(day =>
-                isCurrentMonth(day.date)
-            );
-
-        const daysWithRegularExpenses =
-            currentMonthDays.filter(day => {
-
-                const regularTotal =
+                const dailyRegularSpend =
                     day.expenses.reduce(
-                        (total, expense) => {
+                        (sum, expense) => {
 
-                            const analysis =
-                                analyseExpense(expense);
-
-                            const isEligible =
-                                expense.predictionEligible !== undefined
-                                    ? expense.predictionEligible
-                                    : analysis.predictionEligible;
-
-                            if (isEligible) {
-
-                                return total +
-                                    Number(expense.amount || 0);
+                            if (
+                                !isRegularExpense(expense)
+                            ) {
+                                return sum;
                             }
 
-                            return total;
+                            return sum +
+                                (Number(expense.amount) || 0);
 
                         },
                         0
                     );
 
-                return regularTotal > 0;
-            });
+                return total +
+                    dailyRegularSpend;
+
+            },
+            0
+        );
 
 
-        if (daysWithRegularExpenses.length === 0) {
-
-            return 0;
-        }
-
-
-        const totalRegularSpend =
-            daysWithRegularExpenses.reduce(
-                (total, day) => {
-
-                    const dayRegularSpend =
-                        day.expenses.reduce(
-                            (sum, expense) => {
-
-                                const analysis =
-                                    analyseExpense(expense);
-
-                                const isEligible =
-                                    expense.predictionEligible !== undefined
-                                        ? expense.predictionEligible
-                                        : analysis.predictionEligible;
-
-                                if (isEligible) {
-
-                                    return sum +
-                                        Number(expense.amount || 0);
-                                }
-
-                                return sum;
-
-                            },
-                            0
-                        );
-
-                    return total + dayRegularSpend;
-
-                },
-                0
-            );
+    return (
+        totalRegularSpend /
+        daysWithRegularSpend.length
+    );
+}
 
 
-        return totalRegularSpend / daysWithRegularExpenses.length;
-    }
+/* =========================================
+   REMAINING DAYS
+   ========================================= */
+
+function getRemainingDays() {
+
+    const today = new Date();
+
+    const lastDay =
+        new Date(
+            today.getFullYear(),
+            today.getMonth() + 1,
+            0
+        ).getDate();
+
+    return Math.max(
+        0,
+        lastDay - today.getDate()
+    );
+}
 
 
-            function getRemainingDays() {
+/* =========================================
+   EXPECTED REMAINING SPENDING
+   ========================================= */
 
-                const today = new Date();
-
-                const lastDay =
-                    new Date(
-                        today.getFullYear(),
-                        today.getMonth() + 1,
-                        0
-                    ).getDate();
-
-                return Math.max(
-                    0,
-                    lastDay - today.getDate()
-                );
-            }
-            function getExpectedRemainingExpense() {
+function getExpectedRemainingExpense() {
 
     const averageDaily =
         getAverageDailySpend();
@@ -2302,7 +2486,10 @@
     const daysRemaining =
         getRemainingDays();
 
-    return averageDaily * daysRemaining;
+    return (
+        averageDaily *
+        daysRemaining
+    );
 }
     function toggleProfileEdit() {
         const editCard = document.getElementById("profileEditCard");
@@ -2551,10 +2738,9 @@
     */
 
     const remaining =
-        budget +
-        totalIncome -
-        totalSpent;
-
+    getAvailableBalance();
+    const budgetRemaining =
+    getBudgetRemaining();
 
     /*
         SPENDING ANALYSIS
@@ -2569,7 +2755,7 @@
     const expectedRemainingExpense =
         getExpectedRemainingExpense();
 
-    const potentialSavings =
+    const potentialSavings = 0;
         Math.max(
             0,
             remaining -
