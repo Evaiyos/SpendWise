@@ -787,20 +787,27 @@ main {
     background:#fff7f6;
     color:#b53b3b;
 }
+/* -------------------------
+   ADD EXPENSE BUTTON
+   CENTER OF 2ND & 3RD TABS
+   ------------------------- */
+
 .add-expense-fab {
-    position:fixed;
-    right:34px;
-    bottom:28px;
-    width:62px;
-    height:62px;
-    border-radius:50%;
-    border:0;
-    background:var(--green);
-    color:#fff;
-    font-size:32px;
-    line-height:1;
-    box-shadow:0 14px 28px rgba(36,180,126,.28);
-    z-index:55;
+    position: fixed !important;
+
+    left: 50% !important;
+    right: auto !important;
+
+    bottom: 15px !important;
+
+    transform: translateX(-50%) !important;
+
+    width: 62px;
+    height: 62px;
+
+    border-radius: 50%;
+
+    z-index: 10001;
 }
 
 /* budget */ .settings-card,.insight-card {
