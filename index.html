@@ -787,6 +787,10 @@ main {
     background:#fff7f6;
     color:#b53b3b;
 }
+/* Desktop: hide mobile add button */
+.add-expense-fab {
+    display: none !important;
+}
 .add-expense-fab {
     position: fixed !important;
 
@@ -1516,6 +1520,28 @@ main {
         z-index: 10001 !important;
     }
 }
+.add-expense-fab {
+    display: flex !important;
+
+    position: fixed !important;
+    left: 50% !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: 13px !important;
+
+    transform: translateX(-50%) !important;
+
+    width: 62px !important;
+    height: 62px !important;
+
+    border-radius: 50% !important;
+    border: none !important;
+
+    background: var(--green) !important;
+    color: #fff !important;
+
+    z-index: 10001 !important;
+}
 </style>
     </head>
 
@@ -1754,7 +1780,8 @@ main {
         <button class="primary-btn" onclick="addDay()">+ Add Day</button>
     </div>
     <div id="dailyList" class="daily-list"></div>
-    <button
+<!-- GLOBAL ADD EXPENSE BUTTON -->
+<button
     class="add-expense-fab"
     type="button"
     onclick="addExpenseFromFab()"
