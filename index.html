@@ -787,17 +787,11 @@ main {
     background:#fff7f6;
     color:#b53b3b;
 }
-/* -------------------------
-   ADD EXPENSE BUTTON
-   CENTER OF 2ND & 3RD TABS
-   ------------------------- */
-
 .add-expense-fab {
     position: fixed !important;
 
     left: 50% !important;
     right: auto !important;
-
     bottom: 15px !important;
 
     transform: translateX(-50%) !important;
@@ -806,6 +800,22 @@ main {
     height: 62px;
 
     border-radius: 50%;
+    border: none;
+
+    background: var(--green) !important;
+    color: #ffffff !important;
+
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    box-shadow: 0 14px 28px rgba(36, 180, 126, 0.28);
 
     z-index: 10001;
 }
@@ -1060,14 +1070,32 @@ main {
     }
 
 
-    /* -------------------------
-       ADD EXPENSE BUTTON
-       ------------------------- */
-
     .add-expense-fab {
-        right: 20px;
-        bottom: 91px;
-    }
+    left: 50% !important;
+    right: auto !important;
+    bottom: 15px !important;
+
+    transform: translateX(-50%) !important;
+
+    background: var(--green) !important;
+    color: #fff !important;
+
+    width: 62px;
+    height: 62px;
+    border-radius: 50%;
+    border: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 32px;
+    font-weight: 600;
+
+    box-shadow: 0 14px 28px rgba(36, 180, 126, 0.28);
+
+    z-index: 10001;
+}
 
 
     /* -------------------------
@@ -1576,7 +1604,13 @@ main {
         <button class="primary-btn" onclick="addDay()">+ Add Day</button>
     </div>
     <div id="dailyList" class="daily-list"></div>
-    <button class="add-expense-fab" type="button" onclick="addDay()" aria-label="Add expense">+</button>
+    <button
+    class="add-expense-fab"
+    type="button"
+    onclick="addExpenseFromFab()"
+    aria-label="Add expense">
+    +
+</button>
 </section>
 
     <!-- ================= BUDGET ================= -->
