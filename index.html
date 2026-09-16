@@ -796,30 +796,81 @@ main {
 
     transform: translateX(-50%) !important;
 
-    width: 62px;
-    height: 62px;
+    width: 62px !important;
+    height: 62px !important;
 
-    border-radius: 50%;
-    border: none;
+    border-radius: 50% !important;
+    border: none !important;
 
     background: var(--green) !important;
     color: #ffffff !important;
 
-    font-size: 32px;
-    font-weight: 600;
-    line-height: 1;
+    font-size: 32px !important;
+    font-weight: 600 !important;
+    line-height: 1 !important;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 
     cursor: pointer;
 
     box-shadow: 0 14px 28px rgba(36, 180, 126, 0.28);
 
-    z-index: 10001;
+    z-index: 10001 !important;
+}
+/* =========================================
+   ADD EXPENSE - CLICK EFFECT
+   ========================================= */
+
+.add-expense-fab {
+    overflow: hidden;
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease;
 }
 
+.add-expense-fab::after {
+    content: "";
+    position: absolute;
+
+    width: 12px;
+    height: 12px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.45);
+
+    transform: scale(0);
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+.add-expense-fab.fab-clicked {
+    transform: translateX(-50%) scale(0.88) rotate(12deg) !important;
+
+    box-shadow:
+        0 0 0 8px rgba(36, 180, 126, 0.12),
+        0 0 0 16px rgba(36, 180, 126, 0.06),
+        0 14px 30px rgba(36, 180, 126, 0.35);
+}
+
+.add-expense-fab.fab-clicked::after {
+    animation: fabRipple 0.5s ease-out;
+}
+
+@keyframes fabRipple {
+    0% {
+        transform: scale(0);
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: scale(14);
+        opacity: 0;
+    }
+}
 /* budget */ .settings-card,.insight-card {
     max-width:760px;
     margin:10px auto 0;
@@ -1365,6 +1416,102 @@ main {
     margin-top: 5px;
     font-size: 11px;
     color: var(--muted);
+}
+/* =========================================
+   MOBILE - FIXED BOTTOM NAVIGATION
+   ========================================= */
+
+@media (max-width: 800px) {
+
+    nav.sidebar-menu {
+        position: fixed !important;
+
+        top: auto !important;
+        bottom: 12px !important;
+
+        left: 12px !important;
+        right: 12px !important;
+
+        width: auto !important;
+        height: 64px !important;
+
+        padding: 5px 9px !important;
+
+        display: grid !important;
+
+        grid-template-columns:
+            1fr
+            1fr
+            62px
+            1fr
+            1fr;
+
+        align-items: center;
+        justify-items: center;
+
+        gap: 0 !important;
+
+        flex-direction: unset !important;
+
+        background: rgba(255,255,255,0.97) !important;
+
+        border: 1px solid #e3e5e2 !important;
+        border-radius: 22px !important;
+
+        box-shadow: var(--shadow) !important;
+
+        z-index: 9999 !important;
+    }
+
+    /* LEFT SIDE */
+    nav.sidebar-menu .tab-btn:nth-child(1) {
+        grid-column: 1;
+    }
+
+    nav.sidebar-menu .tab-btn:nth-child(2) {
+        grid-column: 2;
+    }
+
+    /* RIGHT SIDE */
+    nav.sidebar-menu .tab-btn:nth-child(3) {
+        grid-column: 4;
+    }
+
+    nav.sidebar-menu .tab-btn:nth-child(4) {
+        grid-column: 5;
+    }
+
+    nav.sidebar-menu .tab-btn {
+        width: 54px !important;
+        height: 52px !important;
+
+        margin: 0 !important;
+        justify-self: center;
+    }
+
+    /* + BUTTON */
+    .add-expense-fab {
+        position: fixed !important;
+
+        left: 50% !important;
+        right: auto !important;
+
+        top: auto !important;
+        bottom: 13px !important;
+
+        transform: translateX(-50%) !important;
+
+        width: 62px !important;
+        height: 62px !important;
+
+        border-radius: 50% !important;
+        border: none !important;
+
+        background: var(--green) !important;
+        color: white !important;
+
+        z-index: 10001 !important;
+    }
 }
 </style>
     </head>
@@ -1927,7 +2074,91 @@ main {
                 renderDays(days[0].id);
             }
 
+function addExpenseFromFab() {
+const fab = document.querySelector(".add-expense-fab");
 
+if (fab) {
+    fab.classList.add("fab-clicked");
+
+    setTimeout(() => {
+        fab.classList.remove("fab-clicked");
+    }, 500);
+}
+
+    const today = getLocalDate();
+
+    /*
+     * Find today's day
+     */
+    let todayDay = days.find(day => day.date === today);
+
+    /*
+     * If today's day does not exist,
+     * create today's day.
+     */
+    if (!todayDay) {
+
+        todayDay = {
+            id: Date.now(),
+            date: today,
+            income: 0,
+            expenses: []
+        };
+
+        days.unshift(todayDay);
+
+        saveData();
+    }
+
+    /*
+     * Add a new expense to TODAY
+     */
+    todayDay.expenses.push({
+        id: Date.now() + Math.random(),
+        name: "",
+        amount: 0
+    });
+
+    saveData();
+
+    /*
+     * Render today's day and keep it open
+     */
+    renderDays(todayDay.id);
+
+    /*
+     * Scroll to today's expense section
+     */
+    setTimeout(() => {
+
+        const dayCard =
+            document.querySelector(".day-card.open");
+
+        if (!dayCard) return;
+
+        dayCard.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+        /*
+         * Focus the newly created expense name field
+         */
+        setTimeout(() => {
+
+            const expenseInput =
+                dayCard.querySelector(
+                    ".expense-row:last-child input[type='text']"
+                );
+
+            if (expenseInput) {
+                expenseInput.focus();
+            }
+
+        }, 300);
+
+    }, 150);
+}
             /* =========================================
             RENDER DAYS
             ========================================= */
