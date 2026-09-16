@@ -988,163 +988,348 @@ main {
     margin-bottom:12px;
 }
 
-/* mobile */ @media(max-width:800px) {
+/* =========================================================
+   MOBILE LAYOUT
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+    /* -------------------------
+       HEADER
+       ------------------------- */
+
     header {
-        height:64px;
-        padding:0 20px;
+        height: 64px;
+        padding: 0 20px;
     }
+
+
+    /* -------------------------
+       BOTTOM NAVIGATION
+       ------------------------- */
+
     nav {
-        left:12px;
-        top:auto;
-        bottom:14px;
-        width:calc(100% - 24px);
-        height:64px;
-        padding:5px 9px;
-        border-radius:22px;
-        flex-direction:row;
-        justify-content:space-around;
-        gap:4px;
+        position: fixed !important;
+
+        left: 12px !important;
+        right: 12px !important;
+        top: auto !important;
+        bottom: 14px !important;
+
+        width: auto !important;
+        height: 64px;
+
+        padding: 5px 9px;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+
+        gap: 4px;
+
+        background: rgba(255, 255, 255, 0.96);
+
+        border: 1px solid #e3e5e2;
+        border-radius: 22px;
+
+        box-shadow: var(--shadow);
+
+        z-index: 9999;
     }
+
     nav::before {
-        display:none;
+        display: none;
     }
+
+
+    /* -------------------------
+       NAV BUTTONS
+       ------------------------- */
+
     .tab-btn {
-        width:54px;
-        height:52px;
+        width: 54px;
+        height: 52px;
     }
+
+
+    /* -------------------------
+       ADD EXPENSE BUTTON
+       ------------------------- */
+
     .add-expense-fab {
-        right:20px;
-        bottom:91px;
+        right: 20px;
+        bottom: 91px;
     }
+
+
+    /* -------------------------
+       HOME HERO
+       ------------------------- */
+
     .home-hero {
-        min-height:245px;
+        min-height: 245px;
     }
+
     .doodle-person {
-        width:250px;
-        height:220px;
+        width: 250px;
+        height: 220px;
     }
+
     .hero-doodle {
-        width:240px;
-        height:215px;
+        width: 240px;
+        height: 215px;
     }
+
     .speech {
-        right:-5px;
-        top:0;
+        right: -5px;
+        top: 0;
     }
+
     .hero-copy h2 {
-        font-size:37px;
+        font-size: 37px;
     }
+
+
+    /* -------------------------
+       WALLET SUMMARY
+       ------------------------- */
+
     .wallet-summary {
-        grid-template-columns:1fr;
-        gap:14px;
+        grid-template-columns: 1fr;
+        gap: 14px;
     }
+
     .wallet-cell {
-        padding:0;
+        padding: 0;
     }
-    .wallet-cell+.wallet-cell {
-        border-left:0;
-        border-top:1px solid rgba(255,255,255,.12);
-        padding-left:0;
-        padding-top:12px;
+
+    .wallet-cell + .wallet-cell {
+        border-left: 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+
+        padding-left: 0;
+        padding-top: 12px;
     }
+
     .wallet-cell:first-child .wallet-value {
-        font-size:29px;
+        font-size: 29px;
     }
+
+
+    /* -------------------------
+       SECONDARY STATS
+       ------------------------- */
+
     .secondary-stats {
-        grid-template-columns:1fr 1fr;
+        grid-template-columns: 1fr 1fr;
     }
+
+
+    /* -------------------------
+       MAIN CONTENT
+       ------------------------- */
+
     main {
-        padding:30px 18px 110px;
+        padding: 30px 18px 110px;
     }
+
+
+    /* -------------------------
+       ARISTOTLE
+       ------------------------- */
+
     .aristotle-launcher {
-        right:17px;
-        top:9px;
+        right: 17px;
+        top: 9px;
     }
+
     .aristotle-label {
-        display:none;
+        display: none;
     }
+
+
+    /* -------------------------
+       SECTION TITLE
+       ------------------------- */
+
     .section-title {
-        margin-top:23px;
+        margin-top: 23px;
     }
+
+
+    /* -------------------------
+       INSIGHTS
+       ------------------------- */
+
     .insight-grid {
-        grid-template-columns:1fr;
+        grid-template-columns: 1fr;
     }
+
+
+    /* -------------------------
+       PROFILE
+       ------------------------- */
+
     .profile-summary {
-        grid-template-columns:1fr 1fr;
+        grid-template-columns: 1fr 1fr;
     }
+
     .profile-header {
-        flex-direction:column;
+        flex-direction: column;
     }
+
     .profile-income {
-        margin-left:auto;
+        margin-left: auto;
     }
+
+
+    /* -------------------------
+       EXPENSE ROW
+       ------------------------- */
+
     .expense-row {
-        grid-template-columns:1fr 90px 38px;
+        grid-template-columns: 1fr 90px 38px;
     }
 }
-@media(max-width:520px) {
-    .brand h1::before,.brand h1::after {
-        font-size:20px;
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 520px) {
+
+    /* -------------------------
+       BRAND
+       ------------------------- */
+
+    .brand h1::before,
+    .brand h1::after {
+        font-size: 20px;
     }
+
+
+    /* -------------------------
+       HOME HERO
+       ------------------------- */
+
     .home-hero {
-        padding-top:5px;
+        padding-top: 5px;
     }
+
     .hero-copy {
-        max-width:55%;
+        max-width: 55%;
     }
+
     .hero-copy h2 {
-        font-size:31px;
-        letter-spacing:-1.7px;
+        font-size: 31px;
+        letter-spacing: -1.7px;
     }
+
     .hero-copy p {
-        font-size:14px;
+        font-size: 14px;
     }
+
+
+    /* -------------------------
+       HERO DOODLE
+       ------------------------- */
+
     .doodle-person {
-        width:47%;
-        height:190px;
+        width: 47%;
+        height: 190px;
     }
+
     .hero-doodle {
-        width:190px;
-        height:185px;
+        width: 190px;
+        height: 185px;
     }
+
     .speech {
-        font-size:11px;
-        padding:10px 12px;
+        font-size: 11px;
+        padding: 10px 12px;
     }
+
+
+    /* -------------------------
+       PROFILE
+       ------------------------- */
+
     .profile-card {
-        align-items:flex-start;
-        flex-wrap:wrap;
+        align-items: flex-start;
+        flex-wrap: wrap;
     }
+
     .profile-income {
-        width:100%;
-        text-align:left;
-        margin-left:0;
+        width: 100%;
+        text-align: left;
+        margin-left: 0;
     }
+
     .profile-summary {
-        grid-template-columns:1fr;
+        grid-template-columns: 1fr;
     }
-    .welcome-screen,.login-screen {
-        min-height:670px;
-        border-radius:31px;
-        padding:40px 24px 25px;
+
+
+    /* -------------------------
+       ONBOARDING
+       ------------------------- */
+
+    .welcome-screen,
+    .login-screen {
+        min-height: 670px;
+        border-radius: 31px;
+        padding: 40px 24px 25px;
     }
+
     .onboard-doodle {
-        height:335px;
+        height: 335px;
     }
+
     .onboard-doodle svg {
-        width:275px;
-        height:320px;
+        width: 275px;
+        height: 320px;
     }
+
     .doodle-note {
-        right:0;
-        font-size:13px;
+        right: 0;
+        font-size: 13px;
     }
+
     .login-doodle {
-        height:230px;
+        height: 230px;
     }
+
     .new-user-card {
-        min-height:auto;
+        min-height: auto;
     }
+}
+.balance-in-hand-card {
+    margin-top: 14px;
+    padding: 18px 20px;
+    background: #f5faf7;
+    border: 1px solid #dcebe3;
+    border-radius: 18px;
+}
+
+.balance-in-hand-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #53606d;
+    margin-bottom: 6px;
+}
+
+.balance-in-hand-value {
+    font-size: 27px;
+    font-weight: 850;
+    color: var(--green);
+}
+
+.balance-in-hand-formula {
+    margin-top: 5px;
+    font-size: 11px;
+    color: var(--muted);
 }
 </style>
     </head>
@@ -1365,6 +1550,19 @@ main {
       <div class="secondary-stat"><small>Total Income</small><strong id="incomeValue">₹0</strong></div>
       <div class="secondary-stat"><small>Potential Savings</small><strong id="savingsValue">₹0</strong></div>
     </div>
+    <div class="balance-in-hand-card">
+    <div class="balance-in-hand-label">
+        Balance In Hand
+    </div>
+
+    <div class="balance-in-hand-value" id="balanceInHandValue">
+        ₹0
+    </div>
+
+    <div class="balance-in-hand-formula">
+        Income − Total Spent
+    </div>
+</div>
 
     <div class="section-title">
         <h3>My Expenses</h3>
@@ -3078,6 +3276,11 @@ function getExpectedRemainingExpense() {
     getAvailableBalance();
     const budgetRemaining =
     getBudgetRemaining();
+    /*
+    BALANCE IN HAND
+    Total Income - Total Spent
+*/
+const balanceInHand = remaining;
 
     /*
         SPENDING ANALYSIS
@@ -3167,7 +3370,13 @@ function getExpectedRemainingExpense() {
         formatMoney(
             potentialSavings
         );
+const balanceInHandElement =
+    document.getElementById("balanceInHandValue");
 
+if (balanceInHandElement) {
+    balanceInHandElement.innerText =
+        "₹" + formatMoney(balanceInHand);
+}
 
     /*
         SMART NOTIFICATION
