@@ -860,58 +860,379 @@
         }
 
     }
+    /* ================= ARISTOTLE ================= */
+
+.aristotle-card {
+    background: white;
+    border: 1px solid #e7e9ee;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 22px;
+    box-shadow: 0 8px 24px rgba(31, 41, 55, 0.05);
+}
+
+.aristotle-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.aristotle-header h3 {
+    margin: 0 0 5px;
+    font-size: 18px;
+}
+
+.aristotle-header p {
+    margin: 0;
+    color: #7b8190;
+    font-size: 13px;
+}
+
+.aristotle-input {
+    width: 100%;
+    resize: vertical;
+    padding: 13px;
+    border: 1px solid #dfe2e8;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    outline: none;
+    margin-bottom: 12px;
+    font-family: Arial, sans-serif;
+}
+
+.aristotle-input:focus {
+    border-color: #1f2937;
+}
+
+.aristotle-btn {
+    margin-top: 2px;
+}
+
+.aristotle-result {
+    margin-top: 16px;
+    border-top: 1px solid #eef0f3;
+    padding-top: 16px;
+}
+
+.aristotle-entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 0;
+    border-bottom: 1px solid #f0f1f4;
+}
+
+.aristotle-entry:last-child {
+    border-bottom: none;
+}
+
+.aristotle-entry-name {
+    font-weight: 600;
+}
+
+.aristotle-entry-meta {
+    color: #7b8190;
+    font-size: 12px;
+    margin-top: 3px;
+}
+
+.aristotle-entry-amount {
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.aristotle-confirm {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.aristotle-empty {
+    margin-top: 12px;
+    padding: 12px;
+    background: #f8fafc;
+    border-radius: 10px;
+    color: #64748b;
+    font-size: 13px;
+}
+/* ================= GET STARTED SCREEN ================= */
+
+.welcome-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+
+    background: #f7f1e8;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px;
+}
+
+.welcome-content {
+    width: 100%;
+    max-width: 520px;
+
+    text-align: center;
+}
+
+.welcome-logo {
+    font-size: 48px;
+    font-weight: 800;
+
+    color: #17213b;
+
+    letter-spacing: -2px;
+
+    margin-bottom: 12px;
+}
+
+.welcome-tagline {
+    margin: 0;
+
+    color: #687083;
+
+    font-size: 18px;
+}
+
+.welcome-illustration {
+    width: 220px;
+    height: 220px;
+
+    margin: 45px auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #dce9dc;
+
+    border-radius: 50%;
+
+    font-size: 90px;
+
+    box-shadow:
+        0 20px 50px rgba(23, 33, 59, 0.10);
+}
+
+.welcome-btn {
+    border: none;
+
+    background: #17213b;
+    color: white;
+
+    padding: 15px 28px;
+
+    border-radius: 14px;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+.welcome-btn:hover {
+    transform: translateY(-3px);
+}
+
+.welcome-login-text {
+    margin-top: 20px;
+
+    color: #7a8190;
+
+    font-size: 14px;
+}
+
+.welcome-login-btn {
+    border: none;
+    background: none;
+
+    color: #17213b;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    margin-left: 4px;
+}
+
+@media (max-width: 600px) {
+
+    .welcome-logo {
+        font-size: 40px;
+    }
+
+    .welcome-tagline {
+        font-size: 16px;
+    }
+
+    .welcome-illustration {
+        width: 180px;
+        height: 180px;
+        font-size: 70px;
+    }
+
+}/* =====================================================
+   LOGIN + CREATE ACCOUNT CARD FIX
+   Keeps onboarding cards vertical
+   ===================================================== */
+
+#profileSetup .profile-card,
+#newUserSetup .profile-card {
+    display: block !important;
+    width: 100%;
+    max-width: 440px;
+    box-sizing: border-box;
+}
+
+/* Keep the login fields stacked vertically */
+#profileSetup .setup-field,
+#newUserSetup .setup-field {
+    width: 100%;
+}
+
+/* Keep buttons inside the card */
+#profileSetup .setup-btn,
+#newUserSetup .setup-btn {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Login / Create account screen */
+#profileSetup,
+#newUserSetup {
+    align-items: center;
+    justify-content: center;
+}
+
     </style>
     </head>
 
     <body>
-    <div id="profileSetup" class="profile-setup">
+    <<!-- ================= GET STARTED ================= -->
 
-        <div class="profile-card">
+<div id="getStartedScreen" class="welcome-screen">
 
-            <div class="setup-logo">SpendWise</div>
+    <div class="welcome-content">
 
-            <h2>Welcome Back 👋</h2>
+        <div class="welcome-logo">
+            SpendWise
+        </div>
 
-            <p>
-                Login to continue managing your money with SpendWise.
-            </p>
+        <p class="welcome-tagline">
+            Small steps for a bigger tomorrow.
+        </p>
 
-            <div class="setup-field">
-                <label for="loginUsername">Username</label>
-                <input
-                    type="text"
-                    id="loginUsername"
-                    placeholder="Enter your username"
-                >
-            </div>
+        <div class="welcome-illustration">
+            💰
+        </div>
 
-            <div class="setup-field">
-                <label for="loginPassword">Password</label>
-                <input
-                    type="password"
-                    id="loginPassword"
-                    placeholder="Enter your password"
-                >
-            </div>
+        <button
+            class="welcome-btn"
+            type="button"
+            onclick="showLoginForm()"
+        >
+            Let's Get Started →
+        </button>
 
-            <button class="setup-btn" type="button" onclick="loginUser()">
-        Login →
-    </button>
+        <p class="welcome-login-text">
+            Already have an account?
+            <button
+                type="button"
+                class="welcome-login-btn"
+                onclick="showLoginForm()"
+            >
+                Login
+            </button>
+        </p>
 
-            <div style="text-align: center; margin-top: 18px;">
-                <span>Don't have an account?</span>
-                <button
-        type="button"
-        class="new-user-btn"
-        onclick="showNewUserForm()"
-    >
-        Create New User
-    </button>
-            </div>
+    </div>
+
+</div>
+
+
+<!-- ================= LOGIN ================= -->
+
+<div id="profileSetup" class="profile-setup" style="display: none;">
+
+    <div class="profile-card">
+
+        <div class="setup-logo">
+            SpendWise
+        </div>
+
+        <h2>Welcome Back 👋</h2>
+
+        <p>
+            Login to continue managing your money with SpendWise.
+        </p>
+
+        <div class="setup-field">
+
+            <label for="loginUsername">
+                Username
+            </label>
+
+            <input
+                type="text"
+                id="loginUsername"
+                placeholder="Enter your username"
+            >
+
+        </div>
+
+
+        <div class="setup-field">
+
+            <label for="loginPassword">
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="loginPassword"
+                placeholder="Enter your password"
+            >
+
+        </div>
+
+
+        <button
+            class="setup-btn"
+            type="button"
+            onclick="loginUser()"
+        >
+            Login →
+        </button>
+
+
+        <div style="text-align: center; margin-top: 18px;">
+
+            <span>
+                Don't have an account?
+            </span>
+
+            <button
+                type="button"
+                class="new-user-btn"
+                onclick="showNewUserForm()"
+            >
+                Create New User
+            </button>
 
         </div>
 
     </div>
+
+</div>
 
     <!-- NEW USER SETUP -->
     <div id="newUserSetup" class="profile-setup" style="display: none;">
@@ -1053,7 +1374,75 @@
                     <h2>My Expenses</h2>
                     <p>Track your daily spending and understand your money better.</p>
                 </div>
+<!-- ================= ARISTOTLE ================= -->
 
+<!-- ================= ARISTOTLE LAUNCHER ================= -->
+
+<div class="aristotle-launcher" onclick="openAristotleChat()">
+
+    <div class="aristotle-message-box">
+        💬 <span>Message Aristotle...</span>
+    </div>
+
+    <div class="aristotle-name">
+        Aristotle
+    </div>
+
+</div>
+
+
+<!-- ================= ARISTOTLE CHAT ================= -->
+
+<div id="aristotleChat" class="aristotle-overlay">
+
+    <div class="aristotle-chat-window">
+
+        <div class="aristotle-chat-header">
+
+            <div>
+                <strong>🧠 Aristotle</strong>
+                <span>Your money companion</span>
+            </div>
+
+            <button
+                class="aristotle-close"
+                onclick="closeAristotleChat()">
+                ×
+            </button>
+
+        </div>
+
+        <div
+            id="aristotleMessages"
+            class="aristotle-messages">
+
+            <div class="aristotle-bubble bot">
+                Hey 👋<br>
+                What happened with your money?
+            </div>
+
+        </div>
+
+        <div class="aristotle-input-area">
+
+            <textarea
+                id="aristotleInput"
+                placeholder="Message Aristotle..."
+                rows="1"
+                onkeydown="handleAristotleEnter(event)">
+            </textarea>
+
+            <button
+                onclick="processAristotleChat()"
+                class="aristotle-send">
+                ➤
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
                 <div id="notification" class="alert">
                     👋 Welcome! Set your monthly budget and start adding expenses.
                 </div>
@@ -1643,317 +2032,344 @@
 
     function analyseExpense(expense) {
 
-        const name =
-            normalizeExpenseName(expense.name);
+    const name =
+        normalizeExpenseName(expense.name);
 
 
-        /* ===============================
-        ONE-TIME / TRANSFER DETECTION
-        =============================== */
+    /* =========================================
+       ONE-TIME / PERSONAL TRANSFER
+       ========================================= */
 
-        const oneTimeKeywords = [
+    const oneTimeKeywords = [
 
-            "loan",
-            "kadam",
-            "കടം",
+        "loan",
+        "kadam",
+        "കടം",
 
-            "borrow",
-            "borrowed",
+        "borrow",
+        "borrowed",
 
-            "lent",
-            "lend",
+        "lent",
+        "lend",
 
-            "gave money",
-            "money given",
+        "gave money",
+        "money given",
 
-            "transfer",
-            "sent money",
+        "transfer",
+        "sent money",
 
-            "friendinu koduthu",
-            "avanu koduthu",
-            "avaluk koduthu",
-            "koduthu",
+        "friendinu koduthu",
+        "avanu koduthu",
+        "avaluk koduthu",
 
-            "personal transfer"
-        ];
+        "personal transfer"
+    ];
 
 
-        if (
-            oneTimeKeywords.some(keyword =>
-                name.includes(keyword)
-            )
-        ) {
-
-            return {
-
-                category:
-                    "Personal Transfer / One-Time",
-
-                spendingType:
-                    "one-time",
-
-                predictionEligible:
-                    false
-            };
-        }
-
-
-        /* ===============================
-        FOOD & DAILY MEALS
-        =============================== */
-
-        const foodKeywords = [
-
-            "breakfast",
-            "bf",
-
-            "lunch",
-
-            "dinner",
-
-            "food",
-            "meal",
-            "meals",
-
-            "bhakshanam",
-            "bakshanam",
-
-            "chaya",
-            "chaaya",
-
-            "tea",
-            "chai",
-
-            "coffee",
-
-            "juice",
-
-            "snacks",
-            "snack",
-
-            "hotel food",
-            "restaurant",
-
-            "biriyani",
-            "biryani",
-
-            "porotta",
-            "parotta",
-
-            "meals",
-
-            "food expense"
-        ];
-
-
-        if (
-            foodKeywords.some(keyword =>
-                name.includes(keyword)
-            )
-        ) {
-
-            return {
-
-                category:
-                    "Food & Drinks",
-
-                spendingType:
-                    "regular",
-
-                predictionEligible:
-                    true
-            };
-        }
-
-
-        /* ===============================
-        TRANSPORT
-        =============================== */
-
-        const transportKeywords = [
-
-            "petrol",
-            "fuel",
-            "diesel",
-
-            "uber",
-            "ola",
-            "taxi",
-            "cab",
-
-            "bus",
-            "train",
-
-            "auto",
-            "parking"
-        ];
-
-
-        if (
-            transportKeywords.some(keyword =>
-                name.includes(keyword)
-            )
-        ) {
-
-            return {
-
-                category:
-                    "Transport",
-
-                spendingType:
-                    "regular",
-
-                predictionEligible:
-                    true
-            };
-        }
-
-
-        /* ===============================
-        DAILY ESSENTIALS
-        =============================== */
-
-        const essentialKeywords = [
-
-            "grocery",
-            "groceries",
-
-            "vegetables",
-            "vegetable",
-
-            "milk",
-
-            "water",
-
-            "medicine",
-
-            "medical",
-
-            "pharmacy",
-
-            "soap",
-
-            "shampoo"
-        ];
-
-
-        if (
-            essentialKeywords.some(keyword =>
-                name.includes(keyword)
-            )
-        ) {
-
-            return {
-
-                category:
-                    "Daily Essentials",
-
-                spendingType:
-                    "regular",
-
-                predictionEligible:
-                    true
-            };
-        }
-
-
-        /* ===============================
-        SHOPPING / OCCASIONAL
-        =============================== */
-
-        const shoppingKeywords = [
-
-            "shopping",
-
-            "dress",
-            "clothes",
-
-            "shirt",
-            "pant",
-
-            "amazon",
-            "flipkart",
-
-            "phone",
-
-            "electronics"
-        ];
-
-
-        if (
-            shoppingKeywords.some(keyword =>
-                name.includes(keyword)
-            )
-        ) {
-
-            return {
-
-                category:
-                    "Shopping",
-
-                spendingType:
-                    "occasional",
-
-                predictionEligible:
-                    false
-            };
-        }
-
-
-        /* ===============================
-        ENTERTAINMENT
-        =============================== */
-
-        const entertainmentKeywords = [
-
-            "movie",
-
-            "cinema",
-
-            "game",
-
-            "netflix",
-
-            "spotify"
-        ];
-
-
-        if (
-            entertainmentKeywords.some(keyword =>
-                name.includes(keyword)
-            )
-        ) {
-
-            return {
-
-                category:
-                    "Entertainment",
-
-                spendingType:
-                    "occasional",
-
-                predictionEligible:
-                    false
-            };
-        }
-
-
-        /* ===============================
-        DEFAULT
-        =============================== */
+    if (
+        oneTimeKeywords.some(keyword =>
+            name.includes(keyword)
+        )
+    ) {
 
         return {
 
             category:
-                "Other",
+                "Personal Transfer / One-Time",
 
             spendingType:
-                "unknown",
+                "one-time",
+
+            predictionEligible:
+                false
+        };
+    }
+
+
+    /* =========================================
+       FOOD & DRINKS
+       ========================================= */
+
+    const foodKeywords = [
+
+        "breakfast",
+        "bf",
+
+        "lunch",
+        "dinner",
+
+        "food",
+        "meal",
+        "meals",
+
+        "bhakshanam",
+        "bakshanam",
+
+        "chaya",
+        "chaaya",
+
+        "tea",
+        "chai",
+        "coffee",
+        "juice",
+
+        "snack",
+        "snacks",
+
+        "hotel food",
+        "restaurant",
+
+        "biriyani",
+        "biryani",
+
+        "porotta",
+        "parotta"
+    ];
+
+
+    if (
+        foodKeywords.some(keyword =>
+            name.includes(keyword)
+        )
+    ) {
+
+        return {
+
+            category:
+                "Food & Drinks",
+
+            spendingType:
+                "regular",
 
             predictionEligible:
                 true
         };
     }
+
+
+    /* =========================================
+       REGULAR TRANSPORT
+       ========================================= */
+
+    const regularTransportKeywords = [
+
+        "petrol",
+        "fuel",
+        "diesel",
+
+        "uber",
+        "ola",
+        "taxi",
+        "cab",
+
+        "auto",
+        "parking"
+    ];
+
+
+    if (
+        regularTransportKeywords.some(keyword =>
+            name.includes(keyword)
+        )
+    ) {
+
+        return {
+
+            category:
+                "Transport",
+
+            spendingType:
+                "regular",
+
+            predictionEligible:
+                true
+        };
+    }
+
+
+    /* =========================================
+       OCCASIONAL / TRAVEL TRANSPORT
+       ========================================= */
+
+    const occasionalTransportKeywords = [
+
+        "bus ticket",
+        "train ticket",
+        "flight",
+        "flight ticket",
+
+        "return bus",
+        "return ticket",
+
+        "travel",
+        "trip"
+    ];
+
+
+    if (
+        occasionalTransportKeywords.some(keyword =>
+            name.includes(keyword)
+        )
+    ) {
+
+        return {
+
+            category:
+                "Transport",
+
+            spendingType:
+                "occasional",
+
+            predictionEligible:
+                false
+        };
+    }
+
+
+    /* =========================================
+       DAILY ESSENTIALS
+       ========================================= */
+
+    const essentialKeywords = [
+
+        "grocery",
+        "groceries",
+
+        "vegetable",
+        "vegetables",
+
+        "milk",
+
+        "water",
+
+        "medicine",
+        "medical",
+        "pharmacy",
+
+        "soap",
+        "shampoo"
+    ];
+
+
+    if (
+        essentialKeywords.some(keyword =>
+            name.includes(keyword)
+        )
+    ) {
+
+        return {
+
+            category:
+                "Daily Essentials",
+
+            spendingType:
+                "regular",
+
+            predictionEligible:
+                true
+        };
+    }
+
+
+    /* =========================================
+       SHOPPING
+       ========================================= */
+
+    const shoppingKeywords = [
+
+        "shopping",
+
+        "dress",
+        "clothes",
+        "shirt",
+        "pant",
+
+        "amazon",
+        "flipkart",
+
+        "phone",
+        "electronics"
+    ];
+
+
+    if (
+        shoppingKeywords.some(keyword =>
+            name.includes(keyword)
+        )
+    ) {
+
+        return {
+
+            category:
+                "Shopping",
+
+            spendingType:
+                "occasional",
+
+            predictionEligible:
+                false
+        };
+    }
+
+
+    /* =========================================
+       ENTERTAINMENT
+       ========================================= */
+
+    const entertainmentKeywords = [
+
+        "movie",
+        "cinema",
+
+        "game",
+
+        "netflix",
+        "spotify"
+    ];
+
+
+    if (
+        entertainmentKeywords.some(keyword =>
+            name.includes(keyword)
+        )
+    ) {
+
+        return {
+
+            category:
+                "Entertainment",
+
+            spendingType:
+                "occasional",
+
+            predictionEligible:
+                false
+        };
+    }
+
+
+    /* =========================================
+       UNKNOWN
+       ========================================= */
+
+    return {
+
+        category:
+            "Other",
+
+        spendingType:
+            "unknown",
+
+        /*
+           We are not confident enough
+           to use this expense for behavioural
+           prediction.
+        */
+
+        predictionEligible:
+            false
+    };
+}
             /* =========================================
             EXPENSE ACTIONS
             ========================================= */
@@ -2565,10 +2981,27 @@ function getExpectedRemainingExpense() {
         document.getElementById("newUserSetup").style.display = "flex";
     }
 
-    function showLoginForm() {
-        document.getElementById("newUserSetup").style.display = "none";
-        document.getElementById("profileSetup").style.display = "flex";
+   function showLoginForm() {
+
+    const getStarted =
+        document.getElementById("getStartedScreen");
+
+    const login =
+        document.getElementById("profileSetup");
+
+    const newUser =
+        document.getElementById("newUserSetup");
+
+    if (getStarted) {
+        getStarted.style.display = "none";
     }
+
+    if (newUser) {
+        newUser.style.display = "none";
+    }
+
+    login.style.display = "flex";
+}
     function createAccount() {
 
         const username =
@@ -2755,7 +3188,10 @@ function getExpectedRemainingExpense() {
     const expectedRemainingExpense =
         getExpectedRemainingExpense();
 
-    const potentialSavings = 0;
+    const potentialSavings = Math.max(
+    0,
+    budgetRemaining - expectedRemainingExpense
+);
         
 
 
@@ -3450,23 +3886,22 @@ function getExpectedRemainingExpense() {
 
     const totals = {};
 
-    days.forEach(day => {
+    getCurrentMonthDays().forEach(day => {
 
-        day.expenses.forEach(
-            expense => {
+        if (!Array.isArray(day.expenses)) return;
 
-                const name =
-                    expense.name ||
-                    "Unnamed Expense";
+        day.expenses.forEach(expense => {
 
-                totals[name] =
-                    (totals[name] || 0) +
-                    Number(
-                        expense.amount || 0
-                    );
+            const name =
+                expense.name || "Unnamed Expense";
 
-            }
-        );
+            const amount =
+                Number(expense.amount) || 0;
+
+            totals[name] =
+                (totals[name] || 0) + amount;
+
+        });
 
     });
 
@@ -3477,10 +3912,8 @@ function getExpectedRemainingExpense() {
         ([name, amount]) => {
 
             if (amount > highestAmount) {
-
                 highestName = name;
                 highestAmount = amount;
-
             }
 
         }
@@ -3490,18 +3923,15 @@ function getExpectedRemainingExpense() {
         name: highestName,
         amount: highestAmount
     };
-
 }
 function getUnusualExpenses() {
 
     const unusualExpenses = [];
-    
 
     const averageDaily =
         getAverageDailySpend();
 
-    days.forEach(day => {
-
+    getCurrentMonthDays().forEach(day => {
         const dailyTotal =
             day.expenses.reduce(
                 (sum, expense) =>
@@ -3688,6 +4118,496 @@ function getUnusualExpenses() {
 
         updateApp();
     }
+    /* =========================================================
+   ARISTOTLE — NATURAL LANGUAGE TRANSACTION ENTRY V1
+   ========================================================= */
+
+let aristotlePendingEntries = [];
+
+
+/* =========================================================
+   DATE UNDERSTANDING
+   ========================================================= */
+
+function getAristotleDate(text) {
+
+    const lower = text.toLowerCase();
+
+    const today = new Date();
+
+    if (lower.includes("yesterday")) {
+
+        const yesterday = new Date(today);
+        yesterday.setDate(today.getDate() - 1);
+
+        return formatLocalDateObject(yesterday);
+    }
+
+    if (
+        lower.includes("today") ||
+        lower.includes("inn") ||
+        lower.includes("innu")
+    ) {
+        return getLocalDate();
+    }
+
+    /*
+       Default:
+       No date mentioned = today
+    */
+
+    return getLocalDate();
+}
+
+
+function formatLocalDateObject(date) {
+
+    const year =
+        date.getFullYear();
+
+    const month =
+        String(date.getMonth() + 1).padStart(2, "0");
+
+    const day =
+        String(date.getDate()).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+}
+
+
+/* =========================================================
+   REMOVE DATE WORDS
+   ========================================================= */
+
+function cleanAristotleText(text) {
+
+    return text
+        .replace(/\btoday\b/gi, "")
+        .replace(/\byesterday\b/gi, "")
+        .replace(/\binn\b/gi, "")
+        .replace(/\binnu\b/gi, "")
+        .trim();
+}
+
+
+/* =========================================================
+   TRANSACTION PARSER
+   ========================================================= */
+
+function parseAristotleTransactions(text) {
+
+    const date =
+        getAristotleDate(text);
+
+    const cleaned =
+        cleanAristotleText(text);
+
+    /*
+       Split using commas.
+
+       Example:
+
+       Akhilin 500,
+       food 200,
+       vellam 100,
+       petrol 460
+    */
+
+    const parts =
+        cleaned
+            .split(",")
+            .map(item => item.trim())
+            .filter(Boolean);
+
+    const entries = [];
+
+    parts.forEach(part => {
+
+        /*
+           Find the final number in each phrase.
+
+           Supports:
+
+           500
+           ₹500
+           Rs 500
+           Rs.500
+           500.50
+        */
+
+        const match =
+            part.match(
+                /(?:₹|rs\.?|inr)?\s*(\d+(?:\.\d+)?)\s*$/i
+            );
+
+        if (!match) {
+            return;
+        }
+
+        const amount =
+            Number(match[1]);
+
+        if (!amount || amount <= 0) {
+            return;
+        }
+
+        let name =
+            part
+                .replace(
+                    /(?:₹|rs\.?|inr)?\s*\d+(?:\.\d+)?\s*$/i,
+                    ""
+                )
+                .trim();
+
+        if (!name) {
+            name = "Unnamed transaction";
+        }
+
+        const lowerName =
+            name.toLowerCase();
+
+        /*
+           Basic income detection.
+        */
+
+        const incomeKeywords = [
+            "salary",
+            "income",
+            "received",
+            "got",
+            "credited",
+            "bonus",
+            "freelance",
+            "payment received",
+            "salary vannu",
+            "cash kitti"
+        ];
+
+        const isIncome =
+            incomeKeywords.some(keyword =>
+                lowerName.includes(keyword)
+            );
+
+        entries.push({
+
+            id:
+                Date.now() +
+                Math.random(),
+
+            name: name,
+
+            amount: amount,
+
+            date: date,
+
+            type:
+                isIncome
+                    ? "income"
+                    : "spend"
+
+        });
+
+    });
+
+    return entries;
+}
+
+
+/* =========================================================
+   SHOW ARISTOTLE PREVIEW
+   ========================================================= */
+
+function processAristotleInput() {
+
+    const input =
+        document.getElementById(
+            "aristotleInput"
+        );
+
+    const result =
+        document.getElementById(
+            "aristotleResult"
+        );
+
+    const text =
+        input.value.trim();
+
+    if (!text) {
+
+        result.innerHTML = `
+            <div class="aristotle-empty">
+                Tell Aristotle what happened with your money first 🙂
+            </div>
+        `;
+
+        return;
+    }
+
+    const entries =
+        parseAristotleTransactions(text);
+
+    if (entries.length === 0) {
+
+        result.innerHTML = `
+            <div class="aristotle-empty">
+                I couldn't detect a transaction yet.
+                Try something like:
+                <strong>food 200, petrol 500</strong>
+            </div>
+        `;
+
+        return;
+    }
+
+    aristotlePendingEntries =
+        entries;
+
+    renderAristotleConfirmation();
+}
+
+
+/* =========================================================
+   CONFIRMATION UI
+   ========================================================= */
+
+function renderAristotleConfirmation() {
+
+    const result =
+        document.getElementById(
+            "aristotleResult"
+        );
+
+    if (
+        !aristotlePendingEntries.length
+    ) {
+        result.innerHTML = "";
+        return;
+    }
+
+    const date =
+        aristotlePendingEntries[0].date;
+
+    const rows =
+        aristotlePendingEntries
+            .map(entry => {
+
+                const typeLabel =
+                    entry.type === "income"
+                        ? "Income"
+                        : "Spend";
+
+                return `
+                    <div class="aristotle-entry">
+
+                        <div>
+                            <div class="aristotle-entry-name">
+                                ${escapeHTML(entry.name)}
+                            </div>
+
+                            <div class="aristotle-entry-meta">
+                                ${typeLabel} · ${formatDate(entry.date)}
+                            </div>
+                        </div>
+
+                        <div class="aristotle-entry-amount">
+                            ₹${formatMoney(entry.amount)}
+                        </div>
+
+                    </div>
+                `;
+
+            })
+            .join("");
+
+    result.innerHTML = `
+
+        <div class="aristotle-result">
+
+            <strong>
+                I found ${aristotlePendingEntries.length}
+                transaction(s):
+            </strong>
+
+            ${rows}
+
+            <div class="aristotle-confirm">
+
+                <button
+                    class="primary-btn"
+                    onclick="confirmAristotleEntries()"
+                >
+                    ✓ Confirm & Save
+                </button>
+
+                <button
+                    class="secondary-btn"
+                    onclick="cancelAristotleEntries()"
+                >
+                    Cancel
+                </button>
+
+            </div>
+
+        </div>
+    `;
+}
+
+
+/* =========================================================
+   CONFIRM & SAVE
+   ========================================================= */
+
+function confirmAristotleEntries() {
+
+    if (
+        !aristotlePendingEntries.length
+    ) {
+        return;
+    }
+
+    aristotlePendingEntries.forEach(
+        entry => {
+
+            let day =
+                days.find(
+                    existingDay =>
+                        existingDay.date === entry.date
+                );
+
+            /*
+               Create the date automatically
+               if it doesn't exist.
+            */
+
+            if (!day) {
+
+                day = {
+
+                    id: Date.now() +
+                        Math.random(),
+
+                    date: entry.date,
+
+                    income: 0,
+
+                    expenses: []
+
+                };
+
+                days.unshift(day);
+            }
+
+
+            /* =========================
+               INCOME
+               ========================= */
+
+            if (
+                entry.type === "income"
+            ) {
+
+                day.income =
+                    (Number(day.income) || 0)
+                    + entry.amount;
+
+                return;
+            }
+
+
+            /* =========================
+               SPEND
+               ========================= */
+
+            const expense = {
+
+                id:
+                    entry.id,
+
+                name:
+                    entry.name,
+
+                amount:
+                    entry.amount
+
+            };
+
+
+            /*
+               Run SpendWise intelligence
+               on the new transaction.
+            */
+
+            const analysis =
+                analyseExpense(expense);
+
+            expense.category =
+                analysis.category;
+
+            expense.spendingType =
+                analysis.spendingType;
+
+            expense.predictionEligible =
+                analysis.predictionEligible;
+
+
+            day.expenses.push(expense);
+
+        }
+    );
+
+
+    /* =========================
+       SAVE EVERYTHING
+       ========================= */
+
+    saveData();
+
+    aristotlePendingEntries = [];
+
+
+    document.getElementById(
+        "aristotleInput"
+    ).value = "";
+
+    document.getElementById(
+        "aristotleResult"
+    ).innerHTML = `
+
+        <div class="aristotle-empty">
+            ✅ Saved! Your transactions have been added to SpendWise.
+        </div>
+
+    `;
+
+
+    /*
+       Refresh:
+
+       My Expense
+       Dashboard
+       Insights
+       Profile
+    */
+
+    renderDays();
+
+    updateApp();
+}
+
+
+/* =========================================================
+   CANCEL
+   ========================================================= */
+
+function cancelAristotleEntries() {
+
+    aristotlePendingEntries = [];
+
+    document.getElementById(
+        "aristotleResult"
+    ).innerHTML = "";
+
+}
     </script>
     </body>
     </html>
