@@ -1069,7 +1069,160 @@ main {
 .profile-edit-card input {
     margin-bottom:12px;
 }
+/* =========================================================
+   DESKTOP FLOATING NAV
+   Compact -> Hover Expand
+   ========================================================= */
 
+@media (min-width: 801px) {
+
+   nav.sidebar-menu {
+    width: 54px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+
+    transition: none;
+}
+
+nav.sidebar-menu:hover {
+    width: 54px;
+    background: transparent;
+    box-shadow: none;
+}
+
+    /* Hamburger */
+    nav.sidebar-menu::before {
+        content: "☰";
+
+        width: 54px;
+        height: 50px;
+
+        display: grid;
+        place-items: center;
+
+        font-size: 23px;
+        color: var(--ink);
+
+        margin: 0 auto;
+
+        border-radius: 20px;
+
+        transition:
+            background .3s ease,
+            transform .35s cubic-bezier(.22,1,.36,1);
+    }
+
+    nav.sidebar-menu:hover {
+        width: 76px;
+
+        box-shadow:
+            0 20px 45px rgba(23,34,53,.14);
+    }
+
+  nav.sidebar-menu:hover::before {
+    background: var(--green-soft);
+    transform: rotate(90deg);
+    box-shadow: 0 12px 28px rgba(36,180,126,.14);
+}
+    /* Navigation buttons */
+
+    nav.sidebar-menu .tab-btn {
+        width: 54px;
+        height: 50px;
+
+        margin: 0 auto;
+
+        border-radius: 50%;
+
+        opacity: 0;
+        visibility: hidden;
+
+        transform:
+            translateY(-10px)
+            scale(.72);
+
+        transition:
+            opacity .22s ease,
+            visibility .22s ease,
+            transform .38s cubic-bezier(.22,1,.36,1),
+            background .25s ease,
+            color .25s ease,
+            box-shadow .25s ease;
+    }
+
+    /* Reveal icons when hovering sidebar */
+
+    nav.sidebar-menu:hover .tab-btn {
+        opacity: 1;
+        visibility: visible;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+    /* Stagger animation */
+
+    nav.sidebar-menu:hover .tab-btn:nth-child(1) {
+        transition-delay: .04s;
+    }
+
+    nav.sidebar-menu:hover .tab-btn:nth-child(2) {
+        transition-delay: .09s;
+    }
+
+    nav.sidebar-menu:hover .tab-btn:nth-child(3) {
+        transition-delay: .14s;
+    }
+
+    nav.sidebar-menu:hover .tab-btn:nth-child(4) {
+        transition-delay: .19s;
+    }
+
+    /* Icon circles */
+
+    nav.sidebar-menu .tab-btn::after {
+        width: 54px;
+        height: 54px;
+
+        display: grid;
+        place-items: center;
+
+        font-size: 22px;
+        line-height: 1;
+
+        border-radius: 50%;
+
+        transition:
+            transform .25s ease,
+            color .25s ease;
+    }
+
+    nav.sidebar-menu .tab-btn:hover {
+        background: var(--green-soft);
+        color: var(--green);
+
+        transform:
+            translateY(0)
+            scale(1.08);
+
+        box-shadow:
+            0 8px 20px rgba(36,180,126,.12);
+    }
+
+    nav.sidebar-menu .tab-btn:hover::after {
+        transform: scale(1.08);
+    }
+
+    /* Active icon */
+
+    nav.sidebar-menu .tab-btn.active {
+        background: var(--green-soft);
+        color: var(--green);
+    }
+}
 /* =========================================================
    MOBILE LAYOUT
    ========================================================= */
@@ -1982,6 +2135,541 @@ main {
 
     font-size: 11px;
 }
+/* =========================================================
+   DESKTOP NAV - ROUNDED FLOATING SIDEBAR
+   ========================================================= */
+
+@media (min-width: 801px) {
+
+    nav.sidebar-menu {
+        position: fixed;
+
+        left: 20px;
+        top: 108px;
+
+        width: 70px;
+        padding: 10px 8px;
+
+        background: rgba(255,255,255,.96);
+
+        border: 1px solid #e3e5e2;
+        border-radius: 35px;
+
+        box-shadow: 0 18px 50px rgba(23,34,53,.08);
+
+        overflow: visible;
+
+        transition:
+            box-shadow .3s ease,
+            transform .3s ease;
+    }
+
+    /* Hamburger */
+    nav.sidebar-menu::before {
+        content: "☰";
+
+        width: 54px;
+        height: 50px;
+
+        display: grid;
+        place-items: center;
+
+        margin: 0 auto 3px;
+
+        border-radius: 50%;
+
+        font-size: 23px;
+        color: var(--ink);
+
+        transition:
+            background .3s ease,
+            transform .35s cubic-bezier(.22,1,.36,1);
+    }
+
+    /* Hovering sidebar */
+    nav.sidebar-menu:hover {
+        box-shadow:
+            0 22px 55px rgba(23,34,53,.13);
+    }
+
+    nav.sidebar-menu:hover::before {
+        background: var(--green-soft);
+        transform: rotate(90deg);
+    }
+
+    /* Hide navigation icons initially */
+    nav.sidebar-menu .tab-btn {
+        opacity: 0;
+        visibility: hidden;
+
+        transform: translateY(-12px) scale(.75);
+
+        width: 54px;
+        height: 50px;
+
+        margin: 0 auto;
+
+        border-radius: 50%;
+
+        transition:
+            opacity .22s ease,
+            visibility .22s ease,
+            transform .38s cubic-bezier(.22,1,.36,1),
+            background .25s ease,
+            color .25s ease;
+    }
+
+    /* Show icons on hover */
+    nav.sidebar-menu:hover .tab-btn {
+        opacity: 1;
+        visibility: visible;
+
+        transform: translateY(0) scale(1);
+    }
+
+    /* Beautiful stagger */
+    nav.sidebar-menu:hover .tab-btn:nth-child(1) {
+        transition-delay: .04s;
+    }
+
+    nav.sidebar-menu:hover .tab-btn:nth-child(2) {
+        transition-delay: .09s;
+    }
+
+    nav.sidebar-menu:hover .tab-btn:nth-child(3) {
+        transition-delay: .14s;
+    }
+
+    nav.sidebar-menu:hover .tab-btn:nth-child(4) {
+        transition-delay: .19s;
+    }
+
+    /* Round icon buttons */
+    nav.sidebar-menu .tab-btn::after {
+        font-size: 21px;
+        line-height: 1;
+
+        transition:
+            transform .25s ease;
+    }
+
+    /* Hover effect */
+    nav.sidebar-menu .tab-btn:hover {
+        background: var(--green-soft);
+        color: var(--green);
+
+        transform: translateY(0) scale(1.08);
+
+        box-shadow:
+            0 8px 20px rgba(36,180,126,.12);
+    }
+
+    nav.sidebar-menu .tab-btn:hover::after {
+        transform: scale(1.08);
+    }
+
+    /* Active tab */
+    nav.sidebar-menu .tab-btn.active {
+        background: var(--green-soft);
+        color: var(--green);
+    }
+}
+/* =========================================================
+   DESKTOP NAV - HIDDEN UNTIL HOVER
+   ========================================================= */
+
+@media (min-width: 801px) {
+
+    nav.sidebar-menu {
+        width: 54px;
+        padding: 0;
+
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        border-radius: 35px;
+
+        transition:
+            background .35s ease,
+            border-color .35s ease,
+            box-shadow .35s ease,
+            padding .35s ease;
+    }
+
+    /* Hamburger is the ONLY thing visible */
+    nav.sidebar-menu::before {
+        content: "☰";
+
+        width: 54px;
+        height: 54px;
+
+        display: grid;
+        place-items: center;
+
+        margin: 0;
+
+        background: transparent;
+        border: 1px solid transparent;
+        border-radius: 50%;
+
+        font-size: 23px;
+        color: var(--ink);
+
+        transition:
+            background .3s ease,
+            border-color .3s ease,
+            transform .4s cubic-bezier(.22,1,.36,1),
+            box-shadow .3s ease;
+    }
+
+    /* Hide all 4 tabs completely */
+    nav.sidebar-menu .tab-btn {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+
+        transform:
+            translateY(-10px)
+            scale(.65);
+
+        transition:
+            opacity .2s ease,
+            visibility .2s ease,
+            transform .4s cubic-bezier(.22,1,.36,1);
+    }
+
+    /* =====================================================
+       HOVER STATE
+       ===================================================== */
+
+    nav.sidebar-menu:hover {
+        width: 70px;
+        padding: 10px 8px;
+
+        background: rgba(255,255,255,.96);
+
+        border: 1px solid #e3e5e2;
+        border-radius: 35px;
+
+        box-shadow:
+            0 18px 50px rgba(23,34,53,.08);
+    }
+
+    nav.sidebar-menu:hover::before {
+        background: var(--green-soft);
+        border-color: transparent;
+
+        transform: rotate(90deg);
+
+        box-shadow:
+            0 8px 20px rgba(36,180,126,.10);
+    }
+
+    /* Reveal the four icons */
+    nav.sidebar-menu:hover .tab-btn {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+    /* Staggered entrance */
+    nav.sidebar-menu:hover .tab-btn:nth-child(1) {
+        transition-delay: .04s;
+    }
+
+    nav.sidebar-menu:hover .tab-btn:nth-child(2) {
+        transition-delay: .09s;
+    }
+
+    nav.sidebar-menu:hover .tab-btn:nth-child(3) {
+        transition-delay: .14s;
+    }
+
+    nav.sidebar-menu:hover .tab-btn:nth-child(4) {
+        transition-delay: .19s;
+    }
+
+    /* Round navigation buttons */
+    nav.sidebar-menu .tab-btn {
+        width: 54px;
+        height: 50px;
+        margin: 0 auto;
+        border-radius: 50%;
+    }
+
+    nav.sidebar-menu .tab-btn:hover {
+        background: var(--green-soft);
+        color: var(--green);
+
+        transform:
+            translateY(0)
+            scale(1.08);
+    }
+
+    nav.sidebar-menu .tab-btn.active {
+        background: var(--green-soft);
+        color: var(--green);
+    }
+}
+/* =========================================================
+   SPENDMIND NAV ICONS
+   Signature Green + Soft Glow
+   ========================================================= */
+
+@media (min-width: 801px) {
+
+    nav.sidebar-menu .tab-btn {
+        position: relative;
+        overflow: visible;
+
+        color: #24b47e;
+
+        transition:
+            transform .35s cubic-bezier(.22,1,.36,1),
+            background .3s ease,
+            box-shadow .3s ease;
+    }
+
+    /* Remove old text-symbol icons */
+    nav.sidebar-menu .tab-btn::after {
+        content: none !important;
+    }
+
+    
+   /* BOLD BLACK SVG ICONS */
+nav.sidebar-menu .tab-btn svg {
+    width: 22px;
+    height: 22px;
+
+    fill: none;
+    stroke: #172235;
+
+    stroke-width: 2.0;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+
+    position: relative;
+    z-index: 2;
+
+    transition:
+        transform .3s cubic-bezier(.22,1,.36,1),
+        stroke-width .25s ease;
+}
+
+    /* Active */
+    nav.sidebar-menu .tab-btn.active {
+    background: #eaf7f1;
+    color: #24b47e;
+
+    outline: none;
+    border: none;
+
+    box-shadow:
+        0 8px 22px rgba(36,180,126,.16),
+        0 0 0 5px rgba(36,180,126,.045);
+}
+
+    nav.sidebar-menu .tab-btn.active::before {
+        opacity: 1;
+        transform: scale(1);
+
+        box-shadow:
+            0 0 0 5px rgba(36,180,126,.035);
+    }
+
+    /* Hover */
+    nav.sidebar-menu .tab-btn:hover {
+        background: #eaf7f1;
+        color: #24b47e;
+
+        transform: scale(1.09);
+
+        box-shadow:
+            0 10px 24px rgba(36,180,126,.16);
+    }
+
+    nav.sidebar-menu .tab-btn:hover::before {
+        opacity: 1;
+        transform: scale(1.08);
+
+        box-shadow:
+            0 0 0 7px rgba(36,180,126,.045),
+            0 0 22px rgba(36,180,126,.12);
+    }
+
+    nav.sidebar-menu .tab-btn:hover svg {
+    transform: scale(1.12);
+    stroke-width: 3;
+    filter: drop-shadow(0 2px 4px rgba(36,180,126,.25));
+    }
+
+    /* Little breathing effect on active icon */
+    nav.sidebar-menu .tab-btn.active svg {
+        animation: spendMindIconFloat 2.8s ease-in-out infinite;
+    }
+
+    @keyframes spendMindIconFloat {
+
+        0%, 100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-1.5px);
+        }
+    }
+
+    /* Click feedback */
+    nav.sidebar-menu .tab-btn:active {
+        transform: scale(.92);
+    }
+
+    nav.sidebar-menu .tab-btn:active svg {
+        transform: scale(.9);
+    }
+}
+
+
+/* ===== SpendWise: Compact Create Account Layout ===== */
+
+#newUserSetup.profile-setup {
+    display: none;
+    width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding: 20px 16px;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+#newUserSetup .new-user-card {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    width: 100%;
+    max-width: 430px;
+    min-width: 0;
+    height: auto;
+    max-height: none;
+
+    box-sizing: border-box;
+    padding: 24px 28px;
+    margin: auto;
+    gap: 0;
+    overflow: visible;
+}
+
+#newUserSetup .setup-logo {
+    width: 100%;
+    margin: 0 0 10px;
+    text-align: center;
+}
+
+#newUserSetup h2 {
+    width: 100%;
+    margin: 0 0 8px;
+    text-align: center;
+    font-size: 25px;
+    line-height: 1.25;
+}
+
+#newUserSetup p {
+    width: 100%;
+    margin: 0 0 18px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+#newUserSetup .setup-field {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-width: 0;
+    margin: 0 0 11px;
+}
+
+#newUserSetup .setup-field label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+
+#newUserSetup .setup-field input {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    height: 43px;
+    padding: 0 13px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+#newUserSetup .setup-btn {
+    width: 100%;
+    min-height: 44px;
+    margin-top: 5px;
+    box-sizing: border-box;
+}
+
+/* Laptop and shorter screens */
+@media (min-width: 768px) and (min-height: 700px) {
+    #newUserSetup.profile-setup {
+        padding: 16px;
+    }
+
+    #newUserSetup .new-user-card {
+        max-width: 410px;
+        padding: 20px 26px;
+    }
+
+    #newUserSetup .setup-field {
+        margin-bottom: 9px;
+    }
+
+    #newUserSetup .setup-field input {
+        height: 40px;
+    }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 480px) {
+    #newUserSetup.profile-setup {
+        padding: 12px;
+    }
+
+    #newUserSetup .new-user-card {
+        padding: 22px 18px;
+    }
+
+    #newUserSetup h2 {
+        font-size: 23px;
+    }
+}
+
+/* Short laptop windows: allow scrolling without clipping */
+@media (max-height: 699px) {
+    #newUserSetup.profile-setup {
+        align-items: flex-start;
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
+
+    #newUserSetup .new-user-card {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+}
+
 </style>
     </head>
 
@@ -2138,11 +2826,48 @@ main {
     <header>
         <div class="brand"><div><h1>SpendWise</h1><p>Your personal spending companion</p></div></div>
         <nav class="sidebar-menu" aria-label="SpendWise navigation">
-            <button class="tab-btn active" onclick="openTab('home', this)" aria-label="My Expenses">My Expense</button>
-            <button class="tab-btn" onclick="openTab('budget', this)" aria-label="Set Budget">Set Budget</button>
-            <button class="tab-btn" onclick="openTab('insights', this)" aria-label="Insights">Insights</button>
-            <button class="tab-btn" onclick="openTab('profile', this)" aria-label="Profile">Profile</button>
-        </nav>
+
+    <button class="tab-btn active"
+            onclick="openTab('home', this)"
+            aria-label="My Expenses">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3.5 10.8 12 3.7l8.5 7.1"></path>
+            <path d="M5.5 9.8v9.7h13V9.8"></path>
+            <path d="M9.5 19.5v-5h5v5"></path>
+        </svg>
+    </button>
+
+    <button class="tab-btn"
+            onclick="openTab('budget', this)"
+            aria-label="Set Budget">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="3.5" y="6.5" width="17" height="12" rx="2.5"></rect>
+            <path d="M3.5 10h17"></path>
+            <path d="M15.5 14.5h2.5"></path>
+        </svg>
+    </button>
+
+    <button class="tab-btn"
+            onclick="openTab('insights', this)"
+            aria-label="Insights">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 19.5V14"></path>
+            <path d="M10 19.5V9"></path>
+            <path d="M16 19.5V4.5"></path>
+            <path d="M21 19.5V12"></path>
+        </svg>
+    </button>
+
+    <button class="tab-btn"
+            onclick="openTab('profile', this)"
+            aria-label="Profile">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="8" r="3.2"></circle>
+            <path d="M5.5 20c.7-3.5 3-5.3 6.5-5.3s5.8 1.8 6.5 5.3"></path>
+        </svg>
+    </button>
+
+</nav>
         <div class="header-spacer" aria-hidden="true"></div>
     </header>
 
@@ -2176,8 +2901,8 @@ main {
 
     <div class="aristotle-launcher" onclick="openAristotleChat()" aria-label="Open Aristotle">
         <span class="aristotle-label">Aristotle · AI companion</span>
-        <div class="aristotle-doodle">
-          <svg viewBox="0 0 54 54" aria-hidden="true">
+       <div class="aristotle-doodle">
+    <img src="aristotle-icon.png" alt="Aristotle">
             <ellipse cx="27" cy="25" rx="14" ry="17" fill="#f7f5ef" stroke="#172235" stroke-width="2"/>
             <path d="M14 23c1-15 24-22 29-4-8-4-12-6-17-4-5 1-8 4-12 8Z" fill="#172235"/>
             <circle cx="22" cy="27" r="1.5" fill="#172235"/><circle cx="31" cy="27" r="1.5" fill="#172235"/>
