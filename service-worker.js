@@ -1,11 +1,11 @@
-const CACHE_NAME = "spendwise-v4";
+const CACHE_NAME = "spendwise-v5";
 
 const FILES_TO_CACHE = [
     "./",
     "./index.html",
-    "./manifest.json",
-    "./spendwislogo.png"
+    "./manifest.json"
 ];
+
 
 self.addEventListener("install", event => {
     event.waitUntil(
