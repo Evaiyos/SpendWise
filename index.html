@@ -986,36 +986,52 @@
             }
         }
 
-        /* profile */
+        /* =========================================================
+   PROFILE: PREMIUM DESIGN SYSTEM
+   ========================================================= */
+
         #profile {
-            max-width: 850px;
+            max-width: 900px;
             margin: 0 auto;
+            padding-bottom: 50px;
         }
 
         .profile-header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
+            align-items: center;
             gap: 16px;
-            margin-bottom: 20px;
+            margin-bottom: 22px;
         }
 
         .profile-header h2 {
-            margin: 0 0 7px;
+            margin: 0 0 6px;
             font-size: 30px;
+            letter-spacing: -0.8px;
+            color: var(--ink);
         }
 
         .profile-header p {
             margin: 0;
             color: var(--muted);
+            font-size: 14px;
+        }
+
+        .profile-header-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .edit-profile-btn,
         .logout-btn {
             border: 0;
-            padding: 10px 13px;
+            padding: 10px 16px;
             border-radius: 12px;
             font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.15s, background 0.18s;
         }
 
         .edit-profile-btn {
@@ -1023,73 +1039,500 @@
             color: white;
         }
 
+        .edit-profile-btn:hover {
+            background: #23334d;
+            transform: translateY(-1px);
+        }
+
         .logout-btn {
             background: #fff0ef;
             color: #b91c1c;
-            margin-left: 6px;
+            border: 1px solid #fed7d7;
         }
 
-        .profile-card,
-        .profile-edit-card {
+        .logout-btn:hover {
+            background: #fee2e2;
+            transform: translateY(-1px);
+        }
+
+        /* Card base */
+        .profile-card {
             background: white;
             border: 1px solid var(--line);
             border-radius: 22px;
             padding: 24px;
             margin-bottom: 18px;
-            box-shadow: 0 8px 25px rgba(23, 34, 53, .05);
+            box-shadow: 0 8px 25px rgba(23, 34, 53, .04);
         }
 
-        .profile-card {
+        /* Hero profile card */
+        .profile-hero-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #ffffff 0%, #fbfaf7 100%);
+            border: 1px solid #e2e4df;
+        }
+
+        .profile-hero-left {
             display: flex;
             align-items: center;
             gap: 18px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .profile-avatar-wrap {
+            position: relative;
+            flex-shrink: 0;
+            cursor: pointer;
         }
 
         .profile-avatar {
-            width: 64px;
-            height: 64px;
+            width: 72px;
+            height: 72px;
             border-radius: 50%;
-            background: #f0f1ef;
+            background: var(--green-soft);
+            border: 2px solid #bcead4;
             display: grid;
             place-items: center;
-            font-size: 27px;
+            font-size: 34px;
+            box-shadow: 0 6px 16px rgba(36, 180, 126, 0.15);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .profile-avatar-wrap:hover .profile-avatar {
+            transform: scale(1.05);
+            box-shadow: 0 8px 22px rgba(36, 180, 126, 0.25);
+        }
+
+        .profile-avatar-badge {
+            position: absolute;
+            bottom: -2px;
+            right: -2px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--navy);
+            color: white;
+            display: grid;
+            place-items: center;
+            font-size: 11px;
+            border: 2px solid white;
         }
 
         .profile-details {
             flex: 1;
+            min-width: 0;
         }
 
         .profile-details h2 {
-            margin: 0 0 5px;
-            font-size: 23px;
+            margin: 0 0 4px;
+            font-size: 24px;
+            letter-spacing: -0.5px;
+            color: var(--ink);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
-        .profile-details p {
-            margin: 0;
-            color: var(--muted);
+        .profile-meta-row {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        .profile-meta-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 9px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .profile-meta-badge.role {
+            background: #f1eee6;
+            color: var(--ink);
+        }
+
+        .profile-meta-badge.username {
+            background: var(--green-soft);
+            color: #158055;
+        }
+
+        .profile-meta-badge.status {
+            background: #eff6ff;
+            color: #1d4ed8;
         }
 
         .profile-income {
             text-align: right;
+            flex-shrink: 0;
+            padding-left: 14px;
+            border-left: 1px solid var(--line);
         }
 
         .profile-income small {
             display: block;
             color: var(--muted);
+            font-size: 11px;
+            font-weight: 650;
             margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .profile-income strong {
-            font-size: 22px;
-            color: #14945e;
+            font-size: 24px;
+            font-weight: 850;
+            color: var(--green);
+            letter-spacing: -0.6px;
         }
 
-        .profile-summary-card {
+        /* Financial fitness card */
+        .fitness-card {
+            background: #fff;
+        }
+
+        .fitness-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .fitness-header h3 {
+            margin: 0 0 5px;
+            font-size: 18px;
+            color: var(--ink);
+        }
+
+        .fitness-header p {
+            margin: 0;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .fitness-score-badge {
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+            padding: 8px 14px;
+            border-radius: 14px;
+            background: #f8fbf9;
+            border: 1px solid #d5ede0;
+        }
+
+        .fitness-score-badge strong {
+            font-size: 26px;
+            font-weight: 850;
+            color: var(--green);
+        }
+
+        .fitness-score-badge span {
+            font-size: 12px;
+            color: var(--muted);
+            font-weight: 600;
+        }
+
+        .fitness-progress-wrap {
+            margin: 14px 0 16px;
+        }
+
+        .fitness-progress-bar {
+            height: 9px;
+            border-radius: 999px;
+            background: #eef2ef;
+            overflow: hidden;
+        }
+
+        .fitness-progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #24b47e 0%, #10b981 100%);
+            border-radius: inherit;
+            transition: width 0.6s ease;
+        }
+
+        .fitness-status-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            margin-top: 6px;
+            color: var(--muted);
+        }
+
+        .fitness-status-text strong {
+            color: var(--ink);
+        }
+
+        .fitness-badges-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 14px;
+        }
+
+        .fitness-badge-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            border-radius: 14px;
+            background: #fbfaf7;
+            border: 1px solid var(--line);
+        }
+
+        .fitness-badge-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: white;
+            display: grid;
+            place-items: center;
+            font-size: 18px;
+            border: 1px solid #e7e8e5;
+            flex-shrink: 0;
+        }
+
+        .fitness-badge-info small {
             display: block;
+            font-size: 10px;
+            color: var(--muted);
+            font-weight: 650;
         }
 
-        .profile-summary-card h2 {
-            margin: 0 0 18px;
+        .fitness-badge-info strong {
+            display: block;
+            font-size: 13px;
+            color: var(--ink);
+            margin-top: 2px;
+        }
+
+        /* Savings Goal Card */
+        .savings-goal-card {
+            background: #fff;
+        }
+
+        .savings-goal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        .savings-goal-header h3 {
+            margin: 0;
+            font-size: 18px;
+            color: var(--ink);
+        }
+
+        .savings-goal-pill {
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: #f1f8f4;
+            color: var(--green);
+            font-size: 11px;
+            font-weight: 750;
+            border: 1px solid #d9eee4;
+        }
+
+        .savings-goal-body {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+
+        .savings-goal-name {
+            font-size: 16px;
+            font-weight: 750;
+            color: var(--ink);
+        }
+
+        .savings-goal-numbers {
+            text-align: right;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .savings-goal-numbers span {
+            color: var(--muted);
+            font-weight: 500;
+        }
+
+        .savings-progress-bar {
+            height: 10px;
+            border-radius: 999px;
+            background: #eef2ef;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .savings-progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #6a9ee8 0%, #24b47e 100%);
+            border-radius: inherit;
+            transition: width 0.6s ease;
+        }
+
+        .savings-goal-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .btn-sm-edit {
+            border: 1px solid var(--line);
+            background: #fff;
+            padding: 6px 12px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--ink);
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .btn-sm-edit:hover {
+            background: #f8f8f6;
+        }
+
+        /* Data Management / Backup Card */
+        .data-mgmt-card h3 {
+            margin: 0 0 6px;
+            font-size: 18px;
+        }
+
+        .data-mgmt-card p {
+            margin: 0 0 16px;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .data-actions-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .data-action-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            background: #fbfaf7;
+            cursor: pointer;
+            text-align: left;
+            transition: background 0.18s, border-color 0.18s, transform 0.15s;
+        }
+
+        .data-action-btn:hover {
+            background: #fff;
+            border-color: #b8dfcc;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(23, 34, 53, 0.05);
+        }
+
+        .data-action-btn.danger:hover {
+            border-color: #fca5a5;
+            background: #fff7f7;
+        }
+
+        .data-action-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 11px;
+            display: grid;
+            place-items: center;
+            font-size: 18px;
+            background: #fff;
+            border: 1px solid var(--line);
+            flex-shrink: 0;
+        }
+
+        .data-action-btn.danger .data-action-icon {
+            background: #fff0ef;
+            border-color: #fecaca;
+            color: #dc2626;
+        }
+
+        .data-action-text strong {
+            display: block;
+            font-size: 13px;
+            color: var(--ink);
+        }
+
+        .data-action-text small {
+            display: block;
+            font-size: 11px;
+            color: var(--muted);
+            margin-top: 2px;
+        }
+
+        /* Security card */
+        .security-card h3 {
+            margin: 0 0 6px;
+            font-size: 18px;
+        }
+
+        .security-card p {
+            margin: 0 0 14px;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .password-form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr auto;
+            gap: 10px;
+            align-items: end;
+        }
+
+        .password-field label {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--muted);
+            margin-bottom: 5px;
+        }
+
+        .password-field input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            font-size: 13px;
+            background: #f8f8f6;
+            color: var(--ink);
+            outline: none;
+        }
+
+        .password-field input:focus {
+            border-color: #a9d9c3;
+            box-shadow: 0 0 0 3px rgba(36, 180, 126, .1);
+        }
+
+        /* Monthly Summary Card */
+        .profile-summary-card h2,
+        .profile-summary-card h3 {
+            margin: 0 0 16px;
+            font-size: 18px;
         }
 
         .profile-summary {
@@ -1099,24 +1542,180 @@
         }
 
         .profile-item {
-            background: #f7f7f4;
+            background: #f8fbf9;
             padding: 15px;
-            border-radius: 14px;
-            border: 1px solid var(--line);
+            border-radius: 15px;
+            border: 1px solid #e2ebe5;
         }
 
         .profile-item small {
             display: block;
             color: var(--muted);
-            margin-bottom: 7px;
+            margin-bottom: 6px;
+            font-size: 11px;
+            font-weight: 650;
         }
 
         .profile-item strong {
             font-size: 18px;
+            color: var(--ink);
+            letter-spacing: -0.4px;
         }
 
-        .profile-edit-card input {
-            margin-bottom: 12px;
+        /* Modals for Profile & Savings */
+        .sw-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(23, 34, 53, 0.45);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            z-index: 99999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 18px;
+        }
+
+        .sw-modal-overlay.open {
+            display: flex;
+        }
+
+        .sw-modal-card {
+            position: relative;
+            width: min(480px, 100%);
+            background: var(--paper, #fbfaf7);
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: 0 28px 70px rgba(23, 34, 53, 0.22);
+            animation: expenseCalendarPop 0.22s ease-out;
+        }
+
+        .sw-modal-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .sw-modal-head h3 {
+            margin: 0;
+            font-size: 20px;
+            color: var(--ink);
+        }
+
+        .sw-modal-close {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: 1px solid var(--line);
+            background: #fff;
+            cursor: pointer;
+            font-size: 18px;
+            display: grid;
+            place-items: center;
+            color: var(--ink);
+        }
+
+        .avatar-picker-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
+            margin: 10px 0 16px;
+        }
+
+        .avatar-choice-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            border: 2px solid transparent;
+            background: #f1eee6;
+            font-size: 24px;
+            cursor: pointer;
+            display: grid;
+            place-items: center;
+            transition: transform 0.15s, border-color 0.15s, background 0.15s;
+        }
+
+        .avatar-choice-btn:hover {
+            transform: scale(1.08);
+            background: #e8f5ee;
+        }
+
+        .avatar-choice-btn.selected {
+            border-color: var(--green);
+            background: var(--green-soft);
+            box-shadow: 0 4px 12px rgba(36, 180, 126, 0.25);
+        }
+
+        .sw-modal-card label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            color: #56606f;
+            margin: 0 0 6px 2px;
+        }
+
+        .sw-modal-card input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid var(--line);
+            border-radius: 13px;
+            background: #fff;
+            font-size: 14px;
+            color: var(--ink);
+            margin-bottom: 14px;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .sw-modal-card input:focus {
+            border-color: #a9d9c3;
+            box-shadow: 0 0 0 3px rgba(36, 180, 126, .1);
+        }
+
+        .sw-modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .profile-hero-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .profile-income {
+                width: 100%;
+                text-align: left;
+                border-left: 0;
+                border-top: 1px solid var(--line);
+                padding-left: 0;
+                padding-top: 14px;
+            }
+
+            .fitness-badges-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .data-actions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .password-form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-summary {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .avatar-picker-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
         }
 
         /* =========================================================
@@ -5580,7 +6179,245 @@ nav.sidebar-menu .tab-btn.active svg {
     overflow-wrap: anywhere;
 }
 
-.swc-stat.dark { background: var(--navy); border-color:
+.swc-stat.dark {
+    background: var(--navy);
+    border-color: var(--navy);
+}
+
+.swc-stat.dark small {
+    color: #c7ced7;
+}
+
+.swc-stat.dark strong {
+    color: #70e1af;
+}
+
+.swc-stat strong.swc-up {
+    color: var(--red);
+}
+
+.swc-stat strong.swc-down {
+    color: var(--green);
+}
+
+.swc-note {
+    margin: 12px 0 16px;
+    padding: 10px 14px;
+    background: #f8f8f6;
+    border: 1px solid var(--line);
+    border-radius: 13px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.45;
+}
+
+.swc-note b {
+    color: var(--ink);
+    font-weight: 700;
+}
+
+.swc-sec {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin: 18px 0 10px;
+    font-size: 14px;
+    font-weight: 750;
+    color: var(--ink);
+}
+
+.swc-sec span {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+}
+
+.swc-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.swc-bar-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.swc-bar-row .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 650;
+    color: var(--ink);
+}
+
+.swc-bar-row .top em {
+    font-style: normal;
+    font-size: 11px;
+    color: var(--muted);
+    margin-left: 4px;
+}
+
+.swc-bar {
+    height: 7px;
+    background: #edf0ed;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.swc-bar b {
+    display: block;
+    height: 100%;
+    background: var(--c, var(--green));
+    border-radius: inherit;
+    transition: width 0.3s ease;
+}
+
+.swc-list {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    max-height: 240px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    margin-top: 4px;
+    padding-right: 2px;
+}
+
+.swc-tx {
+    display: grid;
+    grid-template-columns: 42px 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    transition: border-color 0.15s, background 0.15s;
+}
+
+.swc-tx:hover {
+    border-color: #b8dfcc;
+    background: #fbfdfc;
+}
+
+.swc-tx-date {
+    width: 42px;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 750;
+    color: var(--muted);
+    line-height: 1.15;
+    padding: 5px 0;
+    background: #f8f8f6;
+    border-radius: 9px;
+    border: 1px solid var(--line);
+}
+
+.swc-tx > div:nth-child(2) {
+    flex: 1;
+    min-width: 0;
+}
+
+.swc-tx-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.swc-tx-sub {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 2px;
+}
+
+.swc-tx-amt {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--ink);
+    white-space: nowrap;
+}
+
+.swc-foot {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 14px 22px;
+    border-top: 1px solid var(--line);
+    background: rgba(251, 250, 247, 0.96);
+}
+
+.swc-btn-primary {
+    padding: 10px 18px;
+    background: var(--navy);
+    color: #fff;
+    border: 0;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.18s, transform 0.15s;
+}
+
+.swc-btn-primary:hover {
+    background: #23334d;
+    transform: translateY(-1px);
+}
+
+.swc-btn-ghost {
+    padding: 10px 18px;
+    background: #fff;
+    color: var(--ink);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.18s, border-color 0.18s;
+}
+
+.swc-btn-ghost:hover {
+    background: #f8f8f6;
+    border-color: #d8dad6;
+}
+
+@media (max-width: 650px) {
+    .swc-card {
+        width: 100%;
+        max-height: 88vh;
+        border-radius: 22px;
+    }
+
+    .swc-head {
+        padding: 16px 18px 14px;
+    }
+
+    .swc-body {
+        padding: 14px 18px 18px;
+    }
+
+    .swc-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .swc-foot {
+        padding: 12px 18px;
+        flex-direction: column-reverse;
+        gap: 8px;
+    }
+
+    .swc-foot button {
+        width: 100%;
+    }
+}
     </style>
 </head>
 
@@ -6140,87 +6977,256 @@ nav.sidebar-menu .tab-btn.active svg {
         <div class="profile-header">
             <div>
                 <h2>👤 My Profile</h2>
-                <p>Manage your personal details and track your financial journey.</p>
+                <p>Manage your personal details, savings goals, and data backup.</p>
             </div>
 
-            <button class="edit-profile-btn" onclick="toggleProfileEdit()">
-                ✏️ Edit Profile
-            </button>
-
-            <button class="logout-btn" onclick="logout()">
-                🚪 Logout
-            </button>
+            <div class="profile-header-actions">
+                <button type="button" class="edit-profile-btn" onclick="openProfileModal()">
+                    ✏️ Edit Profile
+                </button>
+                <button type="button" class="logout-btn" onclick="logout()">
+                    🚪 Logout
+                </button>
+            </div>
         </div>
 
-
-        <!-- PROFILE DETAILS -->
-        <div class="profile-card">
-
-            <div class="profile-avatar">👤</div>
-
-            <div class="profile-details">
-                <h2 id="profileName">Not set</h2>
-                <p id="profileRole">Job role not set</p>
+        <!-- 1. HERO PROFILE CARD -->
+        <div class="profile-card profile-hero-card">
+            <div class="profile-hero-left">
+                <div class="profile-avatar-wrap" onclick="openProfileModal()" title="Click to change avatar">
+                    <div class="profile-avatar" id="profileAvatarIcon">👤</div>
+                    <div class="profile-avatar-badge">✏️</div>
+                </div>
+                <div class="profile-details">
+                    <h2 id="profileName">Not set</h2>
+                    <div class="profile-meta-row">
+                        <span class="profile-meta-badge role" id="profileRole">Job role not set</span>
+                        <span class="profile-meta-badge username" id="profileUsernameBadge">@user</span>
+                        <span class="profile-meta-badge status">✨ Active Saver</span>
+                    </div>
+                </div>
             </div>
-
             <div class="profile-income">
                 <small>Monthly Salary</small>
                 <strong id="profileSalary">₹0</strong>
             </div>
-
         </div>
 
+        <!-- 2. FINANCIAL FITNESS SCORE -->
+        <div class="profile-card fitness-card">
+            <div class="fitness-header">
+                <div>
+                    <h3>🎯 Financial Fitness Score</h3>
+                    <p>Calculated dynamically from your budget discipline & savings consistency.</p>
+                </div>
+                <div class="fitness-score-badge">
+                    <strong id="fitnessScoreNumber">85</strong>
+                    <span>/ 100</span>
+                </div>
+            </div>
 
-        <!-- PROFILE EDIT FORM -->
-        <div class="profile-edit-card" id="profileEditCard" style="display: none;">
+            <div class="fitness-progress-wrap">
+                <div class="fitness-progress-bar">
+                    <div class="fitness-progress-fill" id="fitnessProgressBar" style="width: 85%;"></div>
+                </div>
+                <div class="fitness-status-text">
+                    <span id="fitnessRatingLabel">Status: <strong>Excellent 🟢</strong></span>
+                    <span id="fitnessTipText">Healthy savings rate this month</span>
+                </div>
+            </div>
 
-            <h2>✏️ Edit Profile</h2>
-
-            <input type="text" id="editProfileName" placeholder="Your Name">
-
-            <input type="text" id="editProfileRole" placeholder="Job / Role">
-
-            <input type="number" id="editProfileSalary" placeholder="Monthly Salary" min="0">
-
-            <button class="primary-btn" onclick="saveProfileChanges()">
-                💾 Save Changes
-            </button>
-
+            <div class="fitness-badges-grid">
+                <div class="fitness-badge-item">
+                    <div class="fitness-badge-icon">⚡</div>
+                    <div class="fitness-badge-info">
+                        <small>Tracking Activity</small>
+                        <strong id="fitnessStreakBadge">0 Days Logged</strong>
+                    </div>
+                </div>
+                <div class="fitness-badge-item">
+                    <div class="fitness-badge-icon">🛡️</div>
+                    <div class="fitness-badge-info">
+                        <small>Budget Shield</small>
+                        <strong id="fitnessBudgetBadge">On Track</strong>
+                    </div>
+                </div>
+                <div class="fitness-badge-item">
+                    <div class="fitness-badge-icon">💰</div>
+                    <div class="fitness-badge-info">
+                        <small>Savings Rate</small>
+                        <strong id="fitnessSavingsBadge">0% Saved</strong>
+                    </div>
+                </div>
+            </div>
         </div>
 
-
-        <!-- MONTHLY SUMMARY -->
+        <!-- 3. THIS MONTH'S SUMMARY -->
         <div class="profile-card profile-summary-card">
-
-            <h2>📊 This Month's Summary</h2>
-
+            <h3>📊 This Month's Overview</h3>
             <div class="profile-summary">
-
                 <div class="profile-item">
                     <small>Monthly Budget</small>
                     <strong id="profileBudget">₹0</strong>
                 </div>
-
                 <div class="profile-item">
                     <small>Total Expense</small>
                     <strong id="profileExpense">₹0</strong>
                 </div>
-
                 <div class="profile-item">
                     <small>Extra Income</small>
                     <strong id="profileIncome">₹0</strong>
                 </div>
-
                 <div class="profile-item">
-                    <small>Remaining Balance</small>
+                    <small>Balance In Hand</small>
                     <strong id="profileBalance">₹0</strong>
                 </div>
-
             </div>
+        </div>
 
+        <!-- 4. SAVINGS GOAL & WISHLIST TRACKER -->
+        <div class="profile-card savings-goal-card">
+            <div class="savings-goal-header">
+                <h3>🏆 Active Savings Goal</h3>
+                <span class="savings-goal-pill" id="savingsGoalPercentPill">0% Achieved</span>
+            </div>
+            <div class="savings-goal-body">
+                <div>
+                    <div class="savings-goal-name" id="savingsGoalNameDisplay">Emergency Fund</div>
+                    <small style="color: var(--muted); font-size: 12px;">Target towards your financial freedom</small>
+                </div>
+                <div class="savings-goal-numbers">
+                    <span id="savingsGoalCurrentDisplay">₹0</span> / <strong id="savingsGoalTargetDisplay">₹50,000</strong>
+                </div>
+            </div>
+            <div class="savings-progress-bar">
+                <div class="savings-progress-fill" id="savingsGoalProgressBar" style="width: 0%;"></div>
+            </div>
+            <div class="savings-goal-footer">
+                <span id="savingsGoalRemainingText">₹50,000 left to reach goal</span>
+                <button type="button" class="btn-sm-edit" onclick="openSavingsGoalModal()">
+                    ✏️ Edit Goal
+                </button>
+            </div>
+        </div>
+
+        <!-- 5. DATA MANAGEMENT & BACKUP -->
+        <div class="profile-card data-mgmt-card">
+            <h3>💾 Data Management & Backup</h3>
+            <p>Export your monthly records, create offline backups, or restore data anytime.</p>
+
+            <div class="data-actions-grid">
+                <button type="button" class="data-action-btn" onclick="exportExpensesToCSV()">
+                    <div class="data-action-icon">📥</div>
+                    <div class="data-action-text">
+                        <strong>Export to Excel / CSV</strong>
+                        <small>Download all transactions in a spreadsheet</small>
+                    </div>
+                </button>
+
+                <button type="button" class="data-action-btn" onclick="downloadJSONBackup()">
+                    <div class="data-action-icon">📦</div>
+                    <div class="data-action-text">
+                        <strong>Backup Data (JSON)</strong>
+                        <small>Save full backup file to your device</small>
+                    </div>
+                </button>
+
+                <button type="button" class="data-action-btn" onclick="triggerRestoreBackup()">
+                    <div class="data-action-icon">📤</div>
+                    <div class="data-action-text">
+                        <strong>Restore from Backup</strong>
+                        <small>Import and restore a previous JSON backup</small>
+                    </div>
+                </button>
+                <input type="file" id="restoreBackupInput" accept=".json" style="display:none;" onchange="handleRestoreBackupFile(event)">
+
+                <button type="button" class="data-action-btn danger" onclick="resetAllUserData()">
+                    <div class="data-action-icon">🧹</div>
+                    <div class="data-action-text">
+                        <strong style="color: #b91c1c;">Reset Expense Records</strong>
+                        <small>Clear all recorded expenses for this user</small>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- 6. ACCOUNT SECURITY -->
+        <div class="profile-card security-card">
+            <h3>🔐 Account Security</h3>
+            <p>Update your account password.</p>
+            <div class="password-form-grid">
+                <div class="password-field">
+                    <label for="changePassCurrent">Current Password</label>
+                    <input type="password" id="changePassCurrent" placeholder="Enter current password">
+                </div>
+                <div class="password-field">
+                    <label for="changePassNew">New Password</label>
+                    <input type="password" id="changePassNew" placeholder="Enter new password">
+                </div>
+                <div class="password-field">
+                    <label for="changePassConfirm">Confirm Password</label>
+                    <input type="password" id="changePassConfirm" placeholder="Confirm new password">
+                </div>
+                <button type="button" class="primary-btn" onclick="updatePassword()" style="height: 42px; padding: 0 16px; white-space: nowrap;">
+                    Save Password
+                </button>
+            </div>
         </div>
 
     </section>
+
+    <!-- MODAL 1: EDIT PROFILE & AVATAR PICKER -->
+    <div id="profileEditModal" class="sw-modal-overlay" aria-hidden="true">
+        <div class="sw-modal-card">
+            <div class="sw-modal-head">
+                <h3>✏️ Edit Profile</h3>
+                <button type="button" class="sw-modal-close" onclick="closeProfileModal()">✕</button>
+            </div>
+
+            <label>Choose Avatar</label>
+            <div class="avatar-picker-grid" id="avatarPickerGrid">
+                <!-- Injected avatars -->
+            </div>
+
+            <label for="editProfileName">Full Name</label>
+            <input type="text" id="editProfileName" placeholder="Your Name">
+
+            <label for="editProfileRole">Job Role / Occupation</label>
+            <input type="text" id="editProfileRole" placeholder="Job Role (e.g. Software Engineer)">
+
+            <label for="editProfileSalary">Monthly Salary (₹)</label>
+            <input type="number" id="editProfileSalary" placeholder="Monthly Salary" min="0">
+
+            <div class="sw-modal-footer">
+                <button type="button" class="secondary-btn" onclick="closeProfileModal()">Cancel</button>
+                <button type="button" class="primary-btn" onclick="saveProfileChanges()">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: EDIT SAVINGS GOAL -->
+    <div id="savingsGoalModal" class="sw-modal-overlay" aria-hidden="true">
+        <div class="sw-modal-card">
+            <div class="sw-modal-head">
+                <h3>🏆 Edit Savings Goal</h3>
+                <button type="button" class="sw-modal-close" onclick="closeSavingsGoalModal()">✕</button>
+            </div>
+
+            <label for="goalNameInput">Goal Name</label>
+            <input type="text" id="goalNameInput" placeholder="e.g. Emergency Fund, New Bike, Laptop">
+
+            <label for="goalTargetInput">Target Amount (₹)</label>
+            <input type="number" id="goalTargetInput" placeholder="Target Amount" min="100">
+
+            <label for="goalCurrentInput">Currently Saved (₹)</label>
+            <input type="number" id="goalCurrentInput" placeholder="Saved Amount" min="0">
+
+            <div class="sw-modal-footer">
+                <button type="button" class="secondary-btn" onclick="closeSavingsGoalModal()">Cancel</button>
+                <button type="button" class="primary-btn" onclick="saveSavingsGoal()">Save Goal</button>
+            </div>
+        </div>
+    </div>
     </main>
     </div>
 
@@ -7778,25 +8784,59 @@ nav.sidebar-menu .tab-btn.active svg {
                     daysRemaining
                 );
             }
-            function toggleProfileEdit() {
-                const editCard = document.getElementById("profileEditCard");
+            /* =========================================
+               PROFILE & DATA MANAGEMENT SYSTEM
+               ========================================= */
 
+            const AVAILABLE_AVATARS = [
+                "👤", "🦊", "🦁", "🦉", "💼", "🚀",
+                "💡", "💎", "☕", "🎮", "⚡", "🥑",
+                "👑", "🎯", "🏖️", "🎧", "🚴", "🌟"
+            ];
+            let currentSelectedAvatar = "👤";
+
+            function openProfileModal() {
                 const savedProfile =
-                    JSON.parse(localStorage.getItem("spendwiseProfile"));
+                    JSON.parse(localStorage.getItem("spendwiseProfile") || "{}");
 
-                if (savedProfile) {
-                    document.getElementById("editProfileName").value =
-                        savedProfile.name || "";
+                const nameInput = document.getElementById("editProfileName");
+                const roleInput = document.getElementById("editProfileRole");
+                const salaryInput = document.getElementById("editProfileSalary");
 
-                    document.getElementById("editProfileRole").value =
-                        savedProfile.jobRole || "";
+                if (nameInput) nameInput.value = savedProfile.name || "";
+                if (roleInput) roleInput.value = savedProfile.jobRole || "";
+                if (salaryInput) salaryInput.value = savedProfile.monthlySalary || "";
 
-                    document.getElementById("editProfileSalary").value =
-                        savedProfile.monthlySalary || "";
-                }
+                currentSelectedAvatar =
+                    savedProfile.avatar ||
+                    (activeUser && users[activeUser] && users[activeUser].avatar) ||
+                    "👤";
 
-                editCard.style.display =
-                    editCard.style.display === "none" ? "block" : "none";
+                renderAvatarGrid();
+
+                const modal = document.getElementById("profileEditModal");
+                if (modal) modal.classList.add("open");
+            }
+
+            function closeProfileModal() {
+                const modal = document.getElementById("profileEditModal");
+                if (modal) modal.classList.remove("open");
+            }
+
+            function renderAvatarGrid() {
+                const grid = document.getElementById("avatarPickerGrid");
+                if (!grid) return;
+
+                grid.innerHTML = AVAILABLE_AVATARS.map(avatar => `
+                    <button type="button" class="avatar-choice-btn ${avatar === currentSelectedAvatar ? 'selected' : ''}" onclick="pickAvatar('${avatar}')">
+                        ${avatar}
+                    </button>
+                `).join("");
+            }
+
+            function pickAvatar(emoji) {
+                currentSelectedAvatar = emoji;
+                renderAvatarGrid();
             }
 
             function saveProfileChanges() {
@@ -7809,20 +8849,407 @@ nav.sidebar-menu .tab-btn.active svg {
                     return;
                 }
 
-                const profile = { name, jobRole, monthlySalary: salary };
+                const profile = {
+                    name,
+                    jobRole,
+                    monthlySalary: salary,
+                    avatar: currentSelectedAvatar
+                };
+
                 localStorage.setItem("spendwiseProfile", JSON.stringify(profile));
 
-                const profileName = document.getElementById("profileName");
-                const profileRole = document.getElementById("profileRole");
-                const profileSalary = document.getElementById("profileSalary");
-                const editCard = document.getElementById("profileEditCard");
+                if (activeUser && users[activeUser]) {
+                    users[activeUser].name = name;
+                    users[activeUser].jobRole = jobRole;
+                    users[activeUser].monthlyIncome = salary;
+                    users[activeUser].avatar = currentSelectedAvatar;
+                    saveData();
+                }
 
-                if (profileName) profileName.innerText = name;
-                if (profileRole) profileRole.innerText = jobRole;
-                if (profileSalary) profileSalary.innerText = "₹" + formatMoney(salary);
-                if (editCard) editCard.style.display = "none";
+                closeProfileModal();
+                updateApp();
+                alert("Profile updated successfully! ✨");
+            }
 
-                alert("Profile updated successfully!");
+            function toggleProfileEdit() {
+                openProfileModal();
+            }
+
+            /* ---------- SAVINGS GOAL ---------- */
+
+            function openSavingsGoalModal() {
+                const defaultGoal = { name: "Emergency Fund", target: 50000, current: 0 };
+                const savedGoal =
+                    (activeUser && users[activeUser] && users[activeUser].savingsGoal) ||
+                    JSON.parse(localStorage.getItem("spendwiseSavingsGoal") || "null") ||
+                    defaultGoal;
+
+                const nameInput = document.getElementById("goalNameInput");
+                const targetInput = document.getElementById("goalTargetInput");
+                const currentInput = document.getElementById("goalCurrentInput");
+
+                if (nameInput) nameInput.value = savedGoal.name || "Emergency Fund";
+                if (targetInput) targetInput.value = savedGoal.target || 50000;
+                if (currentInput) currentInput.value = savedGoal.current || 0;
+
+                const modal = document.getElementById("savingsGoalModal");
+                if (modal) modal.classList.add("open");
+            }
+
+            function closeSavingsGoalModal() {
+                const modal = document.getElementById("savingsGoalModal");
+                if (modal) modal.classList.remove("open");
+            }
+
+            function saveSavingsGoal() {
+                const name = (document.getElementById("goalNameInput").value || "").trim() || "Savings Goal";
+                const target = Number(document.getElementById("goalTargetInput").value);
+                const current = Number(document.getElementById("goalCurrentInput").value) || 0;
+
+                if (!Number.isFinite(target) || target <= 0) {
+                    alert("Please enter a valid target amount (greater than ₹0).");
+                    return;
+                }
+
+                const goal = { name, target, current };
+                localStorage.setItem("spendwiseSavingsGoal", JSON.stringify(goal));
+
+                if (activeUser && users[activeUser]) {
+                    users[activeUser].savingsGoal = goal;
+                    saveData();
+                }
+
+                closeSavingsGoalModal();
+                updateApp();
+                alert("Savings goal updated! 🎯");
+            }
+
+            /* ---------- FINANCIAL FITNESS & PROFILE UI UPDATER ---------- */
+
+            function updateProfileExtensions(curBudget, curSpent, curIncome, curRemaining, curSavings, curProfile) {
+                // 1. Avatar icon
+                const avatar =
+                    curProfile?.avatar ||
+                    (activeUser && users[activeUser] && users[activeUser].avatar) ||
+                    "👤";
+                const avatarIconEl = document.getElementById("profileAvatarIcon");
+                if (avatarIconEl) avatarIconEl.innerText = avatar;
+
+                // 2. Username badge
+                const usernameEl = document.getElementById("profileUsernameBadge");
+                if (usernameEl) usernameEl.innerText = "@" + (activeUser || "user");
+
+                // 3. Financial Fitness Score Calculation (0 - 100)
+                let budgetPts = 40;
+                if (curBudget > 0) {
+                    if (curSpent > curBudget) {
+                        const overRatio = (curSpent - curBudget) / curBudget;
+                        budgetPts = Math.max(0, Math.round(40 - overRatio * 50));
+                    } else {
+                        const usage = curSpent / curBudget;
+                        budgetPts = usage <= 0.8 ? 40 : 35;
+                    }
+                } else {
+                    budgetPts = curSpent > 0 ? 25 : 35;
+                }
+
+                const monthlySalary = Number(curProfile?.monthlySalary || 0);
+                const totalInflow = monthlySalary + curIncome;
+                let savingsPts = 20;
+                let savingsRate = 0;
+                if (totalInflow > 0) {
+                    const savedAmt = totalInflow - curSpent;
+                    savingsRate = Math.max(0, Math.round((savedAmt / totalInflow) * 100));
+                    if (savingsRate >= 40) savingsPts = 35;
+                    else if (savingsRate >= 25) savingsPts = 30;
+                    else if (savingsRate >= 15) savingsPts = 22;
+                    else if (savingsRate > 0) savingsPts = 14;
+                    else savingsPts = 5;
+                }
+
+                const daysWithActivity = days.filter(d =>
+                    (d.expenses && d.expenses.length > 0) || Number(d.income) > 0
+                ).length;
+                let consistencyPts = 10;
+                if (daysWithActivity >= 10) consistencyPts = 25;
+                else if (daysWithActivity >= 5) consistencyPts = 20;
+                else if (daysWithActivity >= 1) consistencyPts = 15;
+
+                const fitnessScore = Math.min(100, Math.max(15, budgetPts + savingsPts + consistencyPts));
+
+                const scoreNumEl = document.getElementById("fitnessScoreNumber");
+                const scoreBarEl = document.getElementById("fitnessProgressBar");
+                const scoreLabelEl = document.getElementById("fitnessRatingLabel");
+                const scoreTipEl = document.getElementById("fitnessTipText");
+
+                if (scoreNumEl) scoreNumEl.innerText = fitnessScore;
+                if (scoreBarEl) {
+                    scoreBarEl.style.width = fitnessScore + "%";
+                    if (fitnessScore >= 80) {
+                        scoreBarEl.style.background = "linear-gradient(90deg, #24b47e 0%, #10b981 100%)";
+                    } else if (fitnessScore >= 60) {
+                        scoreBarEl.style.background = "linear-gradient(90deg, #e8b83e 0%, #24b47e 100%)";
+                    } else {
+                        scoreBarEl.style.background = "linear-gradient(90deg, #e85b55 0%, #e8b83e 100%)";
+                    }
+                }
+
+                if (scoreLabelEl) {
+                    if (fitnessScore >= 80) {
+                        scoreLabelEl.innerHTML = 'Status: <strong style="color:var(--green)">Excellent 🟢</strong>';
+                    } else if (fitnessScore >= 60) {
+                        scoreLabelEl.innerHTML = 'Status: <strong style="color:#d97706">Good 🟡</strong>';
+                    } else {
+                        scoreLabelEl.innerHTML = 'Status: <strong style="color:var(--red)">Needs Attention 🟠</strong>';
+                    }
+                }
+
+                if (scoreTipEl) {
+                    if (curBudget > 0 && curSpent > curBudget) {
+                        scoreTipEl.innerText = "Budget exceeded! Minimize non-essential expenses.";
+                    } else if (savingsRate >= 20) {
+                        scoreTipEl.innerText = `${savingsRate}% saved! Keep up the healthy habits.`;
+                    } else {
+                        scoreTipEl.innerText = "Track all daily expenses to raise your score.";
+                    }
+                }
+
+                const streakBadge = document.getElementById("fitnessStreakBadge");
+                const budgetBadge = document.getElementById("fitnessBudgetBadge");
+                const savingsBadge = document.getElementById("fitnessSavingsBadge");
+
+                if (streakBadge) streakBadge.innerText = `${daysWithActivity} Day${daysWithActivity === 1 ? '' : 's'} Tracked`;
+                if (budgetBadge) {
+                    if (curBudget > 0) {
+                        budgetBadge.innerText = curSpent <= curBudget ? "Safe · Under Budget" : "Alert · Over Budget";
+                        budgetBadge.style.color = curSpent <= curBudget ? "var(--green)" : "var(--red)";
+                    } else {
+                        budgetBadge.innerText = "Set Monthly Budget";
+                        budgetBadge.style.color = "var(--ink)";
+                    }
+                }
+                if (savingsBadge) {
+                    savingsBadge.innerText = `${savingsRate}% Saved`;
+                    savingsBadge.style.color = savingsRate >= 20 ? "var(--green)" : "var(--ink)";
+                }
+
+                // 4. Savings Goal Card UI
+                const defaultGoal = { name: "Emergency Fund", target: 50000, current: 0 };
+                const goal =
+                    (activeUser && users[activeUser] && users[activeUser].savingsGoal) ||
+                    JSON.parse(localStorage.getItem("spendwiseSavingsGoal") || "null") ||
+                    defaultGoal;
+
+                const goalNameEl = document.getElementById("savingsGoalNameDisplay");
+                const goalTargetEl = document.getElementById("savingsGoalTargetDisplay");
+                const goalCurEl = document.getElementById("savingsGoalCurrentDisplay");
+                const goalBarEl = document.getElementById("savingsGoalProgressBar");
+                const goalPillEl = document.getElementById("savingsGoalPercentPill");
+                const goalRemEl = document.getElementById("savingsGoalRemainingText");
+
+                const targetAmt = Number(goal.target) || 50000;
+                const currentAmt = Number(goal.current) || 0;
+                const pct = Math.min(100, Math.round((currentAmt / targetAmt) * 100));
+                const remainingToSave = Math.max(0, targetAmt - currentAmt);
+
+                if (goalNameEl) goalNameEl.innerText = goal.name || "Emergency Fund";
+                if (goalTargetEl) goalTargetEl.innerText = "₹" + formatMoney(targetAmt);
+                if (goalCurEl) goalCurEl.innerText = "₹" + formatMoney(currentAmt);
+                if (goalBarEl) goalBarEl.style.width = pct + "%";
+                if (goalPillEl) goalPillEl.innerText = pct + "% Achieved";
+                if (goalRemEl) {
+                    goalRemEl.innerText = remainingToSave > 0
+                        ? "₹" + formatMoney(remainingToSave) + " left to reach goal"
+                        : "🎉 Goal Reached!";
+                }
+            }
+
+            /* ---------- DATA MANAGEMENT: CSV & JSON BACKUP ---------- */
+
+            function exportExpensesToCSV() {
+                if (!days || days.length === 0) {
+                    alert("No expense records available to export.");
+                    return;
+                }
+
+                let rows = [["Date", "Expense Name", "Category", "Amount (INR)", "Day Income (INR)"]];
+                days.forEach(day => {
+                    const dayDate = day.date || "";
+                    const dayIncome = Number(day.income) || 0;
+                    if (day.expenses && day.expenses.length > 0) {
+                        day.expenses.forEach(exp => {
+                            if (String(exp.name || "").trim() !== "" || Number(exp.amount) > 0) {
+                                const cat = (typeof analyseExpense === "function") ? analyseExpense(exp).category : "General";
+                                rows.push([
+                                    dayDate,
+                                    `"${String(exp.name || '').replace(/"/g, '""')}"`,
+                                    `"${cat}"`,
+                                    Number(exp.amount) || 0,
+                                    dayIncome
+                                ]);
+                            }
+                        });
+                    } else if (dayIncome > 0) {
+                        rows.push([dayDate, "Income Entry", "Income", 0, dayIncome]);
+                    }
+                });
+
+                if (rows.length <= 1) {
+                    alert("No expense rows found to export.");
+                    return;
+                }
+
+                const csvContent = "\uFEFF" + rows.map(r => r.join(",")).join("\n");
+                const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement("a");
+                const today = new Date().toISOString().slice(0, 10);
+                link.setAttribute("href", url);
+                link.setAttribute("download", `SpendWise_Expenses_${activeUser || "user"}_${today}.csv`);
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+            }
+
+            function downloadJSONBackup() {
+                const backupObj = {
+                    appName: "SpendWise",
+                    version: "2.0",
+                    exportDate: new Date().toISOString(),
+                    activeUser: activeUser,
+                    userRecord: users[activeUser] || {},
+                    profile: JSON.parse(localStorage.getItem("spendwiseProfile") || "{}"),
+                    days: days,
+                    monthlyBudgets: monthlyBudgets,
+                    savingsGoal: (activeUser && users[activeUser] && users[activeUser].savingsGoal) ||
+                        JSON.parse(localStorage.getItem("spendwiseSavingsGoal") || "{}")
+                };
+
+                const blob = new Blob([JSON.stringify(backupObj, null, 2)], { type: "application/json" });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement("a");
+                const today = new Date().toISOString().slice(0, 10);
+                link.setAttribute("href", url);
+                link.setAttribute("download", `SpendWise_Backup_${activeUser || "user"}_${today}.json`);
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+            }
+
+            function triggerRestoreBackup() {
+                const fileInput = document.getElementById("restoreBackupInput");
+                if (fileInput) {
+                    fileInput.value = "";
+                    fileInput.click();
+                }
+            }
+
+            function handleRestoreBackupFile(event) {
+                const file = event.target.files && event.target.files[0];
+                if (!file) return;
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    try {
+                        const data = JSON.parse(e.target.result);
+                        if (!data || (!data.days && !data.profile && !data.userRecord)) {
+                            alert("Invalid or unrecognized SpendWise backup file.");
+                            return;
+                        }
+
+                        if (data.days && Array.isArray(data.days)) {
+                            days = data.days;
+                        } else if (data.userRecord && Array.isArray(data.userRecord.days)) {
+                            days = data.userRecord.days;
+                        }
+
+                        if (data.monthlyBudgets && typeof data.monthlyBudgets === "object") {
+                            monthlyBudgets = data.monthlyBudgets;
+                        } else if (data.userRecord && typeof data.userRecord.monthlyBudgets === "object") {
+                            monthlyBudgets = data.userRecord.monthlyBudgets;
+                        }
+
+                        if (data.profile) {
+                            localStorage.setItem("spendwiseProfile", JSON.stringify(data.profile));
+                        }
+
+                        const goalToRestore = data.savingsGoal || (data.userRecord && data.userRecord.savingsGoal);
+                        if (goalToRestore) {
+                            localStorage.setItem("spendwiseSavingsGoal", JSON.stringify(goalToRestore));
+                            if (activeUser && users[activeUser]) {
+                                users[activeUser].savingsGoal = goalToRestore;
+                            }
+                        }
+
+                        saveData();
+                        updateApp();
+                        renderDays();
+                        alert("Data backup restored successfully! 🎉");
+                    } catch (err) {
+                        alert("Failed to restore backup: " + err.message);
+                    }
+                };
+                reader.readAsText(file);
+            }
+
+            function resetAllUserData() {
+                const confirmReset = confirm(
+                    "⚠️ Are you sure you want to reset all expense records?\n\nThis will permanently delete all your logged days and transactions for this account."
+                );
+                if (!confirmReset) return;
+
+                const doubleConfirm = confirm("Are you really sure? Please confirm one more time.");
+                if (!doubleConfirm) return;
+
+                days = [];
+                monthlyBudgets = {};
+                budget = 0;
+                saveData();
+                renderDays();
+                updateApp();
+                alert("All expense records have been reset. 🧹");
+            }
+
+            function updatePassword() {
+                const curr = document.getElementById("changePassCurrent").value;
+                const next = document.getElementById("changePassNew").value;
+                const confirmPass = document.getElementById("changePassConfirm").value;
+
+                if (!activeUser || !users[activeUser]) {
+                    alert("No active user session.");
+                    return;
+                }
+
+                if (!curr || !next || !confirmPass) {
+                    alert("Please fill in all password fields.");
+                    return;
+                }
+
+                if (users[activeUser].password && users[activeUser].password !== curr) {
+                    alert("Current password is incorrect.");
+                    return;
+                }
+
+                if (next.length < 4) {
+                    alert("New password must be at least 4 characters long.");
+                    return;
+                }
+
+                if (next !== confirmPass) {
+                    alert("New passwords do not match.");
+                    return;
+                }
+
+                users[activeUser].password = next;
+                saveData();
+
+                document.getElementById("changePassCurrent").value = "";
+                document.getElementById("changePassNew").value = "";
+                document.getElementById("changePassConfirm").value = "";
+
+                alert("Password updated successfully! 🔐");
             }
 
             function logout() {
@@ -8247,6 +9674,17 @@ nav.sidebar-menu .tab-btn.active svg {
                             0
                         );
 
+                }
+
+                if (typeof updateProfileExtensions === "function") {
+                    updateProfileExtensions(
+                        budget,
+                        totalSpent,
+                        totalIncome,
+                        remaining,
+                        potentialSavings,
+                        savedProfile
+                    );
                 }
 
             }
