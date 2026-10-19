@@ -6418,6 +6418,599 @@ nav.sidebar-menu .tab-btn.active svg {
         width: 100%;
     }
 }
+
+/* =========================================================
+   SPENDWISE MASTER RESPONSIVE SYSTEM (MOBILE, TABLET & DESKTOP)
+   ========================================================= */
+
+html, body {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* Ensure inputs never zoom in on mobile browsers */
+input, select, textarea {
+    font-size: 16px;
+}
+
+/* Base main container */
+main {
+    width: 100%;
+    max-width: 1240px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    transition: padding 0.25s ease;
+}
+
+/* ---------- 1. DESKTOP & LARGE LAPTOPS (> 900px) ---------- */
+@media (min-width: 901px) {
+    main {
+        padding: 32px 40px 80px 108px !important;
+    }
+
+    #home .home-hero {
+        padding-left: 0 !important;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 30px;
+    }
+
+    .hero-copy {
+        max-width: 520px;
+    }
+
+    .doodle-person {
+        width: 360px;
+        height: 270px;
+    }
+
+    .wallet-summary {
+        grid-template-columns: 1.3fr 1fr 1fr !important;
+    }
+
+    .budget-summary-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+
+    .insight-kpis {
+        grid-template-columns: repeat(4, 1fr) !important;
+    }
+
+    .insight-charts,
+    .insight-bottom-grid {
+        grid-template-columns: 1fr 1fr !important;
+    }
+
+    .profile-summary {
+        grid-template-columns: repeat(4, 1fr) !important;
+    }
+
+    .fitness-badges-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+}
+
+/* ---------- 2. TABLETS & SMALL LAPTOPS (601px - 900px) ---------- */
+@media (max-width: 900px) and (min-width: 601px) {
+    header {
+        height: 68px !important;
+        padding: 0 24px !important;
+    }
+
+    main {
+        padding: 24px 24px 110px 24px !important;
+    }
+
+    #home .home-hero {
+        padding-left: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 20px !important;
+        min-height: 220px !important;
+    }
+
+    .hero-copy {
+        max-width: 55% !important;
+    }
+
+    .hero-copy h2 {
+        font-size: 34px !important;
+        letter-spacing: -1.5px !important;
+    }
+
+    .doodle-person {
+        width: 42% !important;
+        height: 220px !important;
+    }
+
+    .hero-doodle {
+        width: 100% !important;
+        height: 210px !important;
+    }
+
+    .wallet-summary {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 12px !important;
+        padding: 18px 20px !important;
+    }
+
+    .wallet-cell:first-child .wallet-value {
+        font-size: 26px !important;
+    }
+
+    .wallet-value {
+        font-size: 22px !important;
+    }
+
+    .insights-filters {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+    }
+
+    .insight-reset {
+        grid-column: span 2 !important;
+        width: 100% !important;
+    }
+
+    .insight-kpis {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+    }
+
+    .insight-charts,
+    .insight-bottom-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .budget-summary-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    .profile-summary {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    .fitness-badges-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+
+    .data-actions-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    .password-form-grid {
+        grid-template-columns: 1fr 1fr !important;
+    }
+
+    .password-form-grid button {
+        grid-column: span 2 !important;
+    }
+}
+
+/* ---------- 3. MOBILE PHONES (<= 600px) ---------- */
+@media (max-width: 600px) {
+    header {
+        height: calc(62px + env(safe-area-inset-top)) !important;
+        padding: env(safe-area-inset-top) 16px 0 !important;
+    }
+
+    .brand h1::before,
+    .brand h1::after {
+        font-size: 21px !important;
+    }
+
+    .aristotle-launcher {
+        right: 14px !important;
+        top: calc(10px + env(safe-area-inset-top)) !important;
+    }
+
+    .aristotle-label {
+        display: none !important;
+    }
+
+    main {
+        padding: 16px 14px calc(115px + env(safe-area-inset-bottom)) !important;
+    }
+
+    /* Fixed bottom navigation on phones */
+    nav.sidebar-menu {
+        position: fixed !important;
+        left: 10px !important;
+        right: 10px !important;
+        top: auto !important;
+        bottom: calc(10px + env(safe-area-inset-bottom)) !important;
+        width: auto !important;
+        height: 62px !important;
+        min-width: 0 !important;
+        padding: 4px 6px !important;
+        display: grid !important;
+        grid-template-columns: 1fr 1fr 62px 1fr 1fr !important;
+        align-items: center !important;
+        justify-items: center !important;
+        border-radius: 24px !important;
+        background: rgba(255, 255, 255, 0.98) !important;
+        box-shadow: 0 10px 32px rgba(23, 34, 53, 0.16) !important;
+        border: 1px solid #e1e4e0 !important;
+        z-index: 9999 !important;
+    }
+
+    nav.sidebar-menu::before {
+        display: none !important;
+    }
+
+    nav.sidebar-menu .tab-btn {
+        width: 48px !important;
+        height: 48px !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        transform: none !important;
+    }
+
+    nav.sidebar-menu .tab-btn svg {
+        width: 22px !important;
+        height: 22px !important;
+    }
+
+    .add-expense-fab {
+        left: 50% !important;
+        bottom: calc(12px + env(safe-area-inset-bottom)) !important;
+        transform: translateX(-50%) !important;
+        width: 58px !important;
+        height: 58px !important;
+        font-size: 30px !important;
+        box-shadow: 0 10px 24px rgba(36, 180, 126, 0.35) !important;
+        z-index: 10001 !important;
+    }
+
+    /* Home Hero on mobile: clean spacing, no clipping */
+    #home .home-hero {
+        padding-left: 0 !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        min-height: 180px !important;
+        padding-top: 6px !important;
+        gap: 8px !important;
+    }
+
+    .hero-copy {
+        max-width: 60% !important;
+        padding-top: 0 !important;
+    }
+
+    .hero-copy h2 {
+        font-size: clamp(24px, 7vw, 30px) !important;
+        line-height: 1.05 !important;
+        letter-spacing: -1.2px !important;
+        margin: 0 0 8px !important;
+    }
+
+    .hero-copy p {
+        font-size: 13px !important;
+        line-height: 1.35 !important;
+        color: var(--muted) !important;
+    }
+
+    .doodle-person {
+        width: 38% !important;
+        height: 165px !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: flex-end !important;
+    }
+
+    .hero-doodle {
+        width: 100% !important;
+        height: 155px !important;
+    }
+
+    .speech {
+        display: none !important;
+    }
+
+    /* Wallet Summary */
+    .wallet-summary {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+        padding: 16px 18px !important;
+        border-radius: 20px !important;
+    }
+
+    .wallet-cell {
+        padding: 0 !important;
+    }
+
+    .wallet-cell + .wallet-cell {
+        border-left: 0 !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+        padding-top: 10px !important;
+    }
+
+    .wallet-cell:first-child .wallet-value {
+        font-size: 27px !important;
+    }
+
+    .wallet-value {
+        font-size: 22px !important;
+    }
+
+    .secondary-stats {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 8px !important;
+    }
+
+    .secondary-stat {
+        padding: 10px 12px !important;
+        border-radius: 14px !important;
+    }
+
+    .secondary-stat strong {
+        font-size: 14px !important;
+    }
+
+    .balance-in-hand-card {
+        padding: 14px 16px !important;
+        border-radius: 16px !important;
+    }
+
+    .balance-in-hand-value {
+        font-size: 24px !important;
+    }
+
+    /* Expenses Day Card */
+    .day-header {
+        padding: 14px !important;
+    }
+
+    .day-left {
+        gap: 10px !important;
+    }
+
+    .day-date-circle {
+        width: 38px !important;
+        height: 38px !important;
+        min-width: 38px !important;
+        font-size: 13px !important;
+    }
+
+    .day-total {
+        font-size: 15px !important;
+    }
+
+    .expense-row {
+        grid-template-columns: 1fr 90px 36px !important;
+        gap: 6px !important;
+    }
+
+    .expense-row input {
+        padding: 9px 10px !important;
+        border-radius: 11px !important;
+        font-size: 14px !important;
+    }
+
+    /* Insights */
+    #insights {
+        padding: 4px 0 20px !important;
+    }
+
+    .insights-topbar {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 8px !important;
+        margin-bottom: 14px !important;
+    }
+
+    .insights-topbar h2 {
+        font-size: 24px !important;
+    }
+
+    .insights-filters {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 10px !important;
+        padding: 14px !important;
+        border-radius: 16px !important;
+    }
+
+    .insights-filters label:nth-child(1),
+    .insights-filters label:nth-child(4) {
+        grid-column: span 2 !important;
+    }
+
+    .insight-reset {
+        grid-column: span 2 !important;
+        width: 100% !important;
+    }
+
+    .insight-kpis {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 8px !important;
+    }
+
+    .insight-kpi {
+        padding: 14px !important;
+        border-radius: 16px !important;
+    }
+
+    .insight-kpi strong {
+        font-size: 20px !important;
+        margin: 8px 0 4px !important;
+    }
+
+    .insight-panel {
+        padding: 16px !important;
+        border-radius: 18px !important;
+    }
+
+    .ia-donut {
+        width: 160px !important;
+        height: 160px !important;
+        flex: 0 0 160px !important;
+    }
+
+    /* Profile Mobile */
+    .profile-header {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 10px !important;
+        margin-bottom: 16px !important;
+    }
+
+    .profile-header h2 {
+        font-size: 25px !important;
+    }
+
+    .profile-header-actions {
+        width: 100% !important;
+        display: flex !important;
+        gap: 8px !important;
+    }
+
+    .profile-header-actions button {
+        flex: 1 !important;
+        text-align: center !important;
+        justify-content: center !important;
+    }
+
+    .profile-hero-card {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        padding: 18px !important;
+        gap: 14px !important;
+    }
+
+    .profile-hero-left {
+        width: 100% !important;
+        gap: 14px !important;
+    }
+
+    .profile-avatar {
+        width: 60px !important;
+        height: 60px !important;
+        font-size: 28px !important;
+    }
+
+    .profile-details h2 {
+        font-size: 20px !important;
+    }
+
+    .profile-income {
+        width: 100% !important;
+        text-align: left !important;
+        border-left: 0 !important;
+        border-top: 1px solid var(--line) !important;
+        padding-left: 0 !important;
+        padding-top: 12px !important;
+    }
+
+    .profile-income strong {
+        font-size: 22px !important;
+    }
+
+    .fitness-header {
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+
+    .fitness-score-badge {
+        align-self: flex-start !important;
+        padding: 6px 12px !important;
+    }
+
+    .fitness-badges-grid {
+        grid-template-columns: 1fr !important;
+        gap: 8px !important;
+    }
+
+    .profile-summary {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 8px !important;
+    }
+
+    .profile-item {
+        padding: 12px !important;
+    }
+
+    .profile-item strong {
+        font-size: 16px !important;
+    }
+
+    .savings-goal-body {
+        grid-template-columns: 1fr !important;
+        gap: 6px !important;
+    }
+
+    .savings-goal-numbers {
+        text-align: left !important;
+    }
+
+    .data-actions-grid {
+        grid-template-columns: 1fr !important;
+        gap: 8px !important;
+    }
+
+    .password-form-grid {
+        grid-template-columns: 1fr !important;
+        gap: 8px !important;
+    }
+
+    .password-form-grid button {
+        width: 100% !important;
+    }
+
+    /* Modals on Mobile */
+    .sw-modal-card,
+    .swc-card,
+    .expense-calendar-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        border-radius: 22px !important;
+        padding: 18px 16px !important;
+        max-height: 86vh !important;
+    }
+
+    .avatar-picker-grid {
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 6px !important;
+    }
+}
+
+/* ---------- 4. SMALL MOBILE SCREENS (<= 380px) ---------- */
+@media (max-width: 380px) {
+    .hero-copy h2 {
+        font-size: 22px !important;
+    }
+
+    .hero-copy p {
+        font-size: 12px !important;
+    }
+
+    .doodle-person {
+        width: 35% !important;
+        height: 140px !important;
+    }
+
+    .hero-doodle {
+        height: 135px !important;
+    }
+
+    .profile-summary {
+        grid-template-columns: 1fr !important;
+    }
+
+    .secondary-stats {
+        grid-template-columns: 1fr !important;
+    }
+}
     </style>
 </head>
 
