@@ -4659,6 +4659,928 @@
                 font-size: 23px;
             }
         }
+        /* =========================================================
+   SPENDWISE FINAL POLISH: Insights + Profile + Cross-device
+   ========================================================= */
+
+/* ---------- Cross-device foundation ---------- */
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    background: var(--paper);
+}
+
+body {
+    overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
+}
+
+button, input, select, textarea {
+    font-family: inherit;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+/* iOS zooms the page if input font-size < 16px */
+input, select, textarea {
+    font-size: 16px;
+}
+
+select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23687282' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 34px !important;
+}
+
+input[type="date"] {
+    min-height: 42px;
+}
+
+/* Safe areas for notched phones */
+header {
+    padding-top: env(safe-area-inset-top);
+    height: calc(74px + env(safe-area-inset-top));
+}
+
+@media (max-width: 800px) {
+    header {
+        height: calc(64px + env(safe-area-inset-top));
+    }
+
+    nav.sidebar-menu {
+        bottom: calc(12px + env(safe-area-inset-bottom)) !important;
+    }
+
+    .add-expense-fab {
+        bottom: calc(13px + env(safe-area-inset-bottom)) !important;
+    }
+
+    main {
+        padding-bottom: calc(120px + env(safe-area-inset-bottom)) !important;
+    }
+}
+
+/* Touch devices have no hover: always show the nav icons */
+@media (min-width: 801px) and (hover: none) {
+    nav.sidebar-menu {
+        width: 64px !important;
+        height: auto !important;
+        padding: 8px !important;
+        background: rgba(255, 255, 255, .97) !important;
+        border: 1px solid #e3e5e2 !important;
+        border-radius: 28px !important;
+        box-shadow: 0 18px 45px rgba(23, 34, 53, .12) !important;
+    }
+
+    nav.sidebar-menu .tab-btn {
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        transform: none !important;
+    }
+}
+
+/* Desktop nav icons were missing on some browsers because of the ::after rule */
+nav.sidebar-menu .tab-btn svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: var(--ink);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    display: block;
+    margin: 0 auto;
+}
+
+nav.sidebar-menu .tab-btn::after {
+    content: none !important;
+}
+
+nav.sidebar-menu .tab-btn.active svg {
+    stroke: var(--green);
+}
+
+@media (max-width: 800px) {
+    nav.sidebar-menu .tab-btn svg {
+        width: 23px;
+        height: 23px;
+    }
+}
+
+/* Content must never hide behind the desktop floating menu */
+@media (min-width: 801px) {
+    main {
+        padding-left: 96px !important;
+    }
+}
+
+/* =========================================================
+   INSIGHTS: cleaner, matching Home
+   ========================================================= */
+
+#insights {
+    padding: 8px 0 40px !important;
+}
+
+#insights .insights-dashboard {
+    max-width: 1100px;
+    padding: 0;
+    margin: 0 auto;
+}
+
+#insights .insights-topbar {
+    margin: 18px 0 22px;
+    padding: 0;
+}
+
+#insights .insights-topbar h2 {
+    font-size: clamp(26px, 4vw, 36px);
+    letter-spacing: -1.2px;
+    line-height: 1.05;
+    color: var(--ink);
+}
+
+#insights .insights-topbar p {
+    font-size: 15px;
+    margin-top: 6px;
+}
+
+#insights .insights-live {
+    background: var(--green-soft);
+    color: #14845a;
+    border: 1px solid #d3eee1;
+}
+
+#insights .insights-live i {
+    animation: swPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes swPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: .45; transform: scale(.75); }
+}
+
+/* Filters */
+#insights .insights-filters {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) auto;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 16px 18px;
+    box-shadow: 0 8px 25px rgba(23, 34, 53, .04);
+}
+
+#insights .insights-filters select,
+#insights .insights-filters input,
+#insights .insight-panel-head select {
+    height: 44px;
+    border-radius: 12px;
+    background-color: #f8f8f6;
+    border: 1px solid var(--line);
+    color: var(--ink);
+}
+
+#insights .insights-filters select:focus,
+#insights .insights-filters input:focus,
+#insights .insight-panel-head select:focus {
+    border-color: #a9d9c3;
+    box-shadow: 0 0 0 3px rgba(36, 180, 126, .1);
+    outline: none;
+}
+
+#insights .insight-reset {
+    height: 44px;
+    border-radius: 12px;
+    background: var(--navy);
+    color: #fff;
+    border: 0;
+    padding: 0 20px;
+}
+
+/* KPI cards: dark first card like Home wallet */
+#insights .insight-kpis {
+    gap: 12px;
+}
+
+#insights .insight-kpi {
+    border-radius: 20px;
+    border: 1px solid var(--line);
+    padding: 20px;
+    box-shadow: 0 8px 25px rgba(23, 34, 53, .04);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+#insights .insight-kpi:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 32px rgba(23, 34, 53, .08);
+}
+
+#insights .insight-kpi:first-child {
+    background: var(--navy);
+    border-color: var(--navy);
+}
+
+#insights .insight-kpi:first-child > span,
+#insights .insight-kpi:first-child small {
+    color: #c7ced7;
+}
+
+#insights .insight-kpi:first-child strong {
+    color: #fff;
+}
+
+#insights .insight-kpi > span {
+    font-weight: 650;
+    color: var(--muted);
+}
+
+#insights .insight-kpi strong {
+    color: var(--ink);
+    letter-spacing: -.8px;
+}
+
+#insights .ia-progress {
+    background: #e8ecef;
+}
+
+#insights .ia-progress span {
+    background: var(--green);
+    transition: width .35s ease;
+}
+
+/* Panels */
+#insights .insight-panel {
+    border-radius: 22px;
+    border: 1px solid var(--line);
+    padding: 24px;
+    box-shadow: 0 8px 25px rgba(23, 34, 53, .04);
+}
+
+#insights .insight-panel h3 {
+    font-size: 18px;
+    letter-spacing: -.4px;
+    color: var(--ink);
+}
+
+#insights .insight-panel p {
+    color: var(--muted);
+}
+
+#insights .ia-legend-row {
+    padding: 2px 0;
+}
+
+#insights .ia-legend-name {
+    color: var(--ink);
+    font-weight: 600;
+}
+
+#insights .ia-legend-row strong {
+    color: var(--muted);
+}
+
+#insights .ia-highlight-row {
+    padding: 15px 0;
+    border-bottom: 1px solid #f0f1f2;
+}
+
+#insights .ia-highlight-row span {
+    color: var(--muted);
+}
+
+#insights .ia-highlight-row strong {
+    color: var(--ink);
+}
+
+#insights .ia-smart-insight {
+    background: var(--green-soft);
+    border: 1px solid #d3eee1;
+    border-radius: 16px;
+    color: #226547;
+    margin-top: 12px;
+    position: relative;
+    padding-left: 48px;
+}
+
+#insights .ia-smart-insight::before {
+    content: "✨";
+    position: absolute;
+    left: 16px;
+    top: 16px;
+    font-size: 18px;
+}
+.aristotle-doodle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+/* =========================================================
+   SPENDWISE THEMED PICKERS (Period / Category / Dates / Trend)
+   ========================================================= */
+
+.swp-native-hidden { display: none !important; }
+
+.swp-trigger {
+    width: 100%;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 0 14px;
+    background: #f8f8f6;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    color: var(--ink);
+    font-size: 15px;
+    font-weight: 650;
+    text-align: left;
+    cursor: pointer;
+    transition: border-color .2s, box-shadow .2s, background .2s;
+}
+
+.swp-trigger:hover {
+    border-color: #b8dfcc;
+    background: #fff;
+}
+
+.swp-trigger[aria-expanded="true"],
+.swp-trigger:focus-visible {
+    border-color: #a9d9c3;
+    box-shadow: 0 0 0 3px rgba(36, 180, 126, .12);
+    background: #fff;
+    outline: none;
+}
+
+.swp-trigger.compact {
+    width: auto;
+    min-width: 118px;
+    min-height: 40px;
+    font-size: 14px;
+}
+
+.swp-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.swp-label.is-placeholder {
+    color: #9aa1ac;
+    font-weight: 550;
+}
+
+.swp-ico-svg {
+    width: 18px;
+    height: 18px;
+    flex: none;
+    stroke: var(--green);
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform .2s;
+}
+
+.swp-trigger[aria-expanded="true"] .swp-chev {
+    transform: rotate(180deg);
+}
+
+/* ---------- Popup ---------- */
+
+.swp-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(23, 34, 53, .45);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    z-index: 100000;
+    display: none;
+}
+
+.swp-backdrop.open { display: block; }
+
+.swp-pop {
+    position: absolute;
+    z-index: 100001;
+    display: none;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: 0 28px 70px rgba(23, 34, 53, .22);
+    animation: swpPop .18s ease-out;
+}
+
+.swp-pop.open { display: block; }
+
+@keyframes swpPop {
+    from { opacity: 0; transform: translateY(8px) scale(.98); }
+    to   { opacity: 1; transform: none; }
+}
+
+.swp-sheet-title { display: none; }
+
+/* ---------- Option list ---------- */
+
+.swp-list {
+    display: grid;
+    gap: 3px;
+    max-height: 320px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+.swp-opt {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid transparent;
+    border-radius: 13px;
+    background: transparent;
+    color: var(--ink);
+    font-size: 14px;
+    font-weight: 650;
+    text-align: left;
+    cursor: pointer;
+}
+
+.swp-opt:hover {
+    background: #f1f8f4;
+    border-color: #d9eee4;
+}
+
+.swp-opt.on {
+    background: var(--green);
+    color: #fff;
+    border-color: var(--green);
+    box-shadow: 0 7px 16px rgba(36, 180, 126, .22);
+}
+
+.swp-ico { width: 24px; text-align: center; font-size: 16px; }
+.swp-txt { flex: 1; min-width: 0; }
+.swp-check { margin-left: auto; font-weight: 800; }
+
+/* ---------- Calendar (reuses Expense Calendar styles) ---------- */
+
+.swp-cal { width: 316px; max-width: 100%; }
+
+.swp-pop .calendar-month-nav {
+    grid-template-columns: 38px 1fr 38px;
+    margin-bottom: 10px;
+}
+
+.swp-pop .calendar-nav-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 22px;
+    border-radius: 12px;
+}
+
+.swp-title {
+    border: 0;
+    background: transparent;
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--ink);
+    padding: 8px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.swp-title:hover { background: var(--green-soft); }
+
+.swp-pop .calendar-weekdays,
+.swp-pop .calendar-grid { gap: 4px; }
+
+.swp-pop .calendar-day {
+    min-height: 38px;
+    font-size: 13px;
+    border-radius: 12px;
+}
+
+.swp-pop .calendar-day.in-range:not(.selected) { background: var(--green-soft); }
+
+.swp-pop .calendar-day:disabled:not(.other-month) {
+    opacity: .35;
+    cursor: not-allowed;
+}
+
+.swp-pop .calendar-day:disabled:hover {
+    background: transparent;
+    border-color: transparent;
+}
+
+.swp-months {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+}
+
+.swp-month {
+    min-height: 46px;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    background: #f6f6f3;
+    color: var(--ink);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.swp-month:hover { background: #e8f6ef; border-color: #b7e4cd; }
+
+.swp-month.on {
+    background: var(--green);
+    color: #fff;
+    box-shadow: 0 7px 16px rgba(36, 180, 126, .22);
+}
+
+.swp-cal-foot {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--line);
+}
+
+.swp-cal-foot button {
+    border: 0;
+    background: transparent;
+    color: #119765;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.swp-cal-foot button:hover { background: var(--green-soft); }
+
+/* ---------- Phone: bottom sheet ---------- */
+
+@media (max-width: 650px) {
+    .swp-pop.swp-sheet {
+        position: fixed;
+        left: 12px !important;
+        right: 12px;
+        top: auto !important;
+        bottom: calc(12px + env(safe-area-inset-bottom));
+        width: auto;
+        min-width: 0 !important;
+        max-height: 80vh;
+        overflow: auto;
+        border-radius: 26px;
+        padding: 16px;
+    }
+
+    .swp-pop.swp-sheet .swp-sheet-title {
+        display: block;
+        font-weight: 800;
+        font-size: 17px;
+        letter-spacing: -.4px;
+        margin: 2px 4px 12px;
+    }
+
+    .swp-pop.swp-sheet .swp-cal { width: 100%; }
+    .swp-pop.swp-sheet .calendar-day { min-height: 44px; }
+    .swp-pop.swp-sheet .swp-opt { padding: 13px 12px; }
+    .swp-pop.swp-sheet .swp-list { max-height: 55vh; }
+}
+
+
+/* =========================================================
+   SPENDWISE INTERACTIVE CHARTS (donut + trend + detail popup)
+   ========================================================= */
+
+/* ---------- Donut ---------- */
+.swc-donut-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    overflow: visible;
+    pointer-events: none;
+}
+
+.swc-track {
+    fill: none;
+    stroke: #E8EFEA;
+    stroke-width: 24;
+}
+
+.swc-seg {
+    fill: none;
+    stroke-width: 24;
+    cursor: pointer;
+    pointer-events: stroke;
+    transition: stroke-width .18s ease, opacity .18s ease, filter .18s ease;
+}
+
+.swc-seg.is-hover {
+    stroke-width: 30;
+    filter: drop-shadow(0 4px 8px rgba(23, 34, 53, .2));
+}
+
+.swc-donut-svg.has-hover .swc-seg:not(.is-hover) { opacity: .28; }
+
+.swc-donut-svg.swc-anim .swc-seg {
+    animation: swcSeg .8s cubic-bezier(.22, 1, .36, 1) backwards;
+}
+
+@keyframes swcSeg { from { stroke-dasharray: 0 600; } }
+
+#insights .ia-donut-center small {
+    max-width: 110px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    justify-self: center;
+}
+
+#insights .ia-legend { gap: 4px; }
+
+#insights .ia-legend-row {
+    cursor: pointer;
+    padding: 6px 8px;
+    margin: 0 -8px;
+    border-radius: 10px;
+    transition: background .15s ease;
+}
+
+#insights .ia-legend-row:hover,
+#insights .ia-legend-row.swc-hl,
+#insights .ia-legend-row:focus-visible {
+    background: var(--green-soft);
+    outline: none;
+}
+
+/* ---------- Trend ---------- */
+#insights .ia-trend .swc-trend {
+    position: relative;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+#insights .ia-trend .swc-trend svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    touch-action: pan-y;
+}
+
+#insights .ia-trend .swc-trend text {
+    font-size: 11px;
+    fill: #7a8980;
+}
+
+.swc-grid line { stroke: #e9eeea; stroke-dasharray: 3 5; }
+
+.swc-line {
+    fill: none;
+    stroke: var(--green);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.swc-area { fill: url(#swcGrad); }
+
+.swc-dot {
+    fill: #fff;
+    stroke: var(--green);
+    stroke-width: 2.5;
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
+.swc-guide {
+    stroke: #a9d9c3;
+    stroke-width: 1.5;
+    stroke-dasharray: 4 4;
+    opacity: 0;
+    transition: opacity .15s;
+}
+
+.swc-halo { fill: rgba(36, 180, 126, .16); opacity: 0; transition: opacity .15s; }
+
+.swc-active {
+    fill: var(--green);
+    stroke: #fff;
+    stroke-width: 2.5;
+    opacity: 0;
+    transition: opacity .15s;
+}
+
+.swc-trend.is-active .swc-guide,
+.swc-trend.is-active .swc-halo,
+.swc-trend.is-active .swc-active { opacity: 1; }
+
+.swc-hit { fill: transparent; cursor: pointer; }
+
+.swc-anim .swc-line {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: swcDraw 1s ease forwards;
+}
+
+.swc-anim .swc-area { animation: swcFade .9s ease .25s backwards; }
+
+.swc-anim .swc-dot {
+    animation: swcPop .4s ease backwards;
+    animation-delay: calc(var(--i, 0) * 70ms + .45s);
+}
+
+@keyframes swcDraw { to { stroke-dashoffset: 0; } }
+@keyframes swcFade { from { opacity: 0; } }
+@keyframes swcPop { from { opacity: 0; transform: scale(.3); } }
+
+/* ---------- Tooltip ---------- */
+.swc-tip {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 100003;
+    max-width: 240px;
+    padding: 11px 14px;
+    border-radius: 14px;
+    background: var(--navy);
+    color: #fff;
+    box-shadow: 0 14px 34px rgba(23, 34, 53, .28);
+    font-size: 12px;
+    line-height: 1.45;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity .12s ease, transform .12s ease;
+}
+
+.swc-tip.on { opacity: 1; transform: none; }
+
+.swc-tip .t { display: flex; align-items: center; gap: 7px; font-weight: 800; font-size: 13px; }
+.swc-tip .t i { width: 9px; height: 9px; border-radius: 3px; background: var(--c); flex: none; }
+.swc-tip .v { font-size: 20px; font-weight: 850; letter-spacing: -.6px; margin: 5px 0 2px; color: #70e1af; }
+.swc-tip .m { color: #c7ced7; }
+.swc-tip .h { margin-top: 7px; color: #9aa6b4; font-size: 11px; }
+.swc-tip .up { color: #ff9a94; font-weight: 700; }
+.swc-tip .down { color: #70e1af; font-weight: 700; }
+
+/* ---------- Detail popup ---------- */
+.swc-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 100002;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+}
+
+.swc-modal.open { display: flex; }
+
+.swc-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(23, 34, 53, .45);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+}
+
+.swc-card {
+    position: relative;
+    z-index: 2;
+    width: min(640px, 100%);
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 26px;
+    box-shadow: 0 28px 70px rgba(23, 34, 53, .22);
+    overflow: hidden;
+    animation: expenseCalendarPop .22s ease-out;
+}
+
+.swc-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px 22px 16px;
+    border-bottom: 1px solid var(--line);
+}
+
+.swc-badge {
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
+    display: grid;
+    place-items: center;
+    font-size: 22px;
+    flex: none;
+}
+
+.swc-head-txt { flex: 1; min-width: 0; }
+
+.swc-head-txt h3 {
+    margin: 0;
+    font-size: 21px;
+    letter-spacing: -.5px;
+    color: var(--ink);
+    overflow-wrap: anywhere;
+}
+
+.swc-head-txt p { margin: 4px 0 0; color: var(--muted); font-size: 12px; }
+
+.swc-nav { display: flex; gap: 6px; }
+
+.swc-iconbtn {
+    width: 38px;
+    height: 38px;
+    flex: none;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: #fff;
+    color: var(--ink);
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    transition: background .15s;
+}
+
+.swc-iconbtn:hover:not(:disabled) { background: var(--green-soft); }
+.swc-iconbtn:disabled { opacity: .35; cursor: not-allowed; }
+
+.swc-body {
+    padding: 16px 22px 22px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+.swc-chips {
+    position: relative;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    margin: 0 -22px 8px;
+    padding: 0 22px 8px;
+    scrollbar-width: none;
+}
+
+.swc-chips::-webkit-scrollbar { display: none; }
+
+.swc-chip {
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 13px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--ink);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.swc-chip i { width: 9px; height: 9px; border-radius: 3px; background: var(--c); }
+.swc-chip.on { background: var(--navy); border-color: var(--navy); color: #fff; }
+
+.swc-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin: 6px 0 12px;
+}
+
+.swc-stat {
+    min-width: 0;
+    padding: 13px 14px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+}
+
+.swc-stat small { display: block; color: var(--muted); font-size: 11px; font-weight: 650; }
+
+.swc-stat strong {
+    display: block;
+    margin-top: 6px;
+    font-size: 18px;
+    letter-spacing: -.5px;
+    color: var(--ink);
+    overflow-wrap: anywhere;
+}
+
+.swc-stat.dark { background: var(--navy); border-color:
     </style>
 </head>
 
@@ -4724,7 +5646,7 @@
                 <input type="password" id="loginPassword" placeholder="Enter your password">
             </div>
             <button class="setup-btn" type="button" onclick="loginUser()">Login →</button>
-            <div style="text-align:center;margin-top:16px;font-size:13px;">
+            <div style="text-align: center; margin-top: 16px; font-size: 13px;">
                 <span>Don't have an account?</span>
                 <button type="button" class="new-user-btn" onclick="showNewUserForm()">Create New User</button>
             </div>
@@ -9833,56 +10755,58 @@
             }
 
             function renderHistoryTimeline(records) {
-                const output = document.getElementById("historyTimeline");
-                output.innerHTML = "";
+    const output = document.getElementById("historyTimeline");
+    if (!output) return;
+    output.innerHTML = "";
 
-                const activeRecords = records
-                    .filter(day => historyExpenseTotal(day) > 0 ||
-                        Number(day.income) > 0 ||
-                        (day.expenses || []).length > 0)
-                    .sort((a, b) => b.date.localeCompare(a.date));
+    const activeRecords = records
+        .filter(day => historyExpenseTotal(day) > 0 ||
+            Number(day.income) > 0 ||
+            (day.expenses || []).length > 0)
+        .sort((a, b) => b.date.localeCompare(a.date));
 
-                if (!activeRecords.length) {
-                    output.innerHTML =
-                        '<div class="history-empty">No activity recorded for this month.</div>';
-                    return;
-                }
-            }
-                activeRecords.forEach(day => {
-                    const item = document.createElement("div");
-                    item.className = "history-timeline-item";
+    if (!activeRecords.length) {
+        output.innerHTML =
+            '<div class="history-empty">No activity recorded for this month.</div>';
+        return;
+    }
 
-                    const date = document.createElement("div");
-                    date.className = "history-timeline-date";
-                    date.textContent = new Date(day.date + "T00:00:00").toLocaleDateString(
-                        "en-IN", { day: "numeric", month: "short" }
-                    );
+    activeRecords.forEach(day => {
+        const item = document.createElement("div");
+        item.className = "history-timeline-item";
 
-                    const content = document.createElement("div");
-                    content.className = "history-timeline-content";
+        const date = document.createElement("div");
+        date.className = "history-timeline-date";
+        date.textContent = new Date(day.date + "T00:00:00").toLocaleDateString(
+            "en-IN", { day: "numeric", month: "short" }
+        );
 
-                    const title = document.createElement("strong");
-                    title.textContent =
-                        (day.expenses || []).length + " expenses · Spent ₹" +
-                        formatMoney(historyExpenseTotal(day));
+        const content = document.createElement("div");
+        content.className = "history-timeline-content";
 
-                    const income = document.createElement("span");
-                    income.textContent = "Income: ₹" + formatMoney(Number(day.income) || 0);
+        const title = document.createElement("strong");
+        title.textContent =
+            (day.expenses || []).length + " expenses · Spent ₹" +
+            formatMoney(historyExpenseTotal(day));
 
-                    const open = document.createElement("button");
-                    open.type = "button";
-                    open.textContent = "Open day";
-                    open.onclick = () => {
-                        historySelectedDay = day.date;
-                        const dateInput = document.getElementById("historyDate");
-                        if (dateInput) dateInput.value = day.date;
-                        renderMoneyHistory();
-                    };
+        const income = document.createElement("span");
+        income.textContent = "Income: ₹" + formatMoney(Number(day.income) || 0);
 
-                    content.append(title, income, open);
-                    item.append(date, content);
-                    output.appendChild(item);
-                });
+        const open = document.createElement("button");
+        open.type = "button";
+        open.textContent = "Open day";
+        open.onclick = () => {
+            historySelectedDay = day.date;
+            const dateInput = document.getElementById("historyDate");
+            if (dateInput) dateInput.value = day.date;
+            renderMoneyHistory();
+        };
+
+        content.append(title, income, open);
+        item.append(date, content);
+        output.appendChild(item);
+    });
+}
             
 
     </script>
@@ -9973,6 +10897,1133 @@
         </div>
 
     </div>
+    <script>
+/* =========================================================
+   SPENDWISE THEMED PICKERS FOR INSIGHTS
+   ========================================================= */
+(function () {
+    const $ = id => document.getElementById(id);
+    const pad = n => String(n).padStart(2, "0");
+    const keyOf = (y, m, d) => `${y}-${pad(m + 1)}-${pad(d)}`;
+    const todayKey = () => {
+        const t = new Date();
+        return keyOf(t.getFullYear(), t.getMonth(), t.getDate());
+    };
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+    }[c]));
+    const fmt = v => new Date(v + "T00:00:00").toLocaleDateString("en-IN", {
+        day: "2-digit", month: "short", year: "numeric"
+    });
+
+    const CFG = [
+        ["insightPeriod", "list"],
+        ["insightCategory", "list"],
+        ["insightTrendMode", "list", "compact"],
+        ["insightFrom", "date"],
+        ["insightTo", "date"]
+    ];
+
+    const TITLES = {
+        insightPeriod: "Period",
+        insightCategory: "Category",
+        insightTrendMode: "Trend view",
+        insightFrom: "From date",
+        insightTo: "To date"
+    };
+
+    const ICONS = {
+        insightPeriod: { month: "📅", week: "🗓️", year: "📆", custom: "✏️", all: "♾️" },
+        insightTrendMode: { daily: "📊", weekly: "📈", monthly: "🗂️" }
+    };
+
+    const CAT_ICON = {
+        all: "🧾", "Food & Drinks": "🍔", "Transport": "🚌", "Daily Essentials": "🛒",
+        "Bills & Housing": "🏠", "Clothing": "👕", "Shopping": "🛍️", "Personal Care": "💇",
+        "Health & Fitness": "💪", "Education": "🎓", "Subscriptions": "📺",
+        "Entertainment": "🎬", "Family & Pets": "🐾", "Financial Commitments": "💳",
+        "Savings & Investments": "📈", "Work & Business": "💼", "Gifts & Donations": "🎁",
+        "Other": "📦", "Personal Transfer / One-Time": "🔁"
+    };
+
+    const SVG_CHEV = '<svg class="swp-ico-svg swp-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
+    const SVG_CAL = '<svg class="swp-ico-svg" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>';
+
+    const pop = document.createElement("div");
+    pop.className = "swp-pop";
+    pop.id = "swpPop";
+    const backdrop = document.createElement("div");
+    backdrop.className = "swp-backdrop";
+    document.body.appendChild(backdrop);
+    document.body.appendChild(pop);
+
+    const state = { id: null, kind: null, view: null, mode: "days", trigger: null };
+
+    function fire(el) {
+        el.dispatchEvent(new Event("change", { bubbles: true }));
+    }
+
+    function activeDates() {
+        const set = new Set();
+        try {
+            const list = (typeof days !== "undefined" && Array.isArray(days)) ? days : [];
+            list.forEach(d => {
+                if (!d || !d.date) return;
+                const has = (d.expenses || []).some(e => Number(e.amount) > 0) || Number(d.income) > 0;
+                if (has) set.add(d.date);
+            });
+        } catch (e) { }
+        return set;
+    }
+
+    /* ---------- Sync trigger labels with hidden native fields ---------- */
+    function sync() {
+        CFG.forEach(([id, kind]) => {
+            const n = $(id);
+            const t = n && n.__swp;
+            if (!t) return;
+            const lab = t.querySelector(".swp-label");
+            if (kind === "date") {
+                const v = n.value;
+                lab.textContent = v ? fmt(v) : (id === "insightFrom" ? "From date" : "To date");
+                lab.classList.toggle("is-placeholder", !v);
+            } else {
+                const o = n.options[n.selectedIndex];
+                lab.textContent = o ? o.text : "";
+            }
+        });
+    }
+
+    /* ---------- Rendering ---------- */
+    function renderList() {
+        const sel = $(state.id);
+        const cur = sel.value;
+        const items = [...sel.options].map(o => {
+            const on = o.value === cur;
+            const icon = state.id === "insightCategory"
+                ? (CAT_ICON[o.value] || "🏷️")
+                : ((ICONS[state.id] || {})[o.value] || "•");
+            return `<button type="button" class="swp-opt${on ? " on" : ""}" data-v="${esc(o.value)}">
+                <span class="swp-ico">${icon}</span>
+                <span class="swp-txt">${esc(o.text)}</span>
+                ${on ? '<span class="swp-check">✓</span>' : ""}
+            </button>`;
+        }).join("");
+        pop.innerHTML = `<div class="swp-sheet-title">${TITLES[state.id]}</div><div class="swp-list">${items}</div>`;
+    }
+
+    function renderCal() {
+        const view = state.view;
+        const y = view.getFullYear();
+        const m = view.getMonth();
+
+        if (state.mode === "months") {
+            const names = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            pop.innerHTML = `<div class="swp-sheet-title">${TITLES[state.id]}</div>
+            <div class="swp-cal">
+                <div class="calendar-month-nav">
+                    <button type="button" class="calendar-nav-btn" data-act="prev">‹</button>
+                    <button type="button" class="swp-title" data-act="title">${y}</button>
+                    <button type="button" class="calendar-nav-btn" data-act="next">›</button>
+                </div>
+                <div class="swp-months">
+                    ${names.map((n, i) => `<button type="button" class="swp-month${i === m ? " on" : ""}" data-m="${i}">${n}</button>`).join("")}
+                </div>
+            </div>`;
+            return;
+        }
+
+        const isFrom = state.id === "insightFrom";
+        const sel = $(state.id).value;
+        const other = $(isFrom ? "insightTo" : "insightFrom").value;
+        const fromV = $("insightFrom").value;
+        const toV = $("insightTo").value;
+        const first = new Date(y, m, 1).getDay();
+        const dim = new Date(y, m + 1, 0).getDate();
+        const prevDim = new Date(y, m, 0).getDate();
+        const tk = todayKey();
+        const active = activeDates();
+        let cells = "";
+
+        for (let i = first - 1; i >= 0; i--) {
+            cells += `<button type="button" class="calendar-day other-month" disabled>${prevDim - i}</button>`;
+        }
+
+        for (let d = 1; d <= dim; d++) {
+            const k = keyOf(y, m, d);
+            let cls = "calendar-day";
+            if (k === tk) cls += " today";
+            if (active.has(k)) cls += " has-expense";
+            if (k === sel) cls += " selected";
+            if (fromV && toV && k > fromV && k < toV) cls += " in-range";
+            const bad = other && ((isFrom && k > other) || (!isFrom && k < other));
+            cells += `<button type="button" class="${cls}" data-k="${k}"${bad ? " disabled" : ""}>${d}</button>`;
+        }
+
+        const rest = (7 - ((first + dim) % 7)) % 7;
+        for (let d = 1; d <= rest; d++) {
+            cells += `<button type="button" class="calendar-day other-month" disabled>${d}</button>`;
+        }
+
+        const title = new Date(y, m, 1).toLocaleDateString("en-IN", { month: "long", year: "numeric" });
+
+        pop.innerHTML = `<div class="swp-sheet-title">${TITLES[state.id]}</div>
+        <div class="swp-cal">
+            <div class="calendar-month-nav">
+                <button type="button" class="calendar-nav-btn" data-act="prev" aria-label="Previous month">‹</button>
+                <button type="button" class="swp-title" data-act="title">${title} ▾</button>
+                <button type="button" class="calendar-nav-btn" data-act="next" aria-label="Next month">›</button>
+            </div>
+            <div class="calendar-weekdays">
+                <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+            </div>
+            <div class="calendar-grid">${cells}</div>
+            <div class="swp-cal-foot">
+                <button type="button" data-act="clear">Clear</button>
+                <button type="button" data-act="today">Today</button>
+            </div>
+        </div>`;
+    }
+
+    function render() {
+        if (state.kind === "date") renderCal();
+        else renderList();
+    }
+
+    /* ---------- Position ---------- */
+    function place() {
+        const trigger = state.trigger;
+        if (!trigger) return;
+        const mobile = window.matchMedia("(max-width: 650px)").matches;
+
+        pop.style.cssText = "";
+
+        if (mobile) {
+            pop.classList.add("swp-sheet");
+            backdrop.classList.add("open");
+            return;
+        }
+
+        pop.classList.remove("swp-sheet");
+        backdrop.classList.remove("open");
+
+        const r = trigger.getBoundingClientRect();
+        pop.style.minWidth = Math.max(r.width, 170) + "px";
+        pop.style.left = (r.left + window.scrollX) + "px";
+        pop.style.top = (r.bottom + window.scrollY + 8) + "px";
+
+        const w = pop.offsetWidth;
+        const h = pop.offsetHeight;
+
+        if (r.left + w > window.innerWidth - 12) {
+            pop.style.left = Math.max(12, window.innerWidth - 12 - w) + window.scrollX + "px";
+        }
+
+        if (r.bottom + h + 16 > window.innerHeight && r.top > h + 16) {
+            pop.style.top = (r.top + window.scrollY - h - 8) + "px";
+        }
+    }
+
+    /* ---------- Open / close ---------- */
+    function close() {
+        state.id = null;
+        pop.classList.remove("open", "swp-sheet");
+        backdrop.classList.remove("open");
+        CFG.forEach(([id]) => {
+            const t = $(id) && $(id).__swp;
+            if (t) t.setAttribute("aria-expanded", "false");
+        });
+    }
+
+    function open(id, kind, trigger) {
+        if (state.id === id) { close(); return; }
+        close();
+
+        state.id = id;
+        state.kind = kind;
+        state.trigger = trigger;
+        state.mode = "days";
+
+        if (kind === "date") {
+            const v = $(id).value;
+            const base = v ? new Date(v + "T00:00:00") : new Date();
+            state.view = new Date(base.getFullYear(), base.getMonth(), 1);
+        }
+
+        render();
+        pop.classList.add("open");
+        trigger.setAttribute("aria-expanded", "true");
+        place();
+    }
+
+    /* ---------- Popup clicks ---------- */
+    pop.addEventListener("click", e => {
+        const b = e.target.closest("button");
+        if (!b || b.disabled || !state.id) return;
+
+        // List option
+        if (b.dataset.v !== undefined) {
+            const s = $(state.id);
+            s.value = b.dataset.v;
+            fire(s);
+            close();
+            return;
+        }
+
+        const act = b.dataset.act;
+
+        if (act === "prev" || act === "next") {
+            const step = act === "prev" ? -1 : 1;
+            if (state.mode === "months") state.view.setFullYear(state.view.getFullYear() + step);
+            else state.view.setMonth(state.view.getMonth() + step);
+            render(); place();
+            return;
+        }
+
+        if (act === "title") {
+            state.mode = state.mode === "days" ? "months" : "days";
+            render(); place();
+            return;
+        }
+
+        if (b.dataset.m !== undefined) {
+            state.view = new Date(state.view.getFullYear(), Number(b.dataset.m), 1);
+            state.mode = "days";
+            render(); place();
+            return;
+        }
+
+        const input = $(state.id);
+        const period = $("insightPeriod");
+
+        if (b.dataset.k) {
+            if (period && period.value !== "custom") period.value = "custom";
+            input.value = b.dataset.k;
+            fire(input);
+            close();
+            return;
+        }
+
+        if (act === "clear") {
+            input.value = "";
+            fire(input);
+            close();
+            return;
+        }
+
+        if (act === "today") {
+            const k = todayKey();
+            const isFrom = state.id === "insightFrom";
+            const other = $(isFrom ? "insightTo" : "insightFrom").value;
+            if (other && ((isFrom && k > other) || (!isFrom && k < other))) return;
+            if (period && period.value !== "custom") period.value = "custom";
+            input.value = k;
+            fire(input);
+            close();
+        }
+    });
+
+    /* ---------- Outside click / Esc / resize ---------- */
+    document.addEventListener("click", e => {
+        if (!state.id) return;
+        if (pop.contains(e.target)) return;
+        if (e.target.closest(".swp-trigger")) return;
+        close();
+    });
+
+    document.addEventListener("keydown", e => {
+        if (e.key === "Escape") close();
+    });
+
+    window.addEventListener("resize", close);
+
+    /* ---------- Build triggers ---------- */
+    CFG.forEach(([id, kind, extra]) => {
+        const n = $(id);
+        if (!n || n.__swp) return;
+
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "swp-trigger" + (extra ? " " + extra : "");
+        btn.setAttribute("aria-haspopup", kind === "date" ? "dialog" : "listbox");
+        btn.setAttribute("aria-expanded", "false");
+        btn.innerHTML = `<span class="swp-label"></span>${kind === "date" ? SVG_CAL : SVG_CHEV}`;
+        btn.addEventListener("click", e => {
+            e.preventDefault();
+            open(id, kind, btn);
+        });
+
+        n.classList.add("swp-native-hidden");
+        n.insertAdjacentElement("afterend", btn);
+        n.__swp = btn;
+    });
+
+    /* ---------- Keep labels in sync when Insights refreshes ---------- */
+    if (typeof window.updateInsights === "function" && !window.updateInsights.__swp) {
+        const original = window.updateInsights;
+        window.updateInsights = function () {
+            const result = original.apply(this, arguments);
+            sync();
+            return result;
+        };
+        window.updateInsights.__swp = true;
+    }
+
+    sync();
+})();
+
+</script>
+<script>
+/* =========================================================
+   SPENDWISE INTERACTIVE CHARTS
+   Donut + Trend: hover tooltip, highlight, click detail popup
+   ========================================================= */
+(function () {
+    "use strict";
+
+    const $ = id => document.getElementById(id);
+    const PALETTE = ["#19B67A", "#67C99A", "#9DDDBA", "#F2B866", "#8B9CF6", "#E58D9D", "#8CCAD3"];
+    const CAT_ICON = {
+        "Food & Drinks": "🍔", "Transport": "🚌", "Daily Essentials": "🛒",
+        "Bills & Housing": "🏠", "Clothing": "👕", "Shopping": "🛍️", "Personal Care": "💇",
+        "Health & Fitness": "💪", "Education": "🎓", "Subscriptions": "📺",
+        "Entertainment": "🎬", "Family & Pets": "🐾", "Financial Commitments": "💳",
+        "Savings & Investments": "📈", "Work & Business": "💼", "Gifts & Donations": "🎁",
+        "Other": "📦", "Personal Transfer / One-Time": "🔁"
+    };
+    const R = 83;
+    const CIRC = 2 * Math.PI * R;
+
+    let cur = null;
+    let hiIdx = -1;
+    let lastTrendSig = "";
+    let trendW = 0;
+
+    /* ---------- helpers ---------- */
+    const pad = n => String(n).padStart(2, "0");
+    const dkey = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+    const parse = v => {
+        if (!v) return null;
+        const d = new Date(v + "T00:00:00");
+        return isNaN(d.getTime()) ? null : d;
+    };
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+    }[c]));
+    const fm = v => typeof formatMoney === "function"
+        ? formatMoney(v) : Math.round(v).toLocaleString("en-IN");
+    const inr = v => "₹" + fm(Math.round(Number(v) || 0));
+    const pct = f => {
+        const p = f * 100;
+        return p > 0 && p < 1 ? "<1%" : Math.round(p) + "%";
+    };
+    const plural = (n, one, many) => n + " " + (n === 1 ? one : (many || one + "s"));
+    const fmtDate = k => parse(k).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
+    const trim1 = x => String(Math.round(x * 10) / 10);
+    const short = v => {
+        if (v >= 10000000) return "₹" + trim1(v / 10000000) + "Cr";
+        if (v >= 100000) return "₹" + trim1(v / 100000) + "L";
+        if (v >= 1000) return "₹" + trim1(v / 1000) + "K";
+        return "₹" + trim1(v);
+    };
+
+    function niceScale(maxV) {
+        if (!(maxV > 0)) return { step: 1, top: 4 };
+        const raw = maxV / 4;
+        const p = Math.pow(10, Math.floor(Math.log10(raw)));
+        const n = raw / p;
+        const f = n <= 1 ? 1 : n <= 2 ? 2 : n <= 2.5 ? 2.5 : n <= 5 ? 5 : 10;
+        const step = f * p;
+        return { step, top: step * Math.ceil(maxV / step - 1e-9) };
+    }
+
+    function periodLabel() {
+        const p = $("insightPeriod");
+        if (!p) return "";
+        if (p.value === "custom") {
+            const f = $("insightFrom").value, t = $("insightTo").value;
+            if (f || t) {
+                const s = k => parse(k).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
+                return (f ? s(f) : "Start") + " – " + (t ? s(t) : "Today");
+            }
+            return "Custom range";
+        }
+        const o = p.options[p.selectedIndex];
+        return o ? o.text : "";
+    }
+
+    /* ---------- collect data (same filters as Insights) ---------- */
+    function collect() {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        const period = ($("insightPeriod") || {}).value || "month";
+        let from = null;
+        let to = new Date(today);
+
+        if (period === "month") {
+            from = new Date(today.getFullYear(), today.getMonth(), 1);
+        } else if (period === "week") {
+            from = new Date(today);
+            from.setDate(from.getDate() - ((from.getDay() + 6) % 7));
+        } else if (period === "year") {
+            from = new Date(today.getFullYear(), 0, 1);
+        } else if (period === "custom") {
+            from = parse(($("insightFrom") || {}).value);
+            to = parse(($("insightTo") || {}).value) || new Date(today);
+        }
+        if (to) to.setHours(23, 59, 59, 999);
+
+        const list = (typeof days !== "undefined" && Array.isArray(days)) ? days : [];
+        const all = [];
+
+        list.forEach(day => {
+            if (!day || !day.date) return;
+            const dt = parse(day.date);
+            if (!dt) return;
+            if (period !== "all") {
+                if (from && dt < from) return;
+                if (to && dt > to) return;
+            }
+            (Array.isArray(day.expenses) ? day.expenses : []).forEach(ex => {
+                const amount = Number(ex.amount) || 0;
+                if (amount <= 0) return;
+                const category = String(ex.category || ex.type || ex.name || "Other").trim() || "Other";
+                all.push({
+                    amount,
+                    category,
+                    name: String(ex.name || category).trim() || category,
+                    date: day.date
+                });
+            });
+        });
+
+        const selectedCategory = ($("insightCategory") || {}).value || "all";
+        const tx = selectedCategory === "all" ? all : all.filter(t => t.category === selectedCategory);
+        const total = tx.reduce((s, t) => s + t.amount, 0);
+
+        /* categories */
+        const cmap = Object.create(null);
+        tx.forEach(t => {
+            const g = cmap[t.category] || (cmap[t.category] = { name: t.category, amount: 0, count: 0, items: [] });
+            g.amount += t.amount;
+            g.count++;
+            g.items.push(t);
+        });
+        const segs = Object.values(cmap).sort((a, b) => b.amount - a.amount);
+        const colorOf = Object.create(null);
+        segs.forEach((s, i) => {
+            s.color = PALETTE[i % PALETTE.length];
+            colorOf[s.name] = s.color;
+        });
+
+        /* trend buckets */
+        const mode = ($("insightTrendMode") || {}).value || "daily";
+        const bmap = Object.create(null);
+        tx.forEach(t => {
+            const d = parse(t.date);
+            let key = t.date, label, full;
+            if (mode === "weekly") {
+                const st = new Date(d);
+                st.setDate(st.getDate() - ((st.getDay() + 6) % 7));
+                const en = new Date(st);
+                en.setDate(en.getDate() + 6);
+                key = dkey(st);
+                label = st.toLocaleDateString("en-IN", { day: "numeric", month: "short" });
+                full = "Week of " + label + " – " +
+                    en.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
+            } else if (mode === "monthly") {
+                key = `${d.getFullYear()}-${pad(d.getMonth() + 1)}`;
+                label = d.toLocaleDateString("en-IN", { month: "short", year: "2-digit" });
+                full = d.toLocaleDateString("en-IN", { month: "long", year: "numeric" });
+            } else {
+                label = d.toLocaleDateString("en-IN", { day: "numeric", month: "short" });
+                full = d.toLocaleDateString("en-IN", { weekday: "short", day: "numeric", month: "long", year: "numeric" });
+            }
+            const b = bmap[key] || (bmap[key] = { key, label, full, amount: 0, items: [] });
+            b.amount += t.amount;
+            b.items.push(t);
+        });
+        const buckets = Object.values(bmap).sort((a, b) => a.key < b.key ? -1 : a.key > b.key ? 1 : 0);
+
+        return { total, segs, colorOf, buckets, mode, selectedCategory };
+    }
+
+    /* ---------- tooltip ---------- */
+    const tip = document.createElement("div");
+    tip.className = "swc-tip";
+    document.body.appendChild(tip);
+
+    function moveTip(x, y) {
+        const w = tip.offsetWidth, h = tip.offsetHeight;
+        let left = x + 16, top = y + 16;
+        if (left + w > window.innerWidth - 8) left = x - w - 16;
+        if (top + h > window.innerHeight - 8) top = y - h - 16;
+        tip.style.left = Math.max(8, left) + "px";
+        tip.style.top = Math.max(8, top) + "px";
+    }
+    function showTip(html, x, y) {
+        tip.innerHTML = html;
+        tip.classList.add("on");
+        moveTip(x, y);
+    }
+    function hideTip() { tip.classList.remove("on"); }
+    window.addEventListener("scroll", hideTip, { passive: true });
+
+    function segTip(i) {
+        const s = cur.segs[i];
+        const share = cur.total > 0 ? s.amount / cur.total : 0;
+        return `<div class="t"><i style="--c:${s.color}"></i>${esc(s.name)}</div>
+                <div class="v">${inr(s.amount)}</div>
+                <div class="m">${pct(share)} of spending · ${plural(s.count, "transaction")}</div>
+                <div class="h">Click for details</div>`;
+    }
+
+    function changeInfo(d, i) {
+        const prev = d.buckets[i - 1];
+        const bk = d.buckets[i];
+        if (!prev || !(prev.amount > 0)) return null;
+        const c = (bk.amount - prev.amount) / prev.amount * 100;
+        return { up: c >= 0, val: Math.abs(Math.round(c)) };
+    }
+
+    function trendTip(d, i) {
+        const bk = d.buckets[i];
+        const ch = changeInfo(d, i);
+        const chg = ch
+            ? ` · <span class="${ch.up ? "up" : "down"}">${ch.up ? "▲" : "▼"} ${ch.val}%</span>`
+            : "";
+        return `<div class="t"><i style="--c:#19B67A"></i>${esc(bk.full)}</div>
+                <div class="v">${inr(bk.amount)}</div>
+                <div class="m">${plural(bk.items.length, "transaction")}${chg}</div>
+                <div class="h">Click for details</div>`;
+    }
+
+    /* ---------- donut highlight ---------- */
+    function hi(i) {
+        const donut = $("iaDonut");
+        const svg = donut && donut.querySelector(".swc-donut-svg");
+        if (!svg || !cur || hiIdx === i) return;
+        hiIdx = i;
+        svg.classList.add("has-hover");
+        svg.querySelectorAll(".swc-seg").forEach(c =>
+            c.classList.toggle("is-hover", Number(c.dataset.i) === i));
+        document.querySelectorAll("#iaLegend .ia-legend-row").forEach((r, k) =>
+            r.classList.toggle("swc-hl", k === i));
+        const s = cur.segs[i];
+        if (s) {
+            const sm = donut.querySelector(".ia-donut-center small");
+            const st = $("iaDonutTotal");
+            if (sm) sm.textContent = s.name;
+            if (st) st.textContent = inr(s.amount);
+        }
+    }
+
+    function lo() {
+        hiIdx = -1;
+        const donut = $("iaDonut");
+        const svg = donut && donut.querySelector(".swc-donut-svg");
+        if (svg) {
+            svg.classList.remove("has-hover");
+            svg.querySelectorAll(".swc-seg.is-hover").forEach(c => c.classList.remove("is-hover"));
+        }
+        document.querySelectorAll("#iaLegend .ia-legend-row.swc-hl").forEach(r => r.classList.remove("swc-hl"));
+        if (donut && cur) {
+            const sm = donut.querySelector(".ia-donut-center small");
+            const st = $("iaDonutTotal");
+            if (sm) sm.textContent = "Total spent";
+            if (st) st.textContent = inr(cur.total);
+        }
+    }
+
+    /* ---------- donut ---------- */
+    function enhanceDonut(d) {
+        const donut = $("iaDonut");
+        if (!donut) return;
+
+        const segs = d.segs;
+        const sig = segs.map(s => s.name + ":" + s.amount).join("|");
+        let svg = donut.querySelector(".swc-donut-svg");
+
+        if (!svg || svg.getAttribute("data-sig") !== sig) {
+            if (svg) svg.remove();
+
+            const gap = segs.length > 1 ? 2 : 0;
+            let acc = 0;
+            const circles = segs.map((s, i) => {
+                const frac = d.total > 0 ? s.amount / d.total : 0;
+                const len = Math.max(frac * CIRC - gap, 0.6);
+                const off = -(acc * CIRC + gap / 2);
+                acc += frac;
+                return `<circle class="swc-seg" data-i="${i}" cx="95" cy="95" r="${R}"
+                    stroke="${s.color}" transform="rotate(-90 95 95)"
+                    style="stroke-dasharray:${len.toFixed(2)} ${(CIRC - len).toFixed(2)};stroke-dashoffset:${off.toFixed(2)};animation-delay:${i * 70}ms"/>`;
+            }).join("");
+
+            const tmp = document.createElement("div");
+            tmp.innerHTML = `<svg class="swc-donut-svg swc-anim" viewBox="0 0 190 190" aria-hidden="true" data-sig="${esc(sig)}">
+                <circle class="swc-track" cx="95" cy="95" r="${R}"/>${circles}</svg>`;
+            svg = tmp.firstElementChild;
+            donut.appendChild(svg);
+            hiIdx = -1;
+
+            svg.addEventListener("pointermove", e => {
+                if (e.pointerType === "touch") return;
+                const c = e.target.closest ? e.target.closest(".swc-seg") : null;
+                if (!c) { lo(); hideTip(); return; }
+                const i = Number(c.dataset.i);
+                hi(i);
+                showTip(segTip(i), e.clientX, e.clientY);
+            });
+            svg.addEventListener("pointerleave", () => { lo(); hideTip(); });
+            svg.addEventListener("click", e => {
+                const c = e.target.closest ? e.target.closest(".swc-seg") : null;
+                if (c) openModal("cat", Number(c.dataset.i));
+            });
+        }
+
+        /* the SVG now draws the ring, hide the old gradient */
+        donut.style.background = "none";
+
+        const sm = donut.querySelector(".ia-donut-center small");
+        if (sm && hiIdx === -1) sm.textContent = "Total spent";
+
+        /* legend rows */
+        document.querySelectorAll("#iaLegend .ia-legend-row").forEach((row, i) => {
+            if (!segs[i]) return;
+            row.dataset.i = i;
+            row.tabIndex = 0;
+            row.setAttribute("role", "button");
+            row.setAttribute("aria-label", segs[i].name + ", " + inr(segs[i].amount) + ". Open details");
+        });
+    }
+
+    (function bindLegend() {
+        const legend = $("iaLegend");
+        if (!legend || legend.__swc) return;
+        legend.__swc = true;
+
+        const idx = e => {
+            const r = e.target.closest(".ia-legend-row");
+            return r && r.dataset.i !== undefined ? Number(r.dataset.i) : -1;
+        };
+
+        legend.addEventListener("mouseover", e => {
+            const i = idx(e);
+            if (i < 0 || !cur || !cur.segs[i]) return;
+            hi(i);
+            showTip(segTip(i), e.clientX, e.clientY);
+        });
+        legend.addEventListener("mousemove", e => {
+            if (tip.classList.contains("on")) moveTip(e.clientX, e.clientY);
+        });
+        legend.addEventListener("mouseout", e => {
+            const r = e.target.closest(".ia-legend-row");
+            if (r && !r.contains(e.relatedTarget)) { lo(); hideTip(); }
+        });
+        legend.addEventListener("click", e => {
+            const i = idx(e);
+            if (i >= 0 && cur && cur.segs[i]) openModal("cat", i);
+        });
+        legend.addEventListener("keydown", e => {
+            if (e.key !== "Enter" && e.key !== " ") return;
+            const i = idx(e);
+            if (i >= 0 && cur && cur.segs[i]) { e.preventDefault(); openModal("cat", i); }
+        });
+    })();
+
+    /* ---------- trend chart ---------- */
+    function renderTrend(d) {
+        const host = $("iaTrend");
+        if (!host) return;
+
+        const b = d.buckets;
+        if (!b.length) {
+            host.innerHTML = '<p class="ia-empty">No spending trend to show yet.</p>';
+            return;
+        }
+
+        const visible = host.clientWidth > 0;
+        const W = Math.round(host.clientWidth) || 520;
+        const H = W < 420 ? 220 : 250;
+        trendW = W;
+
+        const padL = 48, padR = 22, padT = 18, padB = 34;
+        const pw = W - padL - padR;
+        const ph = H - padT - padB;
+        const base = padT + ph;
+        const n = b.length;
+        const sc = niceScale(Math.max.apply(null, b.map(x => x.amount)));
+        const f1 = v => Math.round(v * 10) / 10;
+
+        const pts = b.map((x, i) => ({
+            x: n === 1 ? padL + pw / 2 : padL + i * pw / (n - 1),
+            y: base - (x.amount / sc.top) * ph
+        }));
+
+        /* grid + y labels */
+        const tickCount = Math.max(1, Math.round(sc.top / sc.step));
+        let grid = "";
+        for (let k = 0; k <= tickCount; k++) {
+            const y = f1(base - (k / tickCount) * ph);
+            grid += `<line x1="${padL}" y1="${y}" x2="${W - padR}" y2="${y}"/>`;
+            grid += `<text x="${padL - 10}" y="${y + 4}" text-anchor="end">${short(k * sc.step)}</text>`;
+        }
+
+        /* smooth line + area */
+        let line = `M${f1(pts[0].x)},${f1(pts[0].y)}`;
+        for (let i = 1; i < n; i++) {
+            const a = pts[i - 1], c = pts[i], mx = (a.x + c.x) / 2;
+            line += ` C${f1(mx)},${f1(a.y)} ${f1(mx)},${f1(c.y)} ${f1(c.x)},${f1(c.y)}`;
+        }
+        const area = n > 1
+            ? `${line} L${f1(pts[n - 1].x)},${base} L${f1(pts[0].x)},${base} Z`
+            : "";
+
+        /* x labels */
+        const step = Math.max(1, Math.ceil(n / 5));
+        const idx = [];
+        for (let i = 0; i < n; i += step) idx.push(i);
+        if (idx[idx.length - 1] !== n - 1) {
+            if ((n - 1) - idx[idx.length - 1] < Math.ceil(step * 0.6)) idx.pop();
+            idx.push(n - 1);
+        }
+        const xlabs = idx.map(i =>
+            `<text x="${f1(pts[i].x)}" y="${H - 8}" text-anchor="middle">${esc(b[i].label)}</text>`
+        ).join("");
+
+        const dots = pts.map((p, i) =>
+            `<circle class="swc-dot" cx="${f1(p.x)}" cy="${f1(p.y)}" r="4.5" style="--i:${i}"/>`
+        ).join("");
+
+        const sig = d.mode + "|" + b.map(x => x.key + ":" + x.amount).join(",");
+        const animate = visible && sig !== lastTrendSig;
+        if (visible) lastTrendSig = sig;
+
+        host.innerHTML = `
+        <div class="swc-trend${animate ? " swc-anim" : ""}">
+          <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Spending trend chart. Hover or tap a point for details.">
+            <defs>
+              <linearGradient id="swcGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#24b47e" stop-opacity=".28"/>
+                <stop offset="1" stop-color="#24b47e" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <g class="swc-grid">${grid}</g>
+            ${area ? `<path class="swc-area" d="${area}"/>` : ""}
+            ${n > 1 ? `<path class="swc-line" pathLength="1" d="${line}"/>` : ""}
+            <line class="swc-guide" x1="0" y1="${padT}" x2="0" y2="${base}"/>
+            <circle class="swc-halo" r="13" cx="0" cy="0"/>
+            ${dots}
+            <circle class="swc-active" r="6" cx="0" cy="0"/>
+            ${xlabs}
+            <rect class="swc-hit" x="0" y="0" width="${W}" height="${H}"/>
+          </svg>
+        </div>`;
+
+        const wrap = host.querySelector(".swc-trend");
+        const svg = wrap.querySelector("svg");
+        const hit = svg.querySelector(".swc-hit");
+        const guide = svg.querySelector(".swc-guide");
+        const halo = svg.querySelector(".swc-halo");
+        const act = svg.querySelector(".swc-active");
+
+        const idxAt = e => {
+            const r = svg.getBoundingClientRect();
+            const x = (e.clientX - r.left) * (W / (r.width || W));
+            let best = 0, bd = Infinity;
+            pts.forEach((p, i) => {
+                const dd = Math.abs(p.x - x);
+                if (dd < bd) { bd = dd; best = i; }
+            });
+            return best;
+        };
+
+        hit.addEventListener("pointermove", e => {
+            if (e.pointerType === "touch") return;
+            const i = idxAt(e);
+            const p = pts[i];
+            guide.setAttribute("x1", f1(p.x));
+            guide.setAttribute("x2", f1(p.x));
+            halo.setAttribute("cx", f1(p.x));
+            halo.setAttribute("cy", f1(p.y));
+            act.setAttribute("cx", f1(p.x));
+            act.setAttribute("cy", f1(p.y));
+            wrap.classList.add("is-active");
+            showTip(trendTip(d, i), e.clientX, e.clientY);
+        });
+        hit.addEventListener("pointerleave", () => {
+            wrap.classList.remove("is-active");
+            hideTip();
+        });
+        hit.addEventListener("click", e => openModal("trend", idxAt(e)));
+    }
+
+    /* ---------- detail popup ---------- */
+    const modal = document.createElement("div");
+    modal.className = "swc-modal";
+    modal.setAttribute("aria-hidden", "true");
+    modal.innerHTML = `
+        <div class="swc-backdrop" data-act="close"></div>
+        <div class="swc-card" role="dialog" aria-modal="true" aria-labelledby="swcMT">
+            <div class="swc-head">
+                <div class="swc-badge" id="swcMB"></div>
+                <div class="swc-head-txt"><h3 id="swcMT"></h3><p id="swcMS"></p></div>
+                <div class="swc-nav" id="swcNav">
+                    <button type="button" class="swc-iconbtn" data-act="prev" aria-label="Previous">‹</button>
+                    <button type="button" class="swc-iconbtn" data-act="next" aria-label="Next">›</button>
+                </div>
+                <button type="button" class="swc-iconbtn" data-act="close" aria-label="Close">×</button>
+            </div>
+            <div class="swc-body" id="swcBody"></div>
+            <div class="swc-foot" id="swcFoot"></div>
+        </div>`;
+    document.body.appendChild(modal);
+
+    const mState = { kind: null, i: 0, snap: null, prevFocus: null, prevOverflow: "" };
+
+    const stat = (label, value, cls, dark) =>
+        `<div class="swc-stat${dark ? " dark" : ""}"><small>${label}</small><strong class="${cls || ""}">${value}</strong></div>`;
+
+    function bars(rows, base) {
+        return `<div class="swc-bars">${rows.map(r => {
+            const w = Math.max(2, Math.min(100, base > 0 ? r.amount / base * 100 : 0)).toFixed(1);
+            return `<div class="swc-bar-row">
+                <div class="top"><span>${esc(r.name)}${r.count > 1 ? ` <em>×${r.count}</em>` : ""}</span><span>${inr(r.amount)}</span></div>
+                <div class="swc-bar"><b style="width:${w}%;--c:${r.color}"></b></div>
+            </div>`;
+        }).join("")}</div>`;
+    }
+
+    function txList(items, showCat) {
+        const rows = items.slice().sort((a, b) =>
+            a.date < b.date ? 1 : a.date > b.date ? -1 : b.amount - a.amount);
+        return `<div class="swc-list">${rows.map(t => {
+            const d = parse(t.date);
+            const sub = showCat
+                ? t.category
+                : d.toLocaleDateString("en-IN", { weekday: "long" });
+            return `<div class="swc-tx">
+                <div class="swc-tx-date">${pad(d.getDate())}<br>${esc(d.toLocaleDateString("en-IN", { month: "short" }))}</div>
+                <div><div class="swc-tx-name">${esc(t.name)}</div><div class="swc-tx-sub">${esc(sub)}</div></div>
+                <div class="swc-tx-amt">${inr(t.amount)}</div>
+            </div>`;
+        }).join("")}</div>`;
+    }
+
+    function setHead(icon, bg, title, sub, nav) {
+        const b = $("swcMB");
+        b.textContent = icon;
+        b.style.background = bg;
+        $("swcMT").textContent = title;
+        $("swcMS").textContent = sub;
+        $("swcNav").style.display = nav ? "flex" : "none";
+    }
+
+    function renderCat(d, i) {
+        const s = d.segs[i];
+        if (!s) { closeModal(); return; }
+        const share = d.total > 0 ? s.amount / d.total : 0;
+
+        setHead(CAT_ICON[s.name] || "🏷️", s.color + "26", s.name,
+            `${periodLabel()} · ${pct(share)} of total spending`, false);
+
+        const groups = Object.create(null);
+        s.items.forEach(t => {
+            const k = t.name.toLowerCase();
+            const g = groups[k] || (groups[k] = { name: t.name, amount: 0, count: 0, color: s.color });
+            g.amount += t.amount;
+            g.count++;
+        });
+        const top = Object.values(groups).sort((a, b) => b.amount - a.amount).slice(0, 5);
+        const biggest = s.items.reduce((a, t) => t.amount > a.amount ? t : a, s.items[0]);
+
+        const chips = d.segs.map((x, k) =>
+            `<button type="button" class="swc-chip${k === i ? " on" : ""}" data-chip="${k}" style="--c:${x.color}"><i></i>${esc(x.name)}</button>`
+        ).join("");
+
+        const body = $("swcBody");
+        body.innerHTML = `
+            <div class="swc-chips">${chips}</div>
+            <div class="swc-stats">
+                ${stat("Total spent", inr(s.amount), "", true)}
+                ${stat("Share of spending", pct(share))}
+                ${stat("Transactions", s.count)}
+                ${stat("Average", inr(s.amount / s.count))}
+            </div>
+            <div class="swc-note">Largest: <b>${esc(biggest.name)}</b> · ${inr(biggest.amount)} on ${fmtDate(biggest.date)}</div>
+            <div class="swc-sec">Top expenses <span>by amount</span></div>
+            ${bars(top, s.amount)}
+            <div class="swc-sec">All transactions <span>${plural(s.count, "item")}</span></div>
+            ${txList(s.items, false)}`;
+
+        const on = body.querySelector(".swc-chip.on");
+        const strip = body.querySelector(".swc-chips");
+        if (on && strip) strip.scrollLeft = on.offsetLeft - strip.clientWidth / 2 + on.offsetWidth / 2;
+
+        $("swcFoot").innerHTML = (d.selectedCategory === "all"
+            ? `<button type="button" class="swc-btn-primary" data-act="filter" data-cat="${esc(s.name)}">Show only this category</button>`
+            : `<button type="button" class="swc-btn-primary" data-act="unfilter">Show all categories</button>`)
+            + `<button type="button" class="swc-btn-ghost" data-act="close">Close</button>`;
+    }
+
+    function renderTrendModal(d, i) {
+        const bk = d.buckets[i];
+        if (!bk) { closeModal(); return; }
+        const n = d.buckets.length;
+        const share = d.total > 0 ? bk.amount / d.total : 0;
+
+        setHead("📈", "var(--green-soft)", bk.full,
+            `${plural(bk.items.length, "transaction")} · ${i + 1} of ${n}`, true);
+
+        modal.querySelector('[data-act="prev"]').disabled = i <= 0;
+        modal.querySelector('[data-act="next"]').disabled = i >= n - 1;
+
+        const ch = changeInfo(d, i);
+        const label = d.mode === "weekly" ? "vs previous week"
+            : d.mode === "monthly" ? "vs previous month" : "vs previous day";
+        const chHtml = ch
+            ? `${ch.up ? "▲" : "▼"} ${ch.val}%`
+            : "—";
+        const chCls = ch ? (ch.up ? "swc-up" : "swc-down") : "";
+
+        const cm = Object.create(null);
+        bk.items.forEach(t => {
+            const g = cm[t.category] || (cm[t.category] = {
+                name: t.category, amount: 0, count: 0,
+                color: d.colorOf[t.category] || PALETTE[0]
+            });
+            g.amount += t.amount;
+            g.count++;
+        });
+        const cats = Object.values(cm).sort((a, b) => b.amount - a.amount);
+
+        $("swcBody").innerHTML = `
+            <div class="swc-stats">
+                ${stat("Total spent", inr(bk.amount), "", true)}
+                ${stat("Transactions", bk.items.length)}
+                ${stat(label, chHtml, chCls)}
+                ${stat("Share of period", pct(share))}
+            </div>
+            <div class="swc-sec">By category <span>${plural(cats.length, "category", "categories")}</span></div>
+            ${bars(cats, bk.amount)}
+            <div class="swc-sec">Transactions <span>${periodLabel()}</span></div>
+            ${txList(bk.items, true)}`;
+
+        $("swcFoot").innerHTML = `<button type="button" class="swc-btn-ghost" data-act="close">Close</button>`;
+    }
+
+    function renderModal() {
+        const body = $("swcBody");
+        const keep = body.scrollTop;
+        if (mState.kind === "cat") renderCat(mState.snap, mState.i);
+        else renderTrendModal(mState.snap, mState.i);
+        body.scrollTop = mState.kind === "trend" ? 0 : keep;
+    }
+
+    function openModal(kind, i) {
+        if (!cur) return;
+        hideTip();
+        lo();
+        mState.kind = kind;
+        mState.i = i;
+        mState.snap = cur;
+        mState.prevFocus = document.activeElement;
+        if (!modal.classList.contains("open")) mState.prevOverflow = document.body.style.overflow;
+
+        renderModal();
+        modal.classList.add("open");
+        modal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+        $("swcBody").scrollTop = 0;
+
+        const closeBtn = modal.querySelector('.swc-head [data-act="close"]');
+        if (closeBtn) closeBtn.focus({ preventScroll: true });
+    }
+
+    function closeModal() {
+        if (!modal.classList.contains("open")) return;
+        modal.classList.remove("open");
+        modal.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = mState.prevOverflow || "";
+        if (mState.prevFocus && mState.prevFocus.focus) {
+            try { mState.prevFocus.focus({ preventScroll: true }); } catch (e) { }
+        }
+    }
+
+    function applyFilter(name) {
+        const sel = $("insightCategory");
+        closeModal();
+        if (!sel) return;
+        sel.value = name;
+        if (sel.value !== name) sel.value = "all";
+        sel.dispatchEvent(new Event("change", { bubbles: true }));
+    }
+
+    function stepTrend(dir) {
+        if (mState.kind !== "trend") return;
+        const n = mState.snap.buckets.length;
+        const next = mState.i + dir;
+        if (next < 0 || next >= n) return;
+        mState.i = next;
+        renderModal();
+    }
+
+    modal.addEventListener("click", e => {
+        const b = e.target.closest("[data-act],[data-chip]");
+        if (!b || b.disabled) return;
+
+        if (b.dataset.chip !== undefined) {
+            mState.i = Number(b.dataset.chip);
+            renderModal();
+            return;
+        }
+
+        const act = b.dataset.act;
+        if (act === "close") closeModal();
+        else if (act === "prev") stepTrend(-1);
+        else if (act === "next") stepTrend(1);
+        else if (act === "filter") applyFilter(b.dataset.cat);
+        else if (act === "unfilter") applyFilter("all");
+    });
+
+    document.addEventListener("keydown", e => {
+        if (!modal.classList.contains("open")) return;
+        if (e.key === "Escape") { e.stopPropagation(); closeModal(); }
+        else if (e.key === "ArrowLeft") stepTrend(-1);
+        else if (e.key === "ArrowRight") stepTrend(1);
+    }, true);
+
+    /* ---------- run after every Insights refresh ---------- */
+    function enhance() {
+        if (!$("iaDonut") || !$("iaTrend")) return;
+        try { cur = collect(); } catch (e) { console.warn("SpendWise charts:", e); return; }
+        try { enhanceDonut(cur); } catch (e) { console.warn("SpendWise donut:", e); }
+        try { renderTrend(cur); } catch (e) { console.warn("SpendWise trend:", e); }
+    }
+
+    if (typeof window.updateInsights === "function" && !window.updateInsights.__swc) {
+        const original = window.updateInsights;
+        window.updateInsights = function () {
+            const result = original.apply(this, arguments);
+            enhance();
+            return result;
+        };
+        window.updateInsights.__swc = true;
+    }
+
+    /* redraw trend when its width changes (rotate phone, show tab, resize) */
+    const trendHost = $("iaTrend");
+    if (trendHost && "ResizeObserver" in window) {
+        new ResizeObserver(() => {
+            const w = Math.round(trendHost.clientWidth);
+            if (w && Math.abs(w - trendW) > 8 && cur) renderTrend(cur);
+        }).observe(trendHost);
+    }
+
+    enhance();
+})();
+</script>
 </body>
 
 </html>
